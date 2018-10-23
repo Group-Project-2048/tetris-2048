@@ -1,0 +1,9 @@
+.actual-grid {
+    display:grid;
+    width: 200px;
+    height: 400px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    border: 1px solid black;
+}
+
