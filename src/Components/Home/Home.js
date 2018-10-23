@@ -5,7 +5,8 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            board: this.createBoard(12, 4)
+            board: this.createBoard(9, 4),
+            piece: 2
         }
     }
 
@@ -20,21 +21,40 @@ class Home extends Component {
         return b
     }
 
+    addPiece = () => {
+        let {board} = this.state
+       board[1].splice(0, 1, 1024)
+        board[2].splice(0, 1, 64)
+        board[0].splice(0, 1, 512)
+        board[3].splice(0, 1, 32)
+        
+    }
+
+    fallingPiece = ()=>{
+        let {board} = this.state
+        // setTimeout()
+        board[1].splice((board[1].length-1), 1, 32)
+       
+    }
 
 
 
     render() {
         console.log(this.state.board)
+        // mapping over board to create the numbers.
+        this.addPiece()
+        this.fallingPiece()
         let newboard = this.state.board.map(element => {
             let item = element.map(number => {
-                return(
-                <p>
-                    {number}
-                </p>
+                return (
+                        <p>
+                            {number}
+                        </p>
+                    
                 )
-            }) 
+            })
             return (
-             item
+                item
             )
         })
 
@@ -46,6 +66,7 @@ class Home extends Component {
                     Level Next Item Score LeaderBoard Pause
                 </div>
                 <div className='actual-grid'>
+
                     {newboard}
                 </div>
             </div>
