@@ -1,0 +1,56 @@
+
+.backgroundBox{
+    background-color: rgb(0, 0, 70);
+    padding: 20px;
+    padding-bottom: 50px;
+}
+
+.mainBox{
+    width: 400px;
+    height: 500px;
+    margin: auto;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    background-color: black;
+    overflow: scroll
+}
+
+.pageTitles{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+}
+
+.playerBox{
+    border: 1px solid black;
+    margin: 10px;
+    width: 150px;
+    color: white;
+    margin-top: 0px;
+}
+
+.scoreBox{
+    border: 1px solid black;
+    margin: 10px;
+    width: 150px;
+    color: white;
+    margin-top: 0px;
+}
+
+.scoreBtns{
+    margin: 5px;
+
+}
+
+.scorePlayers{
+    display: flex;
+    justify-content: center;
+    overflow: scroll;
+    margin-top: 25px;
+}
+
+.userNames{
+    text-align: left
+}
