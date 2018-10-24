@@ -3,7 +3,7 @@ const session = require('express-session');
 const massive = require('massive');
 const bodyParser = require('body-parser');
 const express = require('express');
-const axios = require('axios');
+// const axios = require('axios');
 const app = express();
 
 
@@ -12,6 +12,8 @@ const {
     SERVER_PORT,
     CONNECTION_STRING,
 } = process.env;
+
+app.use(bodyParser.json())
 
 app.use(session({
     secret: SESSION_SECRET,
@@ -24,7 +26,7 @@ massive(CONNECTION_STRING).then(dbInstance=> {
     console.log('Database Connected')
 }).catch(err => console.log(err));
 
-app.use(bodyParser.json())
+
 
 
 //Endpoints
