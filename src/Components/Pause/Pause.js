@@ -15,32 +15,33 @@ class Pause extends Component {
         }
     }
 
-    // handlePause = () => {
-    //     if(pause === true)
-    // }
+    handlePause = () => {
+        // if(pause === true)
+    }
+
+    handleLocation = () => {
+        const whereAmI = this.props.location.pathname
+        if(whereAmI === '/'){
+            return(
+                <Link to='/leader'>GO TO LEADER BOARDS</Link>
+            )
+        } else if(whereAmI === '/leader'){
+            return(
+                <Link to='/'>GO TO GAME</Link>
+            )
+        }
+    }
 
 
     render(){
-        if(this.props.location.pathname === '/'){
+        if(this.props.location.pathname !== '/fake'){
                 return(
                     <div className='container'>
-                        <div className='btn play'>
-                        {/* <div className='btn play' onClick={this.handlePause()}> */}
+                        <div className='btn play' onClick={this.handlePause()}>
                             <span className='bar bar-1'></span>
                             <span className='bar bar-2'></span>
                         </div>
-                    <Link to='/leader'>GO TO LEADER BOARDS</Link>
-                </div>
-            )
-        } else if(this.props.location.pathname === '/leader'){
-            return(
-                <div className='container'>
-                        <div className='btn play'>
-                        {/* <div className='btn play' onClick={this.handlePause()}> */}
-                            <span className='bar bar-1'></span>
-                            <span className='bar bar-2'></span>
-                        </div>
-                    <Link to='/'>GO TO GAME</Link>
+                    {this.handleLocation()}
                 </div>
             )
         } else {
