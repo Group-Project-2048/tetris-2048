@@ -16,34 +16,28 @@ class Pause extends Component {
     }
 
     handlePause = () => {
-        // if(pause === true)
+        return 'checked'
     }
-
-    handleLocation = () => {
-        const whereAmI = this.props.location.pathname
-        if(whereAmI === '/'){
-            return(
-                <Link to='/leader'>GO TO LEADER BOARDS</Link>
-            )
-        } else if(whereAmI === '/leader'){
-            return(
-                <Link to='/'>GO TO GAME</Link>
-            )
-        }
-    }
-
 
     render(){
-        if(this.props.location.pathname !== '/fake'){
+        if(this.props.location.pathname !== '/leader'){
                 return(
-                    <div className='container'>
-                        <div className='btn play' onClick={this.handlePause()}>
-                            <span className='bar bar-1'></span>
-                            <span className='bar bar-2'></span>
-                        </div>
-                    {this.handleLocation()}
-                </div>
-            )
+                    <nav className='menu'>
+                    <input onClick={this.handlePause} className='menu-toggler' id='menu-toggler' type='checkbox'/>
+                    <label htmlFor='menu-toggler'></label>
+                    <ul>
+                        <li className='menu-item'>
+                        <button>R</button>
+                        </li>
+                        <li className='menu-item'>
+                        <button><Link to='/leader'>LB</Link></button>
+                        </li>
+                        <li className='menu-item'>
+                        <button>S</button>
+                        </li>
+                    </ul>
+                    </nav>
+                )
         } else {
             return null
         }
