@@ -10,6 +10,7 @@ class Home extends Component {
             x: 1
         }
     }
+
     // componentDidMount(){
     //     var timerId;
     //     timerId = setInterval(()=>this.fallingPiece(8), 1000)
@@ -17,6 +18,8 @@ class Home extends Component {
     //         timerId: timerId
     //     })
     // }
+
+
     // creating the board 
     createBoard = (y, x) => {
         var b = []
@@ -31,8 +34,8 @@ class Home extends Component {
     addPiece = () => {
         let { board } = this.state
         // board[1].splice(0, 1, 1024)
-        board[1].splice(0,1, 2)
-        board[1].splice(1,1,64)
+        board[1].splice(0,1, 64)
+        // board[1].splice(1,1,64)
         // board[1].splice(2,1,64)
         // board[2].splice(0, 1, 64)
         // board[0].splice(0, 1, 512)
