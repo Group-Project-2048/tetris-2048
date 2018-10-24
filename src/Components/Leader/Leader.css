@@ -52,5 +52,6 @@
 }
 
 .userNames{
-    text-align: left
+    text-align: left;
+    padding-left: 30px;
 }
