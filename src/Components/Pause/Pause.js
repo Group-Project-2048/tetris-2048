@@ -18,36 +18,55 @@ class Pause extends Component {
 
     handlePause = () => {
         this.setState({
-            pause: true,
+            pause: !this.state.pause
         })
-    }
-
-    handleStart = () => {
-        this.setState({
-            pause: false,
-        })
-
     }
 
     render(){
         if(this.props.location.pathname === '/'){
+            if(this.state.pause){
+                return(
+                    <frosted-glass-container stretch='true'>
+                        <div className='glass-container'>
+                            <frosted-glass overlay-color="#ffffff52" blur-amount="4px" class='nav-container'>
+                                <nav className='menu'>
+                                    <input onClick={this.handlePause} className='menu-toggler' id='menu-toggler' type='checkbox'/>
+                                    <label htmlFor='menu-toggler'></label>
+                                        <ul>
+                                            <li className='menu-item'>
+                                                <button>R</button>
+                                            </li>
+                                            <li className='menu-item'>
+                                                <button><Link to='/leader'>LB</Link></button>
+                                            </li>
+                                            <li className='menu-item'>
+                                                <button>S</button>
+                                            </li>
+                                        </ul>
+                                </nav>
+                            </frosted-glass>
+                        </div>
+                    </frosted-glass-container>
+                )
+            } else {
                 return(
                     <nav className='menu'>
-                    <input onClick={this.handlePause} className='menu-toggler' id='menu-toggler' type='checkbox'/>
-                    <label htmlFor='menu-toggler'></label>
-                    <ul>
-                        <li className='menu-item'>
-                        <button onClick={this.handleStart}>R</button>
-                        </li>
-                        <li className='menu-item'>
-                        <button><Link to='/leader'>LB</Link></button>
-                        </li>
-                        <li className='menu-item'>
-                        <button>S</button>
-                        </li>
-                    </ul>
+                        <input onClick={this.handlePause} className='menu-toggler' id='menu-toggler' type='checkbox'/>
+                        <label htmlFor='menu-toggler'></label>
+                            <ul>
+                                <li className='menu-item'>
+                                    <button onClick={this.handleStart}>R</button>
+                                </li>
+                                <li className='menu-item'>
+                                    <button><Link to='/leader'>LB</Link></button>
+                                </li>
+                                <li className='menu-item'>
+                                    <button>S</button>
+                                </li>
+                            </ul>
                     </nav>
                 )
+            }
         } else {
             return null
         }

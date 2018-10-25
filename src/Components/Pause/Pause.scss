@@ -48,6 +48,21 @@ body {
   background: none;
 }
 
+.glass-container{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: gainsboro;
+  opacity: .90;
+}
+
+.nav-container {
+  // position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+
 .menu-toggler {
   @include absolute-center;
   @include size($toggler-size);
