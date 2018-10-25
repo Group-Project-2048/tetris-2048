@@ -48,15 +48,6 @@ body {
   background: none;
 }
 
-.pause-window {
-  @include window-view;
-}
-
-.blurred-window {
-  @include window-view;
-  filter: $blurring;
-}
-
 .menu-toggler {
   @include absolute-center;
   @include size($toggler-size);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Leader.css';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Leader extends Component {
     constructor(props) {
@@ -11,6 +11,7 @@ class Leader extends Component {
             players: [], //Players will be an array of objects with all players info from the database.
             scoresOfDay: [],
             scoresOfMonth: [],
+            scoresOfWeek: [],
             score: 'Overall',
 
         }
@@ -20,6 +21,8 @@ class Leader extends Component {
         this.handleDayBtn = this.handleDayBtn.bind(this);
         this.handleWeekBtn = this.handleWeekBtn.bind(this);
         this.handleOverallBtn = this.handleOverallBtn.bind(this);
+        this.handleLast7Days = this.handleLast7Days.bind(this);
+        this.handleLast30Days = this.handleLast30Days.bind(this);
     }
 
     componentDidMount() {
@@ -50,45 +53,88 @@ class Leader extends Component {
         for (let i = 0; i < array.length; i++) {
 
             let timeStamp = array[i].time_stamp;
+            let oldScore = array[i].score;
 
-            if (timeStamp !== null) {
+            if (timeStamp !== null && oldScore !== 0) {
+                console.log(array[i].score)
                 let arrayDate = timeStamp.substring(0, 10)
+            
                 if (arrayDate === yyyy + '-' + (mm + 1) + '-' + dd) {
                     dayScores.push(array[i])
-                } else {
-                    return
-                }
+                } 
             }
             this.setState({
                 scoresOfDay: dayScores,
                 score: 'day'
             })
+            console.log(dayScores)
         }
-        console.log(dayScores)
         return dayScores
     }
 
+    handleLast30Days() {
+        return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29].map(function (n) {
+            var d = new Date();
+            d.setDate(d.getDate() - n);
+
+            return (function (day, month, year) {
+                return [day < 10 ? '0' + day : day, month < 10 ? '0' + month : month, year].join('-');
+            })(d.getFullYear(), (d.getMonth() + 1), d.getDate());
+        });
+    }
+
+    handleLast7Days() {
+
+        return '0123456'.split('').map(function (n) {
+            var d = new Date();
+            d.setDate(d.getDate() - n);
+
+            return (function (day, month, year) {
+                return [day < 10 ? '0' + day : day, month < 10 ? '0' + month : month, year].join('-');
+            })(d.getFullYear(), (d.getMonth() + 1), d.getDate());
+        });
+    }
+
     handleWeekBtn(array) {
+        let weekScores = [];
+        let thisWeek = this.handleLast7Days()
+
+        for (let i = 0; i < array.length; i++) {
+            let timeStamp = array[i].time_stamp;
+            let oldScore = array[i].score;
+
+            if (timeStamp !== null && oldScore !== 0) {
+                let arrayDate = timeStamp.substring(0, 10)
+                for (let j = 0; j < thisWeek.length; j++) {
+                    if (thisWeek[j] === arrayDate) {
+                        weekScores.push(array[i])
+                    }
+                }
+            }
+            this.setState({
+                scoresOfWeek: weekScores,
+                score: 'week'
+            })
+        }
+        return weekScores
         
     }
 
     handleMonthBtn(array) {
         //This button will display the highest scores of the month
         let monthScores = [];
+        let thisMonth = this.handleLast30Days()
 
-        let today = new Date();
-        let mm = today.getMonth(); //January is 0!
-
-        for( let i = 0; i < array.length; i++){
-
+        for (let i = 0; i < array.length; i++) {
             let timeStamp = array[i].time_stamp;
+            let oldScore = array[i].score;
 
-            if(timeStamp !== null){
-                let arrayDate = timeStamp.substring(5, 7)
-                if(parseInt(arrayDate) === (mm + 1)){
-                    monthScores.push(array[i])
-                }else{
-                    return
+            if (timeStamp !== null && oldScore !== 0) {
+                let arrayDate = timeStamp.substring(0, 10)
+                for (let j = 0; j < thisMonth.length; j++) {
+                    if (thisMonth[j] === arrayDate) {
+                        monthScores.push(array[i])
+                    }
                 }
             }
             this.setState({
@@ -96,7 +142,7 @@ class Leader extends Component {
                 score: 'month'
             })
         }
-        return monthScores;
+        return monthScores
     }
 
     handleOverallBtn() {
@@ -115,7 +161,7 @@ class Leader extends Component {
 
         const newPlayers = this.state.players.map((el, i) => {
             return (
-                <div key={el+i}>
+                <div key={el + i}>
                     <h5>{el.name}</h5>
                 </div>
             )
@@ -123,7 +169,7 @@ class Leader extends Component {
 
         const scores = this.state.players.map((el, i) => {
             return (
-                <div key={el+i}>
+                <div key={el + i}>
                     <h5>{el.score}</h5>
                 </div>
             )
@@ -133,7 +179,7 @@ class Leader extends Component {
 
         const showDay = this.state.scoresOfDay.map((el, i) => {
             return (
-                <div key={el+i}>
+                <div key={el + i}>
                     <h5>{el.name}</h5>
                 </div>
             )
@@ -141,7 +187,7 @@ class Leader extends Component {
 
         const showDayScores = this.state.scoresOfDay.map((el, i) => {
             return (
-                <div key={el+i}>
+                <div key={el + i}>
                     <h5>{el.score}</h5>
                 </div>
             )
@@ -151,7 +197,7 @@ class Leader extends Component {
 
         const showMonth = this.state.scoresOfMonth.map((el, i) => {
             return (
-                <div key={el+i}>
+                <div key={el + i}>
                     <h5>{el.name}</h5>
                 </div>
             )
@@ -165,6 +211,24 @@ class Leader extends Component {
             )
         })
 
+        //Maps for score of the Week
+
+        const showWeek = this.state.scoresOfWeek.map((el, i) => {
+            return (
+                <div key={el + i}>
+                    <h5>{el.name}</h5>
+                </div>
+            )
+        })
+
+        const showWeekScores = this.state.scoresOfWeek.map((el, i) => {
+            return (
+                <div key={el + i}>
+                    <h5>{el.score}</h5>
+                </div>
+            )
+        })
+
         return (
             <div className='backgroundBox'>
                 <button><Link to='/'>back</Link></button>
@@ -172,7 +236,7 @@ class Leader extends Component {
 
                 <div className='scoreBtns'>
                     <button onClick={() => this.handleDayBtn(this.state.players)} className='scoreBtns'>Day</button>
-                    <button onClick={this.handleWeekBtn} className='scoreBtns'>Week</button>
+                    <button onClick={() => this.handleWeekBtn(this.state.players)} className='scoreBtns'>Week</button>
                     <button onClick={() => this.handleMonthBtn(this.state.players)} className='scoreBtns'>Month</button>
                     <button onClick={() => this.handleOverallBtn()} className='scoreBtns'>Overall</button>
                 </div>
@@ -190,11 +254,11 @@ class Leader extends Component {
                         <div className='playerBox'>
 
                             <div className='userNames'>
-                                {this.state.score === 'Overall'? newPlayers: this.state.score === 'day'? showDay: this.state.score === 'month'? showMonth: 'Overall'}
+                                {this.state.score === 'Overall' ? newPlayers : this.state.score === 'day' ? showDay : this.state.score === 'month' ? showMonth : this.state.score === 'week' ? showWeek : 'Overall'}
                             </div>
                         </div>
                         <div className="scoreBox">
-                            {this.state.score === 'Overall'? scores: this.state.score === 'day'? showDayScores: this.state.score === 'month'? showMonthScores: 'Overall'}
+                            {this.state.score === 'Overall' ? scores : this.state.score === 'day' ? showDayScores : this.state.score === 'month' ? showMonthScores : this.state.score === 'week' ? showWeekScores : 'Overall'}
                         </div>
                     </div>
                 </div>
