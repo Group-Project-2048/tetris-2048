@@ -12,22 +12,32 @@ class Pause extends Component {
 
         this.state = {
             pause: true,
+            toggleBlur: 'blurred-window'
         }
     }
 
     handlePause = () => {
-        return 'checked'
+        this.setState({
+            pause: true,
+        })
+    }
+
+    handleStart = () => {
+        this.setState({
+            pause: false,
+        })
+
     }
 
     render(){
-        if(this.props.location.pathname !== '/leader'){
+        if(this.props.location.pathname === '/'){
                 return(
                     <nav className='menu'>
                     <input onClick={this.handlePause} className='menu-toggler' id='menu-toggler' type='checkbox'/>
                     <label htmlFor='menu-toggler'></label>
                     <ul>
                         <li className='menu-item'>
-                        <button>R</button>
+                        <button onClick={this.handleStart}>R</button>
                         </li>
                         <li className='menu-item'>
                         <button><Link to='/leader'>LB</Link></button>
