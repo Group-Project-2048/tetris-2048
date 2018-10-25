@@ -7,6 +7,7 @@ $item-count: 6;
 $item-size: $toggler-size * 2;
 $item-color: white;
 $item-transition: .5s;
+$blurring: blur(4px) brightness(0.5);
 
 @mixin size ($width, $height: $width) {
   width: $width;
@@ -17,8 +18,8 @@ $item-transition: .5s;
   position: absolute;
   display: block;
   top: 0;
-  bottom: 60%;
-  right: 30%;
+  bottom: 50%;
+  right: 40%;
   left: 0;
   margin: auto;
 }
@@ -32,11 +33,34 @@ $item-transition: .5s;
   transition: $toggler-transition;
 }
 
+@mixin window-view {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: transparent;
+  z-index: 2;
+}
+
 // styles
 
 body {
   overflow: hidden;
   background: none;
+}
+
+.glass-container{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: gainsboro;
+  opacity: .90;
+}
+
+.nav-container {
+  // position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
 }
 
 .menu-toggler {
