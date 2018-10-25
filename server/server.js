@@ -27,10 +27,6 @@ massive(CONNECTION_STRING).then(dbInstance=> {
     console.log('Database Connected')
 }).catch(err => console.log(err));
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 
 //Endpoints
