@@ -21,6 +21,7 @@
     display: flex;
     justify-content: space-around;
     color: white;
+    height: 60px;
 }
 
 .playerBox{
@@ -48,7 +49,7 @@
     display: flex;
     justify-content: center;
     overflow: scroll;
-    margin-top: 25px;
+    /* margin-top: 25px; */
 }
 
 .userNames{

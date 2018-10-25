@@ -58,18 +58,20 @@ class Leader extends Component {
             if (timeStamp !== null && oldScore !== 0) {
                 console.log(array[i].score)
                 let arrayDate = timeStamp.substring(0, 10)
-            
+
                 if (arrayDate === yyyy + '-' + (mm + 1) + '-' + dd) {
                     dayScores.push(array[i])
-                } 
+                }
             }
-            this.setState({
-                scoresOfDay: dayScores,
-                score: 'day'
-            })
-            console.log(dayScores)
         }
-        return dayScores
+        let dayScores2 = dayScores.splice(0, 10)
+        console.log(dayScores2)
+
+        this.setState({
+            scoresOfDay: dayScores2,
+            score: 'day'
+        })
+        
     }
 
     handleLast30Days() {
@@ -98,26 +100,39 @@ class Leader extends Component {
     handleWeekBtn(array) {
         let weekScores = [];
         let thisWeek = this.handleLast7Days()
+        console.log(thisWeek)
+        console.log(array)
 
         for (let i = 0; i < array.length; i++) {
             let timeStamp = array[i].time_stamp;
+            console.log(array[i])
+            console.log(array[i].time_stamp)
             let oldScore = array[i].score;
 
             if (timeStamp !== null && oldScore !== 0) {
                 let arrayDate = timeStamp.substring(0, 10)
+                console.log(timeStamp.substring(0, 10))
                 for (let j = 0; j < thisWeek.length; j++) {
+                    console.log(arrayDate)
+                    console.log(thisWeek[j])
                     if (thisWeek[j] === arrayDate) {
                         weekScores.push(array[i])
                     }
                 }
+
             }
-            this.setState({
-                scoresOfWeek: weekScores,
-                score: 'week'
-            })
+
         }
-        return weekScores
         
+        let weekScore2 = weekScores.splice(0, 10)
+        console.log(weekScore2)
+
+
+        this.setState({
+            scoresOfWeek: weekScore2,
+            score: 'week'
+        })
+
     }
 
     handleMonthBtn(array) {
@@ -137,19 +152,23 @@ class Leader extends Component {
                     }
                 }
             }
-            this.setState({
-                scoresOfMonth: monthScores,
-                score: 'month'
-            })
+
         }
-        return monthScores
+        let monthScores2 = monthScores.splice(0, 10);
+        console.log(monthScores2)
+
+        this.setState({
+            scoresOfMonth: monthScores2,
+            score: 'month'
+        })
+        
     }
 
     handleOverallBtn() {
         axios.get('/api/getPlayers').then(res => {
             console.log(res.data)
             this.setState({
-                players: res.data,
+                players: res.data.splice(0, 10),
                 score: 'Overall'
             })
         })
@@ -205,7 +224,7 @@ class Leader extends Component {
 
         const showMonthScores = this.state.scoresOfMonth.map((el, i) => {
             return (
-                <div key={el.i}>
+                <div key={el + i}>
                     <h5>{el.score}</h5>
                 </div>
             )
@@ -254,11 +273,11 @@ class Leader extends Component {
                         <div className='playerBox'>
 
                             <div className='userNames'>
-                                {this.state.score === 'Overall' ? newPlayers : this.state.score === 'day' ? showDay : this.state.score === 'month' ? showMonth : this.state.score === 'week' ? showWeek : 'Overall'}
+                                {this.state.score === 'Overall' ? newPlayers.splice(0, 10) : this.state.score === 'day' ? showDay : this.state.score === 'month' ? showMonth : this.state.score === 'week' ? showWeek : 'Overall'}
                             </div>
                         </div>
                         <div className="scoreBox">
-                            {this.state.score === 'Overall' ? scores : this.state.score === 'day' ? showDayScores : this.state.score === 'month' ? showMonthScores : this.state.score === 'week' ? showWeekScores : 'Overall'}
+                            {this.state.score === 'Overall' ? scores.splice(0, 10) : this.state.score === 'day' ? showDayScores : this.state.score === 'month' ? showMonthScores : this.state.score === 'week' ? showWeekScores : 'Overall'}
                         </div>
                     </div>
                 </div>
