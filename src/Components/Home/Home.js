@@ -24,6 +24,19 @@ class Home extends Component {
 
             // count: 0
             // initialStart: this.state.board[0][1],
+            // A landed[] that is a duplicate of the board but with filled indices (plural of index)
+            /*
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 1],
+                [1, 0, 0, 1],
+                [1, 0, 1, 1],
+                [1, 1, 1, 1]
+            */
+           // blocks : 2,4,8,16,32,64,wild
         }
     }
 
@@ -34,7 +47,14 @@ class Home extends Component {
 
     }
 
+    randomPiece = () => {
+        var blocks = []
+    }
+
     fall = () => {
+        // this.checkBelow()
+        // this.checkCollision()
+
         //this will change the row of the piece
         //check somehow to see if it needs another piece to fall
         //this would be the set interval 
@@ -65,6 +85,18 @@ class Home extends Component {
         //             board: newboard,
         //         })
         //     }
+
+        // verifies that the row bellow it is occupied by zeros, and if not, the piece will stop.
+        // for (row = 0; row < piece.length; row++) {
+        //     for (col = 0; col < piece[row].length; col++) {
+        //         if (piece[row][col] !== 0) {
+        //             if (newboard[row + piece] !== 0 &&
+        //                 newboard[col + piece] !== 0) {
+        //                 //the space is taken
+        //             }
+        //         }
+        //      }
+        // }
             
     }}
 
@@ -86,11 +118,42 @@ class Home extends Component {
             // console.log(newboard[row][col+x])
         // }
         //this.checkCollision() if they drop next to a piece.
+
+                // verifies that the row bellow it is occupied by zeros, and if not, the piece will stop.
+        // for (row = 0; row < piece.length; row++) {
+        //     for (col = 0; col < piece[row].length; col++) {
+        //         if (piece[row][col] !== 0) {
+        //             if (newboard[row + piece] !== 0 &&
+        //                 newboard[col + piece] !== 0) {
+        //                 //the space is taken
+        //             }
+        //         }
+        //      }
+        // }
     }
 
     checkCollision = () => {
         // if one combines, we need to shift the piece down that was combined
+        // if combined, the piece that fell is no longer there
+        /* 
+        function combine(num1, num2){
+            return num1 + num2
+        }
 
+        function stack(newboard, piece){
+            
+        }
+        
+        if(piece === newboard[col][row]){
+            newboard[col][row] += piece
+             the piece that fell is now equal to 0 so that other pieces can fall through it
+             if(matchesBelow === false){
+                 stack()
+             } else {
+                 combine()
+             }
+        } 
+        */
     }
 
     game = () => {
