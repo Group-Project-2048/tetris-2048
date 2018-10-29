@@ -250,7 +250,7 @@ class Leader extends Component {
 
         return (
             <div className='backgroundBox'>
-                <button><Link to='/'>back</Link></button>
+                <button><Link to='/home'>back</Link></button>
                 <h1 style={{ color: 'white' }}>Top Players</h1>
 
                 <div className='scoreBtns'>
