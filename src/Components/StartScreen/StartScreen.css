@@ -16,9 +16,24 @@
     
 }
 
+.loginBtn{
+    font-size: 80px;
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.loginBtn:hover{
+    color: #467fff;
+    transition: color 0.3s ease;
+}
+
 .stackyTitle{
-    margin-top: 85px;
-    margin-bottom: 95px;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 35px;
+    width: 350px;
+
 }
 
 .startBack{
@@ -43,13 +58,33 @@
   }
 
 .startMenuBox{
-    border: 1px solid white;
+    border: 1px solid #467fff; 
     background-color: black;
     width: 400px;
     height: 500px;
     margin: auto;
     margin-top: 100px;
+    /* border-radius: 10px; */
+
+    -webkit-animation: glow 1.5s infinite alternate;
+  -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
+  -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
+  transition: border 1.5s linear, box-shadow 1.5s linear;
+  
+
+
+  /* border-radius: 10px; */
+  transition: all 200ms ease-in-out;
 }
+
+@-webkit-keyframes glow {
+    to {
+      border-color: #467fff; 
+      -webkit-box-shadow: 0 0 15px #467fff; 
+      -moz-box-shadow: 0 0 15px #467fff; 
+      box-shadow: 0 0 30px #467fff; 
+    }
+  }
 
 .usernameInput{
     background-color: black;
