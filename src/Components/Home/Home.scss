@@ -1,0 +1,116 @@
+$main-color: #434448;
+$game-color: #18242D;
+$level-color: #5D666C;
+$level2-color: #98FD82;
+
+$two: #C0B4A5;
+$four: #F2CB35;
+$eight: #FF891F;
+$sixteen: #FF0A15;
+$thirty:  #7DCB3E;
+$sixty:  #C47BFB;
+$onehund: #FF019D;
+$twohund:  #12B559;
+$fivehund: #8500F5;
+$thous: #018EE6;
+$twothous: #000000;
+
+
+.container{
+    background: $main-color;
+    width: 100vw;
+    height: 100vh;
+}
+
+.actual-grid {
+    background: $game-color;
+    display:grid;
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    width: 300px;
+    height: 480px;
+    // margin: auto;
+    // margin-top: 50px;
+}
+.top-bar{
+    // margin-top: 10px;
+    height: 24%;
+}
+.truelevel{
+    width: 300px;
+    margin: auto;
+}
+.level{
+    width: 300px;
+    height: 10px;
+    background-color: $level-color;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.level2{
+    //this is changeable from the score :) 
+    width: 150px;
+    height:10px;
+    background-color: $level2-color;
+    border-radius:5px;
+}
+
+.margin-right{
+    margin-left: 220px;
+}
+.leaderboard-score{
+    // display: flex;
+    // flex-direction: row;
+    width: 300px;
+    margin: auto;
+    // margin-top: 10px;
+}
+.leaderboard{
+    display:flex;
+    height: 20px;
+}
+
+#leader{
+    height: 50px;
+    margin-top: 10px;
+}
+
+.score{
+    //the score will have 10.00K 
+    height:10px;
+    margin:auto;
+}
+
+.middle{
+    display:flex;
+    justify-content: center;
+}
+
+.next-item{
+    width: 100px;
+    height: 150px;
+    background-color: $game-color;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+
+.swap-item{
+    width: 100px;
+    height: 150px;
+    background-color: $game-color; 
+    margin-left: 10px;
+}
+
+.piece{
+    width: 75px;
+    height: 54px;
+    background-color: $sixty;
+    display: flex;
+    justify-content: center;
+    margin-left: 12px;
+
+}

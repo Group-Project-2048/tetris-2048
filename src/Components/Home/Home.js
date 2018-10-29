@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './Home.css'
+// import './Home.css'
+import './Home.scss'
+import leaderboardimg from './Group-03.png'
 
 class Home extends Component {
     constructor(props) {
@@ -20,6 +22,10 @@ class Home extends Component {
             piece: { row: 0, col: 1, value: 64 },
             y: 0,
             x: 0,
+            level: 99,
+            score: 0,
+            nextitem: 64,
+            swapitem: 32
 
 
             // count: 0
@@ -77,6 +83,7 @@ class Home extends Component {
                 y: movedown
             })
             console.log(newboard[7][1])
+<<<<<<< HEAD
         // }
         //     else if(y === 8 && newboard[row+y][col+x] === 0){
         //         newboard[row+y][col+x] = 0
@@ -99,6 +106,19 @@ class Home extends Component {
         // }
             
     }}
+=======
+            // }
+            //     else if(y === 8 && newboard[row+y][col+x] === 0){
+            //         newboard[row+y][col+x] = 0
+            //         newboard[8][col+x] = value
+            //         this.setState({
+            //             board: newboard,
+            //         })
+            //     }
+
+        }
+    }
+>>>>>>> master
 
     checkBelow = () => {
         //this will check to see if the row below has any pieces
@@ -114,8 +134,8 @@ class Home extends Component {
         // console.log(newboard[row+y][col+x])
         // console.log(newboard[row+y+1][col+x])
         // if(newboard[row+y+1][col+x] === newboard[row+y][col+x]){
-            // console.log(newboard[row+y+1][col+x])
-            // console.log(newboard[row][col+x])
+        // console.log(newboard[row+y+1][col+x])
+        // console.log(newboard[row][col+x])
         // }
         //this.checkCollision() if they drop next to a piece.
 
@@ -170,9 +190,11 @@ class Home extends Component {
         let newboard = this.state.board.map(element => {
             let item = element.map(number => {
                 return (
-                    <p>
-                        {number}
-                    </p>
+                    <div>
+                        <p>
+                            {number}
+                        </p>
+                    </div>
 
                 )
             })
@@ -184,11 +206,38 @@ class Home extends Component {
         return (
             <div className='container'>
                 <div className='top-bar'>
-                    Level Next Item Score LeaderBoard Pause
+                    <div className='leaderboard-score'>
+                        <div className='leaderboard'>
+                            <img id='leader' src={leaderboardimg} alt="" />
+                            <h2>{this.state.score}</h2>
+                        </div>
+                        <div className='score'>
+                            <h2>{this.state.score}</h2>
+                        </div>
+                    </div>
+                    <div className='truelevel'>
+                        <h3 className='margin-right'>Level {`${this.state.level}`} </h3>
+                        <div className='level'>
+                            <div className='level2'></div>
+                        </div>
+                    </div>
                 </div>
-                <div className='actual-grid'>
-
-                    {newboard}
+                <div className='middle'>
+                    <div className='next-item'>
+                        <h4>Next Item</h4>
+                        <div className='piece'>
+                            <p>{this.state.nextitem}</p>
+                        </div>
+                    </div>
+                    <div className='actual-grid'>
+                        {newboard}
+                    </div>
+                    <div className='swap-item'>
+                        <h4>Swap Item</h4>
+                        <div>
+                            <p>{this.state.swapitem}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

@@ -24,7 +24,7 @@ class Pause extends Component {
     }
 
     render(){
-        if(this.props.location.pathname === '/'){
+        if(this.props.location.pathname === '/home'){
                 return(
                     <nav role="navigation">
                         <div id="menuToggle">
@@ -35,6 +35,7 @@ class Pause extends Component {
                                 <ul id="menu">
                                     <li>Restart</li>
                                     <Link to='/leader'><li>Leader Boards</li></Link>
+                                    <Link to='/'><li>Start Screen</li></Link>
                                     <li>Sound: On / Off</li>
                                 </ul>
                         </div>
