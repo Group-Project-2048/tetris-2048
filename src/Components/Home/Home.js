@@ -25,7 +25,8 @@ class Home extends Component {
             level: 99,
             score: 0,
             nextitem: 64,
-            swapitem: 32
+            swapitem: 32,
+            multiplier: 1
 
 
             // count: 0
@@ -83,7 +84,6 @@ class Home extends Component {
                 y: movedown
             })
             console.log(newboard[7][1])
-<<<<<<< HEAD
         // }
         //     else if(y === 8 && newboard[row+y][col+x] === 0){
         //         newboard[row+y][col+x] = 0
@@ -106,19 +106,6 @@ class Home extends Component {
         // }
             
     }}
-=======
-            // }
-            //     else if(y === 8 && newboard[row+y][col+x] === 0){
-            //         newboard[row+y][col+x] = 0
-            //         newboard[8][col+x] = value
-            //         this.setState({
-            //             board: newboard,
-            //         })
-            //     }
-
-        }
-    }
->>>>>>> master
 
     checkBelow = () => {
         //this will check to see if the row below has any pieces
@@ -171,6 +158,7 @@ class Home extends Component {
                  stack()
              } else {
                  combine()
+                 score()
              }
         } 
         */
