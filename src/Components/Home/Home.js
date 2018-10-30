@@ -22,7 +22,7 @@ class Home extends Component {
             piece: { row: 0, col: 1, value: 64 },
             y: 0,
             x: 0,
-            level: 99,
+            level: 1,
             score: 0,
             nextitem: 64,
             swapitem: 32
@@ -150,7 +150,7 @@ class Home extends Component {
                     <div className='next-item'>
                         <h4>Next Item</h4>
                         <div className='piece'>
-                            <p>{this.state.nextitem}</p>
+                            <p id='nextitem'>{this.state.nextitem}</p>
                         </div>
                     </div>
                     <div className='actual-grid'>

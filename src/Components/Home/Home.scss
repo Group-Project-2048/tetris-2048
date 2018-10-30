@@ -106,11 +106,14 @@ $twothous: #000000;
 }
 
 .piece{
+
     width: 75px;
     height: 54px;
     background-color: $sixty;
     display: flex;
     justify-content: center;
     margin-left: 12px;
+    border-radius: 5px;
+    border: 1px solid $game-color;
 
 }
