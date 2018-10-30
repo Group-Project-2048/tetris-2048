@@ -250,14 +250,14 @@ class Leader extends Component {
 
         return (
             <div className='backgroundBox'>
-                <button><Link to='/home'>back</Link></button>
+                <button className='backBtn'><Link to='/home'>Back</Link></button>
                 <h1 style={{ color: 'white' }}>Top Players</h1>
 
                 <div className='scoreBtns'>
-                    <button onClick={() => this.handleDayBtn(this.state.players)} className='scoreBtns'>Day</button>
-                    <button onClick={() => this.handleWeekBtn(this.state.players)} className='scoreBtns'>Week</button>
-                    <button onClick={() => this.handleMonthBtn(this.state.players)} className='scoreBtns'>Month</button>
-                    <button onClick={() => this.handleOverallBtn()} className='scoreBtns'>Overall</button>
+                    <button onClick={() => this.handleDayBtn(this.state.players)} className='dayScoreBtns'>Day</button>
+                    <button onClick={() => this.handleWeekBtn(this.state.players)} className='weekScoreBtns'>Week</button>
+                    <button onClick={() => this.handleMonthBtn(this.state.players)} className='monthScoreBtns'>Month</button>
+                    <button onClick={() => this.handleOverallBtn()} className='overallScoreBtns'>Overall</button>
                 </div>
 
                 <div className='mainBox'>

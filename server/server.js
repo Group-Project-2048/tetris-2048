@@ -31,10 +31,14 @@ massive(CONNECTION_STRING).then(dbInstance=> {
 
 //Endpoints
 
-// let c = controller;
+let c = controller;
 
 //Get all players into the players array in the leaderboard state
 
-app.get('/api/getPlayers', controller.getPlayers);
+app.get('/api/getPlayers', c.getPlayers);
+
+//register user
+
+app.post('/api/register', c.register);
 
 app.listen(SERVER_PORT, () => {console.log(`Server ${SERVER_PORT} is running`); })
