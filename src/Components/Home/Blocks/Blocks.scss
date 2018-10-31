@@ -1,0 +1,135 @@
+$main-color: #434448;
+$game-color: #18242D;
+$level-color: #5D666C;
+$level2-color: #98FD82;
+
+$two: #C0B4A5;
+$four: #F2CB35;
+$eight: #FF891F;
+$sixteen: #FF0A15;
+$thirty:  #7DCB3E;
+$sixty:  #C47BFB;
+$onehund: #FF019D;
+$twohund:  #12B559;
+$fivehund: #8500F5;
+$thous: #018EE6;
+$twothous: #000000;
+
+
+
+.piece{
+    width: 75px;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    margin-left: 12px;
+    border-radius: 5px;
+    border: 1px solid $game-color;
+}
+
+
+@mixin numberColor($val){
+    @if $val == 2 {
+      background-color: $two;
+    }
+    @else if $val == 4 {
+        background-color: $four;
+    }
+    @else if $val == 8 {
+        background-color: $eight;
+    }
+    @else if $val == 16 {
+        background-color: $sixteen;
+    }
+    @else if $val == 32 {
+        background-color: $thirty;
+    }
+    @else if $val == 64 {
+        background-color: $sixty;
+    }
+    @else if $val == 128 {
+        background-color: $onehund;
+    }
+    @else if $val == 256 {
+        background-color: $twohund;
+    }
+    @else if $val == 512 {
+        background-color: $fivehund;
+    }
+    @else if $val == 1024 {
+        background-color: $thous;
+    }
+    @else if $val == 2048 {
+        background-color: $twothous;
+    }
+    @else if $val == 'W'{
+        background: url('./abstract-blurred-gradient-mesh-background.jpg');
+                    background-size: cover;
+                    background-repeat: no-repeat;
+    }
+  }
+
+.piece-2{
+    @extend .piece;
+    @include numberColor(2);
+}
+
+.piece-4{
+    @extend .piece;
+    @include numberColor(4);
+}
+
+.piece-8{
+    @extend .piece;
+    @include numberColor(8);
+}
+
+.piece-16{
+    @extend .piece;
+    @include numberColor(16);
+}
+
+.piece-32{
+    @extend .piece;
+    @include numberColor(32);
+}
+
+.piece-64{
+    @extend .piece;
+    @include numberColor(64);
+}
+
+.piece-128{
+    @extend .piece;
+    @include numberColor(128);
+}
+
+.piece-256{
+    @extend .piece;
+    @include numberColor(256);
+}
+
+.piece-512{
+    @extend .piece;
+    @include numberColor(512);
+}
+
+.piece-1024{
+    @extend .piece;
+    @include numberColor(1024);
+}
+
+.piece-2048{
+    @extend .piece;
+    @include numberColor(2048);
+}
+
+.piece-W{
+    @extend .piece;
+    @include numberColor('W');
+}
+
+#nextitem{
+    margin: auto;
+}
+

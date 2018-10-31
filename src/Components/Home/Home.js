@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+import Blocks from './Blocks/Blocks';
+// import './Home.css'
+=======
+>>>>>>> master
 import './Home.scss'
 import leaderboardimg from './Group-03.png'
 
@@ -25,14 +30,33 @@ class Home extends Component {
             x: 0,
             level: 1,
             score: 0,
+            nextitem: '',
+            swapitem: 32,
+            random: '',
+            numbers: [2, 4, 8, 16, 32, 64, 'W'],
+
+
+            // count: 0
+            // initialStart: this.state.board[0][1],
             nextitem: 64,
             swapitem: 32,
             multiplier: 1,
         }
     }
-
+    
     componentDidMount() {
         this.game()
+        // ^ this is where we need to start our loop
+        // loop should contain this.fall()
+        this.handleRandomNumber(this.state.numbers)
+        console.log(this.state.nextitem)
+    }
+
+    handleRandomNumber = (num) => {
+        let randomNumber = num[Math.floor(Math.random()*num.length)];
+         this.setState({
+            random: randomNumber
+        })
     }
 
     fall = () => {
@@ -188,9 +212,7 @@ class Home extends Component {
                 <div className='middle'>
                     <div className='next-item'>
                         <h4>Next Item</h4>
-                        <div className='piece'>
-                            <p id='nextitem'>{this.state.nextitem}</p>
-                        </div>
+                        <Blocks numbers={this.state.random}/>
                     </div>
                     <div className='actual-grid'>
                         {newboard}
