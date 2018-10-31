@@ -53,4 +53,8 @@ app.post('/api/register', c.register);
 
 app.get('/api/getSession', c.checkSession);
 
+//Get the highest score for the player
+
+app.get('/api/getHighScore', c.getHighestScore)
+
 app.listen(SERVER_PORT, () => {console.log(`Server ${SERVER_PORT} is running`); })
