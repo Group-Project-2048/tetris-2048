@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import './Home.css'
 import './Home.scss'
 import leaderboardimg from './Group-03.png'
 
@@ -29,47 +28,14 @@ class Home extends Component {
             nextitem: 64,
             swapitem: 32,
             multiplier: 1,
-
-            // LEVELS ON PROPS?
-            // count: 0
-            // initialStart: this.state.board[0][1],
-            // A landed[] that is a duplicate of the board but with filled indices (plural of index)
-            /*
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 1],
-                [1, 0, 0, 1],
-                [1, 0, 1, 1],
-                [1, 1, 1, 1]
-            */
-           // blocks : 2,4,8,16,32,64,wild
         }
     }
 
     componentDidMount() {
         this.game()
-        // ^ this is where we need to start our loop
-        // loop should contain this.fall()
-
-    }
-
-    // componentDidUpdate(prevState){
-    //     if(prevState !== this.state){
-    //         this.setState({
-
-    //         })
-    //     }
-    // }
-
-    randomPiece = () => {
-        var blocks = []
     }
 
     fall = () => {
-        // this.checkCollision()
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
@@ -82,9 +48,9 @@ class Home extends Component {
                 let newboard = board.map(element => [...element])
                 if (y >= 0 && y <= 7){
                     if(newboard[row + y+1][col + x] === 0){
+                        let movedown = y+1
                         newboard[row+y][col + x] = 0
                         newboard[row+y+1][col+x] = value
-                        let movedown = y+1
                         this.setState({
                             board: newboard,
                             y: movedown
@@ -104,74 +70,40 @@ class Home extends Component {
         })            
     }
 
-    combine = (num1, num2) =>{
+    combine = (a, b) =>{
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
+        a = x
+        b = y
+        let num1 = newboard[row+b][col+a]
+        let num2 = newboard[row+b+1][col+a]
         if( num1 === num2){
             let num3 = num1 + num2
-            newboard[row+y+1][col+x] = num3
-            newboard[row+y][col+x] = 0
+            newboard[row+b+1][col+a] = num3
+            newboard[row+b][col+a] = 0
             this.setState({
                 board: newboard
             })
-            if(newboard[row+y+1][col+x]===newboard[row+y+2][col+x]){
-                let num3 = newboard[row+y+1][col+x] + newboard[row+y+2][col+x]
-                newboard[row+y+1][col+x] = 0
-                newboard[row+y+2][col+x] = num3
-                this.setState({
-                    board: newboard
-                })
-                
-            }
+            this.combine(a,b+1)
+            console.log('THIS IS A THING', value, newboard[row+y][col+x])
         }
+        // if(value === newboard[row+y][col+x]){
+
+        // }
     }
 
 
     checkCollision = () => {
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
-        var { value, row, col } = newpiece
+        let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
         
         if(newboard[row + y][col + x] === newboard[row + y +1][col + x]){
-            let a = newboard[row + y][col + x]
-            let b = newboard[row + y +1][col + x]
-            this.combine(a, b)
+            this.combine(x, y)
         }
-
-        //  else if(newboard[row + y][col + x] !== newboard[row + y +1][col + x]){
-        //     stack()
-        // } 
-        
-
-
-        // function stack(newboard, piece){
-            
-        // }
-
-
-        // if one combines, we need to shift the piece down that was combined
-        // if combined, the piece that fell is no longer there
-        /* 
-        function combine(num1, num2){
-            return num1 + num2
-        }
-
-
-        
-        if(piece === newboard[col][row]){
-            newboard[col][row] += piece
-             the piece that fell is now equal to 0 so that other pieces can fall through it
-             if(matchesBelow === false){
-                 stack()
-             } else {
-                 combine()
-                 score()
-             }
-        } 
-        */
     }
 
 
