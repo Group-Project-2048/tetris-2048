@@ -13,11 +13,21 @@ class StartScreen extends Component {
         this.state = {
             
             username: '',
+            user: {},
         }
 
 
         this.handleRegister = this.handleRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
+    }
+    
+    componentDidMount(){
+        axios.get('/api/getSession').then(res => {
+            this.setState({
+                user: res.data
+            })
+            console.log(this.state.user[0])
+        })
     }
 
     handleChange(prop, val){
@@ -29,7 +39,7 @@ class StartScreen extends Component {
 
     handleRegister(){
 
-        //This method is not working because the table is duplicating the primary key. 
+        //I am currently trying to make the session object to have a user property with an object that stores the id from the database. 
 
         const toast = swal.mixin({
             toast: true,
@@ -55,9 +65,11 @@ class StartScreen extends Component {
 
         axios.post('/api/register', body).then(res =>{
 
+
             this.props.history.push('/home')
 
             console.log(res)
+
         }).catch(err => console.log(err))
 
     }
@@ -74,6 +86,7 @@ class StartScreen extends Component {
                             <input 
                                 type="text" 
                                 placeholder='Username' 
+                                value={this.state.user[0]? this.state.user[0].name: undefined}
                                 className='usernameInput'
                                 onChange={(e) => this.handleChange('username', e.target.value)}/>
                             <hr/>
