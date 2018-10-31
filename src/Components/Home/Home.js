@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import Blocks from './Blocks/Blocks';
 // import './Home.css'
-=======
->>>>>>> master
 import './Home.scss'
 import leaderboardimg from './Group-03.png'
 
