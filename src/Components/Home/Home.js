@@ -69,25 +69,11 @@ class Home extends Component {
     }
 
     fall = () => {
-        // this.checkBelow()
         // this.checkCollision()
-
-        //this will change the row of the piece
-        //check somehow to see if it needs another piece to fall
-        //this would be the set interval 
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
-        // if (y >= 0 && y <= 8) {
-        //     // figure out a way to check below everytime this moves down 
-        //     // this.checkBelow()
-        //     newboard[0][col + x] = 0
-        //     newboard[row + y][col + x] = value
-        //     if (y >= 1) {
-        //         newboard[row + y - 1][col + x] = 0
-        //         newboard[row + y][col + x] = value
-        //     }
 
         newboard.forEach(row => {
             row.forEach(column => {
@@ -115,30 +101,7 @@ class Home extends Component {
                     }
                 }
             })
-        })
-
-
-        // }
-        //     else if(y === 8 && newboard[row+y][col+x] === 0){
-        //         newboard[row+y][col+x] = 0
-        //         newboard[8][col+x] = value
-        //         this.setState({
-        //             board: newboard,
-        //         })
-        //     }
-
-        // verifies that the row bellow it is occupied by zeros, and if not, the piece will stop.
-        // for (row = 0; row < piece.length; row++) {
-        //     for (col = 0; col < piece[row].length; col++) {
-        //         if (piece[row][col] !== 0) {
-        //             if (newboard[row + piece] !== 0 &&
-        //                 newboard[col + piece] !== 0) {
-        //                 //the space is taken
-        //             }
-        //         }
-        //      }
-        // }
-            
+        })            
     }
 
     combine = (num1, num2) =>{
@@ -162,7 +125,7 @@ class Home extends Component {
                 })
                 
             }
-                }
+        }
     }
 
 
