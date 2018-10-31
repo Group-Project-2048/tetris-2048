@@ -78,7 +78,7 @@ class Home extends Component {
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
-        let newboard = [...board]
+        let newboard = board.map(element => [...element])
         // if (y >= 0 && y <= 8) {
         //     // figure out a way to check below everytime this moves down 
         //     // this.checkBelow()
@@ -93,7 +93,7 @@ class Home extends Component {
             row.forEach(column => {
                 let newpiece = { ...piece }
                 var { value, row, col } = newpiece
-                let newboard = [...board]
+                let newboard = board.map(element => [...element])
                 if (y >= 0 && y <= 7){
                     if(newboard[row + y+1][col + x] === 0){
                         newboard[row+y][col + x] = 0
@@ -110,6 +110,8 @@ class Home extends Component {
                  else if(y === 8){
                     if(newboard[row + y][col + x] === 0){
                         newboard[row+y][col + x] = value
+                    } else {
+                        this.checkCollision()
                     }
                 }
             })
@@ -143,28 +145,24 @@ class Home extends Component {
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
-        console.log('newpiece', newpiece)
         let newboard = board.map(element => [...element])
         if( num1 === num2){
-            value = 0
             let num3 = num1 + num2
-            console.log('goodbye', num1, num2, num3)
-            console.log(x, y, row, col)
             newboard[row+y+1][col+x] = num3
-            console.log(newboard[row+y+1])
-            console.log(newboard[row+y])
             newboard[row+y][col+x] = 0
-            console.log(newboard[row+y])
-            console.log('askdjh', newboard)
-
             this.setState({
                 board: newboard
             })
-            console.log('asdg', newboard)
-            console.log('4444', newboard[row+y][col+x])
-            console.log('5555', newboard[row+y+1][col+x])
-            // this.combine(num3, newboard[row+y+1][col+x])
-        }
+            if(newboard[row+y+1][col+x]===newboard[row+y+2][col+x]){
+                let num3 = newboard[row+y+1][col+x] + newboard[row+y+2][col+x]
+                newboard[row+y+1][col+x] = 0
+                newboard[row+y+2][col+x] = num3
+                this.setState({
+                    board: newboard
+                })
+                
+            }
+                }
     }
 
 
@@ -172,12 +170,11 @@ class Home extends Component {
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         var { value, row, col } = newpiece
-        let newboard = [...board]
+        let newboard = board.map(element => [...element])
         
         if(newboard[row + y][col + x] === newboard[row + y +1][col + x]){
             let a = newboard[row + y][col + x]
             let b = newboard[row + y +1][col + x]
-            // console.log('herro', a, b)
             this.combine(a, b)
         }
 
@@ -218,7 +215,7 @@ class Home extends Component {
     game = () => {
 
         let { board, piece } = this.state
-        let newboard = [...board]
+        let newboard = board.map(element => [...element])
         setInterval(this.fall, 1000)
 
 
