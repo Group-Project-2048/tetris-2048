@@ -17,13 +17,13 @@ class Home extends Component {
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
-                [0, 32, 0, 0],
-                [0, 64, 0, 0]
+                [0, 16, 0, 0],
+                [0, 32, 0, 0]
             ],
             //block class that consists of the pieces like below
             // VALUE WILL BE A FN THAT TAKES A VALUE FROM OU LIST OF VALUES. (2 4 8 16 32 64 WILD)
             // piece: { row: 0, col: 1, value: rando()}
-            piece: { row: 0, col: 1, value: 32 },
+            piece: { row: 0, col: 1, value: 16 },
             y: 0,
             x: 0,
             level: 1,
@@ -79,25 +79,25 @@ class Home extends Component {
                 var { value, row, col } = newpiece
                 let newboard = board.map(element => [...element])
                 if (y >= 0 && y <= 7){
-                    if(newboard[row + y+1][col + x] === 0){
+                //     if(newboard[row + y+1][col + x] === 0){
                         let movedown = y+1
-                        newboard[row+y][col + x] = 0
-                        newboard[row+y+1][col+x] = value
+                        newboard[row+y][col + x] = value    
+                //         newboard[row+y+1][col+x] = value
                         this.setState({
                             board: newboard,
                             y: movedown
+                        })  
+                         this.checkCollision()
+                         console.log('y',y)
+                    } 
+                    else if(y===8){
+                        console.log("Hello?", y)
+                        this.setState({
+                            board: newboard,
+                            y
                         })
-                    } else {
                         this.checkCollision()
                     }
-                }
-                 else if(y === 8){
-                    if(newboard[row + y][col + x] === 0){
-                        newboard[row+y][col + x] = value
-                    } else {
-                        this.checkCollision()
-                    }
-                }
             })
         })            
     }
@@ -109,21 +109,37 @@ class Home extends Component {
         let newboard = board.map(element => [...element])
         a = x
         b = y
-        let num1 = newboard[row+b][col+a]
-        let num2 = newboard[row+b+1][col+a]
-        if( num1 === num2){
-            let num3 = num1 + num2
-            newboard[row+b+1][col+a] = num3
-            newboard[row+b][col+a] = 0
-            this.setState({
-                board: newboard
-            })
-            this.combine(a,b+1)
-            console.log('THIS IS A THING', value, newboard[row+y][col+x])
-        }
-        // if(value === newboard[row+y][col+x]){
 
-        // }
+        console.log('words', b)
+        var masterdigs = value + newboard[row+b][col+a]
+        console.log(masterdigs)
+        newpiece.value = masterdigs
+        newboard[row+b-1][col+a] = 0
+        newboard[row+b][col+a] = newpiece.value
+        console.log('value', newpiece)
+        console.log('newboard', newboard)
+        this.setState({
+            board: newboard,
+            piece: newpiece
+        })
+    //     let num1 = newboard[row+b][col+a]
+    //     console.log("checking value", value, num1)
+    //     let num2 = newboard[row+b+1][col+a]
+    //     if( num1 === num2){
+    //         let num3 = num1 + num2
+            
+    //         // newboard[row+b][col+a] = 0
+    //         newboard[row+b+1][col+a] = num3
+    //         this.setState({
+    //             board: newboard,
+    //             // piece: num3
+    //         })
+    //         this.combine(a,b+1)
+    //         console.log('THIS IS A THING', value, newboard[row+y][col+x],newpiece)
+    //     }
+    //     // if(value === newboard[row+y][col+x]){
+
+    //     // }
     }
 
 
@@ -133,9 +149,25 @@ class Home extends Component {
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
         
-        if(newboard[row + y][col + x] === newboard[row + y +1][col + x]){
-            this.combine(x, y)
+        if(newboard[row+y][col+x] === 0){
+            newboard[row+y-1][col+x]=0
+            newboard[row+y][col+x] = value
+            this.setState({
+                board: newboard
+            })
         }
+        else if(newboard[row + y][col + x] === value){
+            this.combine(x, y)
+          
+            console.log('THIS IS Another THING', value, newboard[row+y][col+x])
+         
+        } else if (newboard[row+y][col+x] !== value){
+            //stack
+        }
+        // else if( y === 8 ){
+        //     return
+        // }
+
     }
 
 
