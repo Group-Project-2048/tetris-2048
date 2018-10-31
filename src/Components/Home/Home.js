@@ -9,22 +9,42 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 16, 0, 0],
-                [0, 32, 0, 0]
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 16, 0, 0]
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 32, 0, 0],
+            [0, 64, 0, 0],
+            [0, 128, 0, 0],
+            [0, 256, 0, 0],
+            [0, 512, 0, 0]
             ],
+
+            // [0, 0, 0, 0],
+            // [0, 0, 0, 0],
+            // [0, 0, 0, 0],
+            // [0, 16, 0, 0],
+            // [0, 32, 0, 0],
+            // [0, 64, 0, 0],
+            // [0, 128, 0, 0],
+            // [0, 256, 0, 0],
+            // [0, 512, 0, 0]
             //block class that consists of the pieces like below
             // VALUE WILL BE A FN THAT TAKES A VALUE FROM OU LIST OF VALUES. (2 4 8 16 32 64 WILD)
             // piece: { row: 0, col: 1, value: rando()}
             piece: { row: 0, col: 1, value: 16 },
             y: 0,
             x: 0,
+            z: 0,
             level: 1,
             score: 0,
             nextitem: '',
@@ -35,18 +55,22 @@ class Home extends Component {
 
             // count: 0
             // initialStart: this.state.board[0][1],
-            nextitem: 64,
-            swapitem: 32,
+            nextItem: 64,
+            swapItem: 32,
             multiplier: 1,
         }
     }
     
     componentDidMount() {
         this.game()
-        // ^ this is where we need to start our loop
-        // loop should contain this.fall()
         this.handleRandomNumber(this.state.numbers)
         console.log(this.state.nextitem)
+    }   
+
+    game = () => {
+        let { board, piece } = this.state
+        let newboard = board.map(element => [...element])
+        setInterval(this.fall, 1000) 
     }
 
     handleRandomNumber = (num) => {
@@ -67,70 +91,28 @@ class Home extends Component {
                 let newpiece = { ...piece }
                 var { value, row, col } = newpiece
                 let newboard = board.map(element => [...element])
-                if (y >= 0 && y <= 7){
-                //     if(newboard[row + y+1][col + x] === 0){
-                        let movedown = y+1
+                if (y>=0 && y<=8){
+                        if(y>=0 && y<=7){
+                            var movedown = y+1
+                            newboard[row + y][col + x] = 0  
+                            this.setState({
+                                board: newboard,     
+                                y: movedown
+                            })  
+                        this.checkCollision()   
+                        } else {
+                            let movedown = y
+                            this.setState({
+                                board: newboard,
+                                y: movedown
+                            })  
+                        }
                         newboard[row+y][col + x] = value    
-                //         newboard[row+y+1][col+x] = value
-                        this.setState({
-                            board: newboard,
-                            y: movedown
-                        })  
-                         this.checkCollision()
-                         console.log('y',y)
-                    } 
-                    else if(y===8){
-                        console.log("Hello?", y)
-                        this.setState({
-                            board: newboard,
-                            y
-                        })
-                        this.checkCollision()
-                    }
+                    }   
+
             })
         })            
     }
-
-    combine = (a, b) =>{
-        let { piece, board, x, y } = this.state
-        let newpiece = { ...piece }
-        let { value, row, col } = newpiece
-        let newboard = board.map(element => [...element])
-        a = x
-        b = y
-
-        console.log('words', b)
-        var masterdigs = value + newboard[row+b][col+a]
-        console.log(masterdigs)
-        newpiece.value = masterdigs
-        newboard[row+b-1][col+a] = 0
-        newboard[row+b][col+a] = newpiece.value
-        console.log('value', newpiece)
-        console.log('newboard', newboard)
-        this.setState({
-            board: newboard,
-            piece: newpiece
-        })
-    //     let num1 = newboard[row+b][col+a]
-    //     console.log("checking value", value, num1)
-    //     let num2 = newboard[row+b+1][col+a]
-    //     if( num1 === num2){
-    //         let num3 = num1 + num2
-            
-    //         // newboard[row+b][col+a] = 0
-    //         newboard[row+b+1][col+a] = num3
-    //         this.setState({
-    //             board: newboard,
-    //             // piece: num3
-    //         })
-    //         this.combine(a,b+1)
-    //         console.log('THIS IS A THING', value, newboard[row+y][col+x],newpiece)
-    //     }
-    //     // if(value === newboard[row+y][col+x]){
-
-    //     // }
-    }
-
 
     checkCollision = () => {
         let { piece, board, x, y } = this.state
@@ -153,26 +135,34 @@ class Home extends Component {
         } else if (newboard[row+y][col+x] !== value){
             //stack
         }
-        // else if( y === 8 ){
-        //     return
-        // }
-
     }
 
-
-    game = () => {
-
-        let { board, piece } = this.state
+    combine = (a, b) =>{
+        let { piece, board, x, y, z } = this.state
+        let newpiece = { ...piece }
+        let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
-        setInterval(this.fall, 1000)
+        a = x
+        b = y
 
+        var masterdigs = value + newboard[row+b][col+a]
+        newpiece.value = masterdigs
+        newboard[row+b-z][col+a] = 0
+        newboard[row+b][col+a] = newpiece.value
 
-
+        let pickle = newboard.map(element => [...element])
+        let markdown = z++
+        this.setState({
+            board: pickle,
+            piece: newpiece ,
+            y:b,
+            z: markdown
+        })
     }
 
     render() {
-        let newboard = this.state.board.map(element => {
-            let item = element.map(number => {
+        let newboard = this.state.board.map((el,i) => {
+            let item = el.map(number => {
                 return (
                     <div>
                         <p>
