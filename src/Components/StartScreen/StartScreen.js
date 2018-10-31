@@ -26,8 +26,10 @@ class StartScreen extends Component {
             this.setState({
                 user: res.data
             })
-            console.log(this.state.user[0])
+            console.log(this.state.user)
         })
+
+        
     }
 
     handleChange(prop, val){

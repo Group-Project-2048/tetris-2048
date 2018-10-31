@@ -42,21 +42,21 @@ module.exports = {
     checkSession: (req, res, next) => {
         let {session} = req;
         const db = req.app.get('db');
-        console.log(session)
+        // console.log(session)
         
+        //The session id and username have been hardcoded to make sure that there is always something in session for development purposes.
         
-        // if(session.user.id === 0){
-        //     return
-        // }else{
+        db.get_user([(session.user.id = 69), (session.user.username = 'Josefa')]).then(dbResult => {
+
+            session.user.id = dbResult[0].id;
+            session.user.username = dbResult[0].name;
+            res.status(200).send(dbResult);
+
+        }).catch(err => console.log(err))
+
+
+
         
-        // db.get_user([session.user.id, session.user.username]).then(dbResult => {
-            
-
-        //     res.status(200).send(dbResult);
-
-        // }).catch(err => console.log(err))
-
-        // }
     }
     
 }
