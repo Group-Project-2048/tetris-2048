@@ -3,6 +3,7 @@ import Blocks from './Blocks/Blocks';
 // import './Home.css'
 import './Home.scss'
 import leaderboardimg from './Group-03.png'
+import Axios from 'axios';
 
 class Home extends Component {
     constructor(props) {
@@ -51,8 +52,7 @@ class Home extends Component {
             swapitem: 32,
             random: '',
             numbers: [2, 4, 8, 16, 32, 64, 'W'],
-
-
+            highestScore: [],
             // count: 0
             // initialStart: this.state.board[0][1],
             nextItem: 64,
@@ -71,12 +71,24 @@ class Home extends Component {
         let { board, piece } = this.state
         let newboard = board.map(element => [...element])
         setInterval(this.fall, 1000) 
+        
+        this.handleGetHighScore()
     }
 
-    handleRandomNumber = (num) => {
-        let randomNumber = num[Math.floor(Math.random()*num.length)];
+    handleRandomNumber = (arr) => {
+        let randomNumber = arr[Math.floor(Math.random()*arr.length)];
          this.setState({
             random: randomNumber
+        })
+    }
+
+    handleGetHighScore = () => {
+        Axios.get('/api/getHighScore').then(res => {
+            let newRes = res.data[0].score
+            console.log(newRes)
+            this.setState({
+                highestScore: newRes
+            })
         })
     }
 
@@ -165,7 +177,7 @@ class Home extends Component {
             let item = el.map(number => {
                 return (
                     <div>
-                        <p>
+                        <p className={`num-${number}`}>
                             {number}
                         </p>
                     </div>
@@ -183,7 +195,7 @@ class Home extends Component {
                     <div className='leaderboard-score'>
                         <div className='leaderboard'>
                             <img id='leader' src={leaderboardimg} alt="" />
-                            <h2>{this.state.score}</h2>
+                            <h3>{this.state.highestScore}</h3>
                         </div>
                         <div className='score'>
                             <h2>{this.state.score}</h2>

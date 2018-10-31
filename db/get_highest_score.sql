@@ -1,0 +1,1 @@
+select score from overflow where id = $1;
