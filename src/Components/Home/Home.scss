@@ -14,7 +14,7 @@ $twohund:  #12B559;
 $fivehund: #8500F5;
 $thous: #018EE6;
 $twothous: #000000;
-
+$wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
 
 .container{
     background: $main-color;
@@ -105,15 +105,6 @@ $twothous: #000000;
     margin-left: 10px;
 }
 
-.piece{
 
-    width: 75px;
-    height: 54px;
-    background-color: $sixty;
-    display: flex;
-    justify-content: center;
-    margin-left: 12px;
-    border-radius: 5px;
-    border: 1px solid $game-color;
 
-}
+
