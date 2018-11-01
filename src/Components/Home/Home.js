@@ -52,7 +52,7 @@ class Home extends Component {
             pointsToLevel: 600,
             score: 0,
             shadowScore: 0,
-            absoluteZero: 0,
+    
             scorePercentageMet: 0,
             nextitem: '',
             swapitem: 32,
@@ -255,7 +255,7 @@ class Home extends Component {
         })
     }
     
-    onKeyDown = (e) => {
+    KeyDown = (e) => {
         // console.log(e.which)
         this.setState({
             key: e.which
