@@ -52,6 +52,7 @@ class Home extends Component {
             pointsToLevel: 600,
             score: 0,
             shadowScore: 0,
+            absoluteZero: 0,
             scorePercentageMet: 0,
             nextitem: '',
             swapitem: 32,
@@ -75,7 +76,7 @@ class Home extends Component {
         this.focusDiv()
     }
 
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps, prevState){
         if(prevProps.pause !== this.props.pause){
             if(this.props.pause){
                 clearInterval(this.state.setIntervalID)
@@ -85,6 +86,15 @@ class Home extends Component {
                 this.game()
             }
         }
+
+        if(prevState.shadowScore !== this.state.shadowScore){
+            if(this.state.shadowScore){
+                this.handleScoreBar(this.state.shadowScore)
+                this.handleIncreaseLevel(this.state.pointsToLevel)
+            }
+        }
+
+        
     }
 
     game = () => {
@@ -142,9 +152,10 @@ class Home extends Component {
         
             this.setState({
                 score: this.state.score + 100,
-                // scorePercentageMet: this.state.scorePercentageMet + 10
+                shadowScore: this.state.shadowScore + 100
             })
             console.log(this.state.scorePercentageMet)
+            console.log(this.state.shadowScore)
      }
 
 
@@ -167,13 +178,14 @@ class Home extends Component {
     }
 
     handleIncreaseLevel = (num) => {
-        if(this.state.score > num){
+        if(this.state.shadowScore >= num){
             this.setState({
                 pointsToLevel: num * 2,
                 shadowScore: 0,
                 level: this.state.level + 1,
-                // scorePercentageMet: '0%'
+                scorePercentageMet: '0%'
             })
+            console.log(this.state.pointsToLevel)
             
         }
     }
