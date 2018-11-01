@@ -18,28 +18,17 @@ class Home extends Component {
                 // [0, 0, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 16, 0, 0]
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 16, 0, 0],
-            [0, 32, 0, 0],
-            [0, 64, 0, 0],
-            [0, 128, 0, 0],
-            [0, 256, 0, 0],
-            [0, 512, 0, 0]
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 16, 0, 0],
+                [0, 32, 0, 0],
+                [0, 64, 0, 0],
+                [0, 128, 0, 0],
+                [0, 256, 0, 0],
+                [0, 512, 0, 0]
             ],
 
-            // [0, 0, 0, 0],
-            // [0, 0, 0, 0],
-            // [0, 0, 0, 0],
-            // [0, 16, 0, 0],
-            // [0, 32, 0, 0],
-            // [0, 64, 0, 0],
-            // [0, 128, 0, 0],
-            // [0, 256, 0, 0],
-            // [0, 512, 0, 0]
-            //block class that consists of the pieces like below
-            // VALUE WILL BE A FN THAT TAKES A VALUE FROM OU LIST OF VALUES. (2 4 8 16 32 64 WILD)
             // piece: { row: 0, col: 1, value: rando()}
             piece: { row: 0, col: 1, value: 16 },
             y: 0,
@@ -57,6 +46,7 @@ class Home extends Component {
             nextItem: 64,
             swapItem: 32,
             multiplier: 1,
+            pause: true
         }
     }
     
