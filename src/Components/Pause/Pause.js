@@ -13,7 +13,7 @@ class Pause extends Component {
         super(props)
 
         this.state = {
-            pause: true,
+            pause: true
         }
     }
 
@@ -28,7 +28,7 @@ class Pause extends Component {
                 return(
                     <nav role="navigation">
                         <div id="menuToggle">
-                            <input type="checkbox" />
+                            <input type="checkbox" onClick={this.props.togglePause}/>
                                 <span></span>
                                 <span></span>
                                 <span></span>

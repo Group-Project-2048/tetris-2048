@@ -59,7 +59,7 @@ class Home extends Component {
     game = () => {
         let { board, piece } = this.state
         let newboard = board.map(element => [...element])
-        setInterval(this.fall, 1000) 
+        // setInterval(this.fall, 1000) 
         
         this.handleGetHighScore()
     }
@@ -162,6 +162,8 @@ class Home extends Component {
     }
 
     render() {
+
+        console.log(this.props)
         let newboard = this.state.board.map((el,i) => {
             let item = el.map(number => {
                 return (
@@ -179,9 +181,9 @@ class Home extends Component {
         })
 
         return (
-            <div className='container'>
-                <div className='top-bar'>
-                    <div className='leaderboard-score'>
+            <section className='container'>
+                <header className='top-bar'>
+                    <section className='leaderboard-score'>
                         <div className='leaderboard'>
                             <img id='leader' src={leaderboardimg} alt="" />
                             <h3>{this.state.highestScore}</h3>
@@ -189,15 +191,15 @@ class Home extends Component {
                         <div className='score'>
                             <h2>{this.state.score}</h2>
                         </div>
-                    </div>
-                    <div className='truelevel'>
+                    </section>
+                    <section className='truelevel'>
                         <h3 className='margin-right'>Level {`${this.state.level}`} </h3>
                         <div className='level'>
-                            <div className='level2'></div>
+                            <p className='level2'></p>
                         </div>
-                    </div>
-                </div>
-                <div className='middle'>
+                    </section>
+                </header>
+                <section className='middle'>
                     <div className='next-item'>
                         <h4>Next Item</h4>
                         <Blocks numbers={this.state.random}/>
@@ -211,8 +213,8 @@ class Home extends Component {
                             <p>{this.state.swapitem}</p>
                         </div>
                     </div>
-                </div>
-            </div>
+                </section>
+            </section>
         )
     }
 }
