@@ -12,24 +12,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                // [0, 32, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0]
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
-                [0, 32, 0, 0],
-                [0, 64, 0, 0],
-                [0, 128, 0, 0],
-                [0, 256, 0, 0],
-                [32, 512, 0, 0],
-                [64, 1024, 4, 0],
-                [8, 2, 64, 32]
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+                // [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 32, 0, 0],
+                // [0, 64, 0, 0],
+                // [0, 128, 0, 0],
+                // [0, 256, 0, 0],
+                // [32, 512, 0, 0],
+                // [64, 1024, 4, 0],
+                // [8, 2, 64, 32]
             ],
 
             // [0, 0, 0, 0],
@@ -70,7 +70,6 @@ class Home extends Component {
     componentDidMount() {
         this.game()
         this.handleRandomNumber(this.state.numbers)
-        document.addEventListener("keypress", this.checkKey, false)
         this.focusDiv()
     }
 
@@ -141,14 +140,7 @@ class Home extends Component {
             console.log(this.state.scorePercentageMet)
      }
 
-    game = () => {
-        let id = setInterval(this.fall, 1000)
-        console.log('setinterval id:', id)
-        //This interval is to test the handleScoreBar and handleIncreaseLevel methods
-        setInterval(this.increaseScore, 2000)
-        this.handleScoreBar(this.state.score)
-        this.handleGetHighScore()
-    }
+   
 
     handleRandomNumber = (arr) => {
         let randomNumber = arr[Math.floor(Math.random() * arr.length)];
