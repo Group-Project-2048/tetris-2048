@@ -63,7 +63,7 @@ $twothous: #000000;
         background-color: $twothous;
     }
     @else if $val == 'W'{
-        background: url('./abstract-blurred-gradient-mesh-background.jpg');
+        background: url('../Images/abstract-blurred-gradient-mesh-background.jpg');
                     background-size: cover;
                     background-repeat: no-repeat;
     }
@@ -131,5 +131,6 @@ $twothous: #000000;
 
 #nextitem{
     margin: auto;
+    color: $main-color;
 }
 

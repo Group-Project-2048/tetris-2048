@@ -54,9 +54,17 @@ module.exports = {
 
         }).catch(err => console.log(err))
 
+    },
 
+    getHighestScore: (req, res, next) => {
+        let {session} = req;
+        const db = req.app.get('db');
+        console.log(session.user.id)
 
-        
+        db.get_highest_score([session.user.id]).then(dbResult => {
+
+            res.status(200).send(dbResult);
+        }).catch(err => (console.log(err)))
     }
     
 }
