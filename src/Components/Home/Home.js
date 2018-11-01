@@ -74,10 +74,21 @@ class Home extends Component {
         this.focusDiv()
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.pause !== this.props.pause){
+            if(this.props.pause){
+                clearInterval(2)
+            }
+            else {
+                this.game()
+            }
+        }
+    }
+
     game = () => {
         let { board, piece } = this.state
         
-        setInterval(this.fall, 1000)
+        let id = setInterval(this.fall, 1000)
         this.handleGetHighScore()
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
@@ -288,6 +299,13 @@ class Home extends Component {
                         <Blocks numbers={this.state.random} />
                     </div>
                     <div className='actual-grid' >
+                    <div id='game-over'>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                         {newboard}
                     </div>
                     <div className='swap-item'>
