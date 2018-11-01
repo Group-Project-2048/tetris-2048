@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import '../../Styles/Pause.scss';
+import leaderboardimg from '../../Images/Group-03.png'
 
 
 // card colors from the solitaire game
@@ -33,7 +34,7 @@ class Pause extends Component {
                                 <span></span>
                                 <ul id="menu">
                                     <li>Restart</li>
-                                    <Link to='/leader'><li>Leader Boards</li></Link>
+                                    <Link to='/leader'><li><img src={leaderboardimg} alt="leader boards"/></li></Link>
                                     <Link to='/'><li>EXIT</li></Link>
                                     <li>Sound: On / Off</li>
                                 </ul>
@@ -47,22 +48,3 @@ class Pause extends Component {
 }
 
 export default withRouter(Pause);
-
-
-/* <div className='glass-container'>
-<nav className='menu'>
-    <input onClick={this.handlePause} className='menu-toggler' id='menu-toggler' type='checkbox'/>
-    <label htmlFor='menu-toggler'></label>
-        <ul>
-            <li className='menu-item'>
-                <button>R</button>
-            </li>
-            <li className='menu-item'>
-                <button><Link to='/leader'>LB</Link></button>
-            </li>
-            <li className='menu-item'>
-                <button>S</button>
-            </li>
-        </ul>
-</nav>
-</div> */
