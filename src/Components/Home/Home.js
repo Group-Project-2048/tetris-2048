@@ -3,30 +3,33 @@ import Blocks from './Blocks/Blocks';
 import '../../Styles/Home.scss'
 import leaderboardimg from '../../Images/Group-03.png'
 import Axios from 'axios';
+import keydown, { Keys } from 'react-keydown'
+import ReactDOM from 'react-dom';
+
 
 class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
             board: [
-                // [0, 32, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0]
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
-                [0, 32, 0, 0],
-                [0, 64, 0, 0],
-                [0, 128, 0, 0],
-                [0, 256, 0, 0],
-                [0, 512, 0, 0],
-                [0, 1024, 0, 0],
-                [0, 2 , 0, 0]
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+                // [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 32, 0, 0],
+                // [0, 64, 0, 0],
+                // [0, 128, 0, 0],
+                // [0, 256, 0, 0],
+                // [32, 512, 0, 0],
+                // [64, 1024, 4, 0],
+                // [8, 2, 64, 32]
             ],
 
             // [0, 0, 0, 0],
@@ -41,7 +44,7 @@ class Home extends Component {
             //block class that consists of the pieces like below
             // VALUE WILL BE A FN THAT TAKES A VALUE FROM OU LIST OF VALUES. (2 4 8 16 32 64 WILD)
             // piece: { row: 0, col: 1, value: rando()}
-            piece: { row: 0, col: 1, value: 32},
+            piece: { row: 0, col: 1, value: 32 },
             y: 0,
             x: 0,
             z: 0,
@@ -57,29 +60,64 @@ class Home extends Component {
             nextItem: 64,
             swapItem: 32,
             multiplier: 1,
+            key: 'n/a'
         }
     }
 
     componentDidMount() {
         this.game()
         this.handleRandomNumber(this.state.numbers)
+        document.addEventListener("keypress", this.checkKey, false)
+        this.focusDiv()
     }
 
     game = () => {
         let { board, piece } = this.state
-        let newboard = board.map(element => [...element])
+        
         setInterval(this.fall, 1000)
-
         this.handleGetHighScore()
     }
+    
+    changeColumn = () => {
+        let { piece, key, board } = this.state
+        let newboard = board.map(element => [...element])
+        let newpiece = {...piece}
 
+        if (newpiece.col > 0 && newpiece.col <= 2) {
+            switch(key){
+
+                case 37: 
+                    //if the piece was moved to the left or the right the piece before should equal 0
+                    // if the piece is moved it should be able to move again to a different place.
+                    let left = newpiece.col-1
+                    newpiece.col = left
+                    console.log(newpiece)
+                    this.setState({
+                        piece: newpiece
+                    })
+                break
+                case 39: 
+                    //for some reason it is adding multiple times
+                    let right = newpiece.col+1
+                    newpiece.col = right
+                    console.log(newpiece)
+                    this.setState({
+                       piece: newpiece
+                    })
+                 break;
+                
+            }
+            
+        }
+       
+    }
     handleRandomNumber = (arr) => {
         let randomNumber = arr[Math.floor(Math.random() * arr.length)];
         this.setState({
             random: randomNumber
         })
     }
-
+    
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
             let newRes = res.data[0].score
@@ -88,13 +126,14 @@ class Home extends Component {
             })
         })
     }
-
+    
+    
     fall = () => {
+        this.changeColumn()
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
-
         newboard.forEach(row => {
             row.forEach(column => {
                 let newpiece = { ...piece }
@@ -106,31 +145,30 @@ class Home extends Component {
                         // basic movement 
                         if (newboard[row + y + 1][col + x] === 0) {
                             newboard[row + y][col + x] = 0
-                            newboard[row + y + 1][col+x] = value
+                            newboard[row + y + 1][col + x] = value
                             var movedown = y + 1
                             
-                        } 
+                        }
                         // combine movement
-                        else if (newboard[row+y][col+x] === newboard[row+y+1][col+x]){
+                        else if (newboard[row + y][col + x] === newboard[row + y + 1][col + x]) {
                             // newboard + newboard(1) = new value
                             // newvalue = newboard(1)
                             // newboard = 0
-                            newboard[row+y][col+x] = 0
-                            newboard[row+y+1][col+x] = value*2
-                            newpiece.value = value*2
-                            if(newboard[row+y+1][col+x] === 2048){
-                                newboard[row+y+1][col+x] = 0
+                            newboard[row + y][col + x] = 0
+                            newboard[row + y + 1][col + x] = value * 2
+                            newpiece.value = value * 2
+                            if (newboard[row + y + 1][col + x] === 2048) {
+                                newboard[row + y + 1][col + x] = 0
                             }
                             var movedown = y + 1
-                        } 
-                        
+                        }
                         
                         this.setState({
                             board: newboard,
                             y: movedown,
                             piece: newpiece
                         })
-                       
+                        
                     } else {
                         let movedown = y
                         this.setState({
@@ -138,16 +176,26 @@ class Home extends Component {
                             y: movedown
                         })
                     }
-                   
+                    
                 }
-
+                
             })
         })
     }
-
-
-
+    
+    onKeyDown = (e) => {
+        // console.log(e.which)
+        this.setState({
+            key: e.which
+        })
+    }
+    
+    focusDiv() {
+        ReactDOM.findDOMNode(this.refs.theDiv).focus()
+    }
+    
     render() {
+        // console.log('key', this.state.key)
         let newboard = this.state.board.map((el, i) => {
             let item = el.map(number => {
                 return (
@@ -165,7 +213,7 @@ class Home extends Component {
         })
 
         return (
-            <div className='container'>
+            <div className='container' ref="theDiv" onKeyDown={(e) => this.onKeyDown(e)} tabIndex="1">
                 <div className='top-bar'>
                     <div className='leaderboard-score'>
                         <div className='leaderboard'>
@@ -188,7 +236,7 @@ class Home extends Component {
                         <h4>Next Item</h4>
                         <Blocks numbers={this.state.random} />
                     </div>
-                    <div className='actual-grid'>
+                    <div className='actual-grid' >
                         {newboard}
                     </div>
                     <div className='swap-item'>
