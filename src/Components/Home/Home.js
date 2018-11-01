@@ -63,6 +63,17 @@ class Home extends Component {
         
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.pause !== this.props.pause){
+            if(this.props.pause){
+                clearInterval(2)
+            }
+            else {
+                this.game()
+            }
+        }
+    }
+
     
 //This method is to test the handleScoreBar and handleIncreaseLevel methods
     increaseScore = () => {
@@ -74,8 +85,8 @@ class Home extends Component {
      }
 
     game = () => {
-        setInterval(this.fall, 1000)
-
+        let id = setInterval(this.fall, 1000)
+        console.log('setinterval id:', id)
         //This interval is to test the handleScoreBar and handleIncreaseLevel methods
         setInterval(this.increaseScore, 2000)
 
@@ -137,12 +148,12 @@ class Home extends Component {
                     if (y >= 0 && y <= 7) {
                         //before it moves down we want it to check first
                         // basic movement 
-                        console.log('the real value', value)
+                        // console.log('the real value', value)
                         if (newboard[row + y + 1][col + x] === 0) {
                             newboard[row + y][col + x] = 0
                             newboard[row + y + 1][col+x] = value
-                            console.log('hello')
-                            console.log(value)
+                            // console.log('hello')
+                            // console.log(value)
                             var movedown = y + 1
                             
                         } 
@@ -153,11 +164,11 @@ class Home extends Component {
                             // newboard = 0
                             newboard[row+y][col+x] = 0
                             newboard[row+y+1][col+x] = value*2
-                            console.log(newboard[row+y][col+x]) 
-                            console.log(newboard[row+y+1][col+x]) 
+                            // console.log(newboard[row+y][col+x]) 
+                            // console.log(newboard[row+y+1][col+x]) 
                             newpiece.value = value*2
-                            console.log('goodbye')
-                            var movedown = y + 1
+                            // console.log('goodbye')
+                            movedown = y + 1
                         } 
                         
                         
@@ -174,9 +185,7 @@ class Home extends Component {
                             y: movedown
                         })
                     }
-                   
                 }
-
             })
         })
     }
@@ -184,7 +193,7 @@ class Home extends Component {
 
 
     render() {
-        console.log('props of pause: ', this.props.pause)
+        // console.log('props of pause: ', this.props.pause)
         let newboard = this.state.board.map((el, i) => {
             let item = el.map(number => {
                 return (
@@ -227,6 +236,13 @@ class Home extends Component {
                         <Blocks numbers={this.state.random} />
                     </div>
                     <div className='actual-grid'>
+                    <div id='game-over'>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                         {newboard}
                     </div>
                     <div className='swap-item'>
