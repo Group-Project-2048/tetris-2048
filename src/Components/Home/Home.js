@@ -102,10 +102,10 @@ class Home extends Component {
     }
     
     changeColumn = () => {
-        let { piece, key, board } = this.state
-        let newboard = board.map(element => [...element])
-        let newpiece = {...piece}
-
+        var { piece, key, board,x,y } = this.state
+        var newboard = board.map(element => [...element])
+        var newpiece = {...piece}
+        var {value, row, col} = newpiece
         if (newpiece.col > 0 && newpiece.col <= 2) {
             switch(key){
 
@@ -113,18 +113,24 @@ class Home extends Component {
                     //if the piece was moved to the left or the right the piece before should equal 0
                     // if the piece is moved it should be able to move again to a different place.
                     let left = newpiece.col-1
+                    newboard[row+y][col+x] = 0
+                    console.log(newpiece.col)
                     newpiece.col = left
                     console.log(newpiece)
+                    console.log(left)
                     this.setState({
+                        board: newboard,
                         piece: newpiece
                     })
-                break
-                case 39: 
+                    break
+                    case 39: 
                     //for some reason it is adding multiple times
                     let right = newpiece.col+1
+                    newboard[row+y][col+x] = 0
                     newpiece.col = right
                     console.log(newpiece)
                     this.setState({
+                        board: newboard,
                        piece: newpiece
                     })
                  break;
