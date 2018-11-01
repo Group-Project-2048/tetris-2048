@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Blocks from './Blocks/Blocks';
-// import './Home.css'
-import './Home.scss'
-import leaderboardimg from './Group-03.png'
+import '../../Styles/Home.scss'
+import leaderboardimg from '../../Images/Group-03.png'
 import Axios from 'axios';
 
 class Home extends Component {
@@ -22,7 +21,7 @@ class Home extends Component {
             [0, 0, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
-            [0, 0, 0, 0],
+            [0, 16, 0, 0],
             [0, 32, 0, 0],
             [0, 64, 0, 0],
             [0, 128, 0, 0],

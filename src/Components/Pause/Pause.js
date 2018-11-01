@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import './Pause.scss';
+import '../../Styles/Pause.scss';
 
 
 // card colors from the solitaire game
@@ -13,7 +13,6 @@ class Pause extends Component {
 
         this.state = {
             pause: true,
-            toggleBlur: 'blurred-window'
         }
     }
 
@@ -35,7 +34,7 @@ class Pause extends Component {
                                 <ul id="menu">
                                     <li>Restart</li>
                                     <Link to='/leader'><li>Leader Boards</li></Link>
-                                    <Link to='/'><li>Start Screen</li></Link>
+                                    <Link to='/'><li>EXIT</li></Link>
                                     <li>Sound: On / Off</li>
                                 </ul>
                         </div>
