@@ -9,7 +9,7 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                [0, 16, 0, 0],
+                [0, 32, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
@@ -18,15 +18,15 @@ class Home extends Component {
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0]
-                // [0, 16, 0, 0],
+                // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 64, 0, 0],
                 // [0, 32, 0, 0],
                 // [0, 64, 0, 0],
                 // [0, 128, 0, 0],
                 // [0, 256, 0, 0],
-                // [0, 512, 0, 0]
+                // [0, 512, 0, 0],
+                // [0, 1024, 0, 0],
+                // [0, 2 , 0, 0]
             ],
 
             // [0, 0, 0, 0],
@@ -41,7 +41,7 @@ class Home extends Component {
             //block class that consists of the pieces like below
             // VALUE WILL BE A FN THAT TAKES A VALUE FROM OU LIST OF VALUES. (2 4 8 16 32 64 WILD)
             // piece: { row: 0, col: 1, value: rando()}
-            piece: { row: 0, col: 1, value: 16 },
+            piece: { row: 0, col: 1, value: 32},
             y: 0,
             x: 0,
             z: 0,
@@ -63,7 +63,6 @@ class Home extends Component {
     componentDidMount() {
         this.game()
         this.handleRandomNumber(this.state.numbers)
-        console.log(this.state.nextitem)
     }
 
     game = () => {
@@ -83,9 +82,7 @@ class Home extends Component {
 
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
-            console.log(res.data)
             let newRes = res.data[0].score
-            console.log(newRes)
             this.setState({
                 highestScore: newRes
             })
@@ -107,12 +104,9 @@ class Home extends Component {
                     if (y >= 0 && y <= 7) {
                         //before it moves down we want it to check first
                         // basic movement 
-                        console.log('the real value', value)
                         if (newboard[row + y + 1][col + x] === 0) {
                             newboard[row + y][col + x] = 0
                             newboard[row + y + 1][col+x] = value
-                            console.log('hello')
-                            console.log(value)
                             var movedown = y + 1
                             
                         } 
@@ -123,10 +117,10 @@ class Home extends Component {
                             // newboard = 0
                             newboard[row+y][col+x] = 0
                             newboard[row+y+1][col+x] = value*2
-                            console.log(newboard[row+y][col+x]) 
-                            console.log(newboard[row+y+1][col+x]) 
                             newpiece.value = value*2
-                            console.log('goodbye')
+                            if(newboard[row+y+1][col+x] === 2048){
+                                newboard[row+y+1][col+x] = 0
+                            }
                             var movedown = y + 1
                         } 
                         
