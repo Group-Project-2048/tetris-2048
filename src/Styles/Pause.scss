@@ -1,5 +1,10 @@
 $main-color: #434448;
 
+@mixin links {
+  color: #467fff;
+  font-weight: 600;
+}
+
 body
 {
   margin: 0;
@@ -22,8 +27,14 @@ a
 
 a:hover
 {
-  color: #55008d;
-  font-weight: 600;
+@include links;
+}
+
+.rls {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 #menuToggle
@@ -45,8 +56,8 @@ a:hover
   top: -33px;
   left: 54.5vw;
   cursor: pointer;
-  opacity: 0; /* hide this */
-  z-index: 2; /* and place it over the hamburger */
+  opacity: 0;
+  z-index: 2;
   -webkit-touch-callout: none;
 }
 

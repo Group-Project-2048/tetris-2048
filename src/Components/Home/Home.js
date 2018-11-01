@@ -9,24 +9,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                [0, 16, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
                 // [0, 16, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 0, 0, 0],
-                // [0, 64, 0, 0],
-                // [0, 32, 0, 0],
-                // [0, 64, 0, 0],
-                // [0, 128, 0, 0],
-                // [0, 256, 0, 0],
-                // [0, 512, 0, 0]
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0]
+                [0, 16, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 16, 0, 0],
+                [0, 32, 0, 0],
+                [0, 64, 0, 0],
+                [0, 128, 0, 0],
+                [0, 256, 32, 0],
+                [0, 512, 64, 0]
             ],
 
             // piece: { row: 0, col: 1, value: rando()}
@@ -46,7 +46,6 @@ class Home extends Component {
             nextItem: 64,
             swapItem: 32,
             multiplier: 1,
-            pause: true
         }
     }
 
@@ -57,10 +56,7 @@ class Home extends Component {
     }
 
     game = () => {
-        let { board, piece } = this.state
-        let newboard = board.map(element => [...element])
         setInterval(this.fall, 1000)
-
         this.handleGetHighScore()
     }
 
@@ -144,6 +140,7 @@ class Home extends Component {
 
 
     render() {
+        console.log('props of pause: ', this.props.pause)
         let newboard = this.state.board.map((el, i) => {
             let item = el.map(number => {
                 return (
