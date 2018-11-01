@@ -63,7 +63,8 @@ class Home extends Component {
             nextItem: 64,
             swapItem: 32,
             multiplier: 1,
-            key: 'n/a'
+            key: 'n/a',
+            setIntervalID: 0
         }
     }
 
@@ -77,7 +78,8 @@ class Home extends Component {
     componentDidUpdate(prevProps){
         if(prevProps.pause !== this.props.pause){
             if(this.props.pause){
-                clearInterval(2)
+                clearInterval(this.state.setIntervalID)
+                console.log(this.state.setIntervalID)
             }
             else {
                 this.game()
@@ -89,10 +91,14 @@ class Home extends Component {
         let { board, piece } = this.state
         
         let id = setInterval(this.fall, 1000)
+            this.setState({
+                setIntervalID: id
+            })
+
         this.handleGetHighScore()
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
-        console.log(this.state.nextitem)
+        console.log(this.state.nextItem)
 
     }
     
@@ -141,14 +147,6 @@ class Home extends Component {
             console.log(this.state.scorePercentageMet)
      }
 
-    game = () => {
-        let id = setInterval(this.fall, 1000)
-        console.log('setinterval id:', id)
-        //This interval is to test the handleScoreBar and handleIncreaseLevel methods
-        setInterval(this.increaseScore, 2000)
-        this.handleScoreBar(this.state.score)
-        this.handleGetHighScore()
-    }
 
     handleRandomNumber = (arr) => {
         let randomNumber = arr[Math.floor(Math.random() * arr.length)];
