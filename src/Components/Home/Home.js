@@ -35,7 +35,10 @@ class Home extends Component {
             x: 0,
             z: 0,
             level: 1,
+            pointsToLevel: 300,
             score: 0,
+            shadowScore: 0,
+            scorePercentageMet: '',
             nextitem: '',
             swapitem: 32,
             random: '',
@@ -52,11 +55,30 @@ class Home extends Component {
     componentDidMount() {
         this.game()
         this.handleRandomNumber(this.state.numbers)
+        this.handleScoreBar(this.state.shadowScore)
+        this.handleIncreaseLevel(this.state.pointsToLevel)
         console.log(this.state.nextitem)
+
+
+        
     }
+
+    
+//This method is to test the handleScoreBar and handleIncreaseLevel methods
+    increaseScore = () => {
+        
+            this.setState({
+                score: this.state.score + 100,
+                shadowScore: this.state.shadowScore + 100
+            })
+     }
 
     game = () => {
         setInterval(this.fall, 1000)
+
+        //This interval is to test the handleScoreBar and handleIncreaseLevel methods
+        setInterval(this.increaseScore, 2000)
+
         this.handleGetHighScore()
     }
 
@@ -65,6 +87,28 @@ class Home extends Component {
         this.setState({
             random: randomNumber
         })
+    }
+
+    handleScoreBar = (num) => {
+        let percentageMet = ((1.00 - (((this.state.pointsToLevel - num) / this.state.pointsToLevel).toFixed(2))).toFixed(2) * 100) + '%';
+        
+        console.log(percentageMet)
+        this.setState({
+            scorePercentageMet: percentageMet
+        })
+        console.log(this.state.scorePercentageMet)
+    }
+
+    handleIncreaseLevel = (num) => {
+        if(this.state.shadowScore > num){
+            this.setState({
+                pointsToLevel: num * 2,
+                shadowScore: 0,
+                level: this.state.level + 1,
+                // scorePercentageMet: '0%'
+            })
+            
+        }
     }
 
     handleGetHighScore = () => {
@@ -172,6 +216,7 @@ class Home extends Component {
                     <section className='truelevel'>
                         <h3 className='margin-right'>Level {`${this.state.level}`} </h3>
                         <div className='level'>
+                            <div className='level2' style={{width: this.state.scorePercentageMet}}></div>
                             <p className='level2'></p>
                         </div>
                     </section>
