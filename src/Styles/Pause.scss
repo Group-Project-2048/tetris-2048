@@ -1,3 +1,5 @@
+$main-color: #434448;
+
 body
 {
   margin: 0;
@@ -54,10 +56,10 @@ a:hover
 #menuToggle span
 {
   display: block;
-  width: 33px;
-  height: 4px;
+  width: 4px;
+  height: 33px;
   margin-bottom: 5px;
-  position: relative;
+  position: absolute;
   top: -26px;
   left: 55vw;
   background: #ababab;
@@ -79,35 +81,43 @@ a:hover
 
 #menuToggle span:nth-last-child(2)
 {
+  left: 56vw;
   transform-origin: 0% 100%;
 }
 
 /* 
  * Transform all the slices of hamburger
- * into a crossmark.
  */
 #menuToggle input:checked ~ span
 {
+  position: relative;
+  top: -26px;
+  left: 55vw;
+  width: 33px;
+  height: 4px;
   opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
+  transform: rotate(27deg) translate(-2px, -5px);
   background: #232323;
 }
 
-/*
- * hide the middle one
- */
 #menuToggle input:checked ~ span:nth-last-child(3)
 {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
+  position: relative;
+  top: -26px;
+  left: 55vw;
+  width: 33px;
+  height: 4px;
+  transform: rotate(90deg) translate(-12px, 2px);
 }
 
-/*
- * last one should go the other direction
- */
 #menuToggle input:checked ~ span:nth-last-child(2)
 {
-  transform: rotate(-45deg) translate(0, -1px);
+  position: relative;
+  top: -26px;
+  left: 55vw;
+  width: 33px;
+  height: 4px;
+  transform: rotate(-28deg) translate(0, 4px);
 }
 
 #menu
@@ -120,11 +130,10 @@ a:hover
   padding-top: 125px;
   text-align:center;
   
-  background: white;
+  background: $main-color ;
   opacity: 0.9;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
-  /* to stop flickering of text in safari */
   
   transform-origin: 0% 0%;
   transform: translate(0, -100%);
