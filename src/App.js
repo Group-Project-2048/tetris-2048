@@ -2,14 +2,27 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Pause from './Components/Pause/Pause';
-import routes from './routes';
+import Routes from './routes';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      pause: false
+    }
+  }
+
+  togglePause = () => {
+    this.setState({
+      pause: !this.state.pause
+    })
+  }
   render() {
     return (
       <div className="App">
-        <Pause />
-        {routes}
+        <Pause togglePause={this.togglePause} pause={this.state.pause} />
+        <Routes pause={this.state.pause}/>
       </div>
     );
   }

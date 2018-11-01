@@ -2,6 +2,7 @@ $main-color: #434448;
 $game-color: #18242D;
 $level-color: #5D666C;
 $level2-color: #98FD82;
+$game-over: #467fff;
 
 $two: #C0B4A5;
 $four: #F2CB35;
@@ -50,7 +51,7 @@ $wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
 
 .level2{
     //this is changeable from the score :) 
-    width: 150px;
+    // width: 50%;
     height:10px;
     background-color: $level2-color;
     border-radius:5px;
@@ -85,6 +86,22 @@ $wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
 .middle{
     display:flex;
     justify-content: center;
+}
+
+#game-over{
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    top: 40%;
+    height: 4px;
+    width: 15.5%;
+    // border: 1px dotted red;
+}
+
+#game-over>div{
+    width:10%;
+    height: 4px;
+    background: $game-over;
 }
 
 .next-item{
