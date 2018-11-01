@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import {Link} from 'react-router-dom';
-import './StartScreen.css';
+import '../../Styles/StartScreen.scss';
 import axios from 'axios';
-import logo from'./Stacky.png';
+import logo from'../../Images/Stacky.png';
 import swal from 'sweetalert2';
 
 
@@ -27,6 +26,7 @@ class StartScreen extends Component {
                 user: res.data
             })
             console.log(this.state.user)
+            console.log(this.state.username)
         })
 
         
@@ -52,12 +52,14 @@ class StartScreen extends Component {
 
         const {username} = this.state;
 
-        if(!username){
+        if(this.state.user[0].name){
+            return this.props.history.push('/home')
+        } else if (!username && !this.state.user[0].name){
             return toast({
                 type: 'warning',
                 title: 'Please add a username'
             })
-        };
+        }else {
 
         let body = {
             username: username,
@@ -73,6 +75,8 @@ class StartScreen extends Component {
             console.log(res)
 
         }).catch(err => console.log(err))
+
+        }
 
     }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Leader.css';
+import '../../Styles/Leader.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 

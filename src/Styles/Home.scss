@@ -105,6 +105,84 @@ $wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
     margin-left: 10px;
 }
 
+.num{
+    width: 75px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    margin-left: 12px;
+    border-radius: 5px;
+    margin: auto;
+    border: none;
+    color: $main-color;
+    padding-top: 17px;
+    font-weight: bold;
+}
 
+.num-2{
+    @extend .num;
+    background-color: $two;
+}
+
+.num-4{
+    @extend .num;
+    background-color: $four;
+}
+
+.num-8{
+    @extend .num;
+    background-color: $eight;
+}
+
+.num-16{
+    @extend .num;
+    background-color: $sixteen;
+}
+
+.num-32{
+    @extend .num;
+    background-color: $thirty;
+}
+
+.num-64{
+    @extend .num;
+    background-color: $sixty;
+}
+
+.num-128{
+    @extend .num;
+    background-color: $onehund;
+}
+
+.num-256{
+    @extend .num;
+    background-color: $twohund;
+}
+
+.num-512{
+    @extend .num;
+    background-color: $fivehund;
+}
+
+.num-1024{
+    @extend .num;
+    background-color: $thous;
+}
+
+.num-2048{
+    @extend .num;
+    background-color: $twothous;
+}
+
+.num-W{
+    @extend .num;
+    background: url('../Images/abstract-blurred-gradient-mesh-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.num-0{
+    display:none
+}
 
 

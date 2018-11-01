@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Blocks.scss';
+import '../../../Styles/Blocks.scss';
 
 
 class Blocks extends Component{
