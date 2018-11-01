@@ -12,24 +12,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                // [0, 32, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0]
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
-                [0, 32, 0, 0],
-                [0, 64, 0, 0],
-                [0, 128, 0, 0],
-                [0, 256, 0, 0],
-                [32, 512, 0, 0],
-                [64, 1024, 4, 0],
-                [8, 2, 64, 32]
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+                // [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 32, 0, 0],
+                // [0, 64, 0, 0],
+                // [0, 128, 0, 0],
+                // [0, 256, 0, 0],
+                // [32, 512, 0, 0],
+                // [64, 1024, 4, 0],
+                // [8, 2, 64, 32]
             ],
 
             // [0, 0, 0, 0],
@@ -72,7 +72,6 @@ class Home extends Component {
     componentDidMount() {
         this.game()
         this.handleRandomNumber(this.state.numbers)
-        document.addEventListener("keypress", this.checkKey, false)
         this.focusDiv()
     }
 
@@ -113,10 +112,10 @@ class Home extends Component {
     }
     
     changeColumn = () => {
-        let { piece, key, board } = this.state
-        let newboard = board.map(element => [...element])
-        let newpiece = {...piece}
-
+        var { piece, key, board,x,y } = this.state
+        var newboard = board.map(element => [...element])
+        var newpiece = {...piece}
+        var {value, row, col} = newpiece
         if (newpiece.col > 0 && newpiece.col <= 2) {
             switch(key){
 
@@ -124,18 +123,24 @@ class Home extends Component {
                     //if the piece was moved to the left or the right the piece before should equal 0
                     // if the piece is moved it should be able to move again to a different place.
                     let left = newpiece.col-1
+                    newboard[row+y][col+x] = 0
+                    console.log(newpiece.col)
                     newpiece.col = left
                     console.log(newpiece)
+                    console.log(left)
                     this.setState({
+                        board: newboard,
                         piece: newpiece
                     })
-                break
-                case 39: 
+                    break
+                    case 39: 
                     //for some reason it is adding multiple times
                     let right = newpiece.col+1
+                    newboard[row+y][col+x] = 0
                     newpiece.col = right
                     console.log(newpiece)
                     this.setState({
+                        board: newboard,
                        piece: newpiece
                     })
                  break;
