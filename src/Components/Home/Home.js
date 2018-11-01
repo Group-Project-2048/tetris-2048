@@ -49,7 +49,10 @@ class Home extends Component {
             x: 0,
             z: 0,
             level: 1,
+            pointsToLevel: 600,
             score: 0,
+            shadowScore: 0,
+            scorePercentageMet: 0,
             nextitem: '',
             swapitem: 32,
             random: '',
@@ -76,6 +79,10 @@ class Home extends Component {
         
         setInterval(this.fall, 1000)
         this.handleGetHighScore()
+        this.handleScoreBar(this.state.score)
+        this.handleIncreaseLevel(this.state.pointsToLevel)
+        console.log(this.state.nextitem)
+
     }
     
     changeColumn = () => {
@@ -111,13 +118,57 @@ class Home extends Component {
         }
        
     }
+
+    
+//This method is to test the handleScoreBar and handleIncreaseLevel methods
+    increaseScore = () => {
+        
+            this.setState({
+                score: this.state.score + 100,
+                // scorePercentageMet: this.state.scorePercentageMet + 10
+            })
+            console.log(this.state.scorePercentageMet)
+     }
+
+    game = () => {
+        let id = setInterval(this.fall, 1000)
+        console.log('setinterval id:', id)
+        //This interval is to test the handleScoreBar and handleIncreaseLevel methods
+        setInterval(this.increaseScore, 2000)
+        this.handleScoreBar(this.state.score)
+        this.handleGetHighScore()
+    }
+
     handleRandomNumber = (arr) => {
         let randomNumber = arr[Math.floor(Math.random() * arr.length)];
         this.setState({
             random: randomNumber
         })
     }
-    
+
+    handleScoreBar = (num) => {
+        let percentageMet = ((1.00 - (((this.state.pointsToLevel - num) / this.state.pointsToLevel).toFixed(2))).toFixed(2) * 100);
+        
+        console.log(percentageMet)
+        this.setState({
+            scorePercentageMet: percentageMet
+        })
+
+        console.log(this.state.scorePercentageMet)
+    }
+
+    handleIncreaseLevel = (num) => {
+        if(this.state.score > num){
+            this.setState({
+                pointsToLevel: num * 2,
+                shadowScore: 0,
+                level: this.state.level + 1,
+                // scorePercentageMet: '0%'
+            })
+            
+        }
+    }
+
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
             let newRes = res.data[0].score
@@ -227,7 +278,7 @@ class Home extends Component {
                     <div className='truelevel'>
                         <h3 className='margin-right'>Level {`${this.state.level}`} </h3>
                         <div className='level'>
-                            <div className='level2'></div>
+                            <p className='level2' style={{width: this.state.scorePercentageMet + '%'}}></p>
                         </div>
                     </div>
                 </div>
