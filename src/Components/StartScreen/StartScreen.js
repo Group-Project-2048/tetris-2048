@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import {Link} from 'react-router-dom';
-import './StartScreen.css';
+import '../../Styles/StartScreen.scss';
 import axios from 'axios';
-import logo from'./Stacky.png';
+import logo from'../../Images/Stacky.png';
 import swal from 'sweetalert2';
 
 
