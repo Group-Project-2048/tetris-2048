@@ -53,9 +53,9 @@ class StartScreen extends Component {
 
         const {username} = this.state;
 
-        if(this.state.user[0].name){
+        if(this.state.user[0]){
             return this.props.history.push('/home')
-        } else if (!username && !this.state.user[0].name){
+        } else if (!username && !this.state.user[0]){
             return toast({
                 type: 'warning',
                 title: 'Please add a username'
