@@ -12,15 +12,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                [0, 32, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
+                // [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0]
+             [0, 32, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 32, 0, 0],
+            [0, 64, 0, 0],
+            [0, 128, 0, 0],
+            [0, 256, 0, 0],
+            [0, 512, 0, 0]
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 32, 0, 0],
@@ -85,15 +94,16 @@ class Home extends Component {
             }
         }
     }
-
+    
     game = () => {
         let { board, piece } = this.state
         
+        
         let id = setInterval(this.fall, 1000)
-            this.setState({
-                setIntervalID: id
-            })
-
+        this.setState({
+            setIntervalID: id
+        })
+        
         this.handleGetHighScore()
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
@@ -278,7 +288,7 @@ class Home extends Component {
         })
 
         return (
-            <div className='container' ref="theDiv" onKeyDown={(e) => this.onKeyDown(e)} tabIndex="1">
+            <div className='container' ref="theDiv" onKeyUp={(e) => this.onKeyDown(e)} tabIndex="1">
                 <div className='top-bar'>
                     <div className='leaderboard-score'>
                         <div className='leaderboard'>
