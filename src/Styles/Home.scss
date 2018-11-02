@@ -91,10 +91,10 @@ $wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
 #game-over{
     display: flex;
     justify-content: space-around;
-    position: absolute;
-    top: 40%;
+    position: relative;
+    bottom: 66.5%;
     height: 4px;
-    width: 15.5%;
+    width: 400%;
     // border: 1px dotted red;
 }
 

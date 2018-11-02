@@ -19,7 +19,10 @@ class Pause extends Component {
                                 <span></span>
                                 <span></span>
                                 <ul id="menu">
-                                    <li><img type="checkbox" onClick={this.props.togglePause} src={continueimg} alt="constinue"/></li>
+                                    <li>
+                                        <input className='toggler' type="checkbox" onClick={this.props.togglePause}/>
+                                        <img src={continueimg} alt="constinue"/>
+                                    </li>
                                     <li>
                                         <div>
                                             <Link to='/leader'><img className='rls' src={leaderboardimg} alt="leader boards"/></Link>
