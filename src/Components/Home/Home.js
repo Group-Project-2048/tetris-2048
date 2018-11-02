@@ -61,6 +61,7 @@ class Home extends Component {
             pointsToLevel: 600,
             score: 0,
             shadowScore: 0,
+            absoluteZero: 0,
             scorePercentageMet: 0,
             nextitem: '',
             swapitem: 32,
@@ -83,7 +84,7 @@ class Home extends Component {
         this.focusDiv()
     }
 
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps, prevState){
         if(prevProps.pause !== this.props.pause){
             if(this.props.pause){
                 clearInterval(this.state.setIntervalID)
@@ -93,6 +94,15 @@ class Home extends Component {
                 this.game()
             }
         }
+
+        if(prevState.shadowScore !== this.state.shadowScore){
+            if(this.state.shadowScore){
+                this.handleScoreBar(this.state.shadowScore)
+                this.handleIncreaseLevel(this.state.pointsToLevel)
+            }
+        }
+
+        
     }
     
     game = () => {
@@ -144,6 +154,8 @@ class Home extends Component {
                        piece: newpiece
                     })
                  break;
+                 default:
+                 break;
                 
             }
             
@@ -157,9 +169,10 @@ class Home extends Component {
         
             this.setState({
                 score: this.state.score + 100,
-                // scorePercentageMet: this.state.scorePercentageMet + 10
+                shadowScore: this.state.shadowScore + 100
             })
             console.log(this.state.scorePercentageMet)
+            console.log(this.state.shadowScore)
      }
 
 
@@ -182,13 +195,14 @@ class Home extends Component {
     }
 
     handleIncreaseLevel = (num) => {
-        if(this.state.score > num){
+        if(this.state.shadowScore >= num){
             this.setState({
                 pointsToLevel: num * 2,
                 shadowScore: 0,
                 level: this.state.level + 1,
-                // scorePercentageMet: '0%'
+                scorePercentageMet: '0%'
             })
+            console.log(this.state.pointsToLevel)
             
         }
     }
@@ -235,7 +249,7 @@ class Home extends Component {
                             if (newboard[row + y + 1][col + x] === 2048) {
                                 newboard[row + y + 1][col + x] = 0
                             }
-                            var movedown = y + 1
+                            movedown = y + 1
                         }
                         
                         this.setState({
@@ -259,7 +273,7 @@ class Home extends Component {
     }
     
     onKeyDown = (e) => {
-        // console.log(e.which)
+        console.log(e.which)
         this.setState({
             key: e.which
         })
@@ -288,9 +302,9 @@ class Home extends Component {
         })
 
         return (
-            <div className='container' ref="theDiv" onKeyUp={(e) => this.onKeyDown(e)} tabIndex="1">
-                <div className='top-bar'>
-                    <div className='leaderboard-score'>
+            <section className='container' ref="theDiv" onKeyDown={(e) => this.onKeyDown(e)} tabIndex="1">
+                <header className='top-bar'>
+                    <section className='leaderboard-score'>
                         <div className='leaderboard'>
                             <img id='leader' src={leaderboardimg} alt="" />
                             <h3>{this.state.highestScore}</h3>
@@ -298,37 +312,37 @@ class Home extends Component {
                         <div className='score'>
                             <h2>{this.state.score}</h2>
                         </div>
-                    </div>
-                    <div className='truelevel'>
+                    </section>
+                    <section className='truelevel'>
                         <h3 className='margin-right'>Level {`${this.state.level}`} </h3>
                         <div className='level'>
                             <p className='level2' style={{width: this.state.scorePercentageMet + '%'}}></p>
                         </div>
-                    </div>
-                </div>
-                <div className='middle'>
+                    </section>
+                </header>
+                <section className='middle'>
                     <div className='next-item'>
                         <h4>Next Item</h4>
                         <Blocks numbers={this.state.random} />
                     </div>
-                    <div className='actual-grid' >
-                    <div id='game-over'>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+                    <section className='actual-grid' >
                         {newboard}
-                    </div>
-                    <div className='swap-item'>
+                    <article id='game-over'>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </article>
+                    </section>
+                    <section className='swap-item'>
                         <h4>Swap Item</h4>
                         <div>
                             <p>{this.state.swapitem}</p>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </section>
+            </section>
         )
     }
 }
