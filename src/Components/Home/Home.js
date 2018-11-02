@@ -144,6 +144,8 @@ class Home extends Component {
                        piece: newpiece
                     })
                  break;
+                 default:
+                 break;
                 
             }
             
