@@ -12,15 +12,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                [0, 32, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
+                // [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 32, 0],
+                // [0, 32, 64, 32],
+                // [32, 64, 32, 8]
+             [0, 32, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 32, 0, 0],
+            [0, 64, 0, 0],
+            [0, 128, 0, 0],
+            [0, 256, 0, 0],
+            [0, 512, 0, 0]
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 32, 0, 0],
@@ -72,12 +81,11 @@ class Home extends Component {
         this.game()
         this.handleRandomNumber(this.state.numbers)
         this.focusDiv()
-
         //Work in progress
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
     }
-
+    
     componentDidUpdate(prevProps, prevState){
         if(prevProps.pause !== this.props.pause){
             if(this.props.pause){
@@ -88,25 +96,26 @@ class Home extends Component {
                 this.game()
             }
         }
-
+        
         if(prevState.shadowScore !== this.state.shadowScore){
             if(this.state.shadowScore){
                 this.handleScoreBar(this.state.shadowScore)
                 this.handleIncreaseLevel(this.state.pointsToLevel)
             }
         }
-
+        
         
     }
-
+    
     game = () => {
         let { board, piece } = this.state
         
+        
         let id = setInterval(this.fall, 1000)
-            this.setState({
-                setIntervalID: id
-            })
-
+        this.setState({
+            setIntervalID: id
+        })
+        
         //This interval is to test the handleScoreBar and handleIncreaseLevel methods
         setInterval(this.increaseScore, 1000)
         //***Testing for score bar */
@@ -115,7 +124,7 @@ class Home extends Component {
         this.handleIncreaseLevel(this.state.pointsToLevel)
         
         console.log(this.state.nextItem)
-
+        
     }
     
     changeColumn = () => {
@@ -123,74 +132,86 @@ class Home extends Component {
         var newboard = board.map(element => [...element])
         var newpiece = {...piece}
         var {value, row, col} = newpiece
-        if (newpiece.col > 0 && newpiece.col <= 2) {
+       
             switch(key){
-
-                case 37: 
-                    //if the piece was moved to the left or the right the piece before should equal 0
-                    // if the piece is moved it should be able to move again to a different place.
-                    let left = newpiece.col-1
-                    newboard[row+y][col+x] = 0
-                    console.log(newpiece.col)
-                    newpiece.col = left
-                    console.log(newpiece)
-                    console.log(left)
-                    this.setState({
-                        board: newboard,
-                        piece: newpiece
-                    })
-                    break
-                    case 39: 
-                    //for some reason it is adding multiple times
-                    let right = newpiece.col+1
-                    newboard[row+y][col+x] = 0
-                    newpiece.col = right
-                    console.log(newpiece)
-                    this.setState({
-                        board: newboard,
-                       piece: newpiece
-                    })
-                 break;
-                 default:
-                 break;
                 
-            }
+                case 37: 
+                if(x>=0){
+                    newboard[row+y][col+x]= 0
+                    let left = x-1
+                    this.setState({
+                        board: newboard,
+                        x: left,
+                        key: 'n/a'
+                    })
+                }
+              
+                //if the piece was moved to the left or the right the piece before should equal 0
+                // if the piece is moved it should be able to move again to a different place.
+                // x = 0 
+                console.log(x)
+                break
+                case 39: 
+                //for some reason it is adding multiple times
+                // x=0
+                if(x<2){
+                    newboard[row+y][col+x] = 0
+                    console.log(x)
+                    let right = x+1
+                    
+                    this.setState({
+                        board: newboard,
+                       x: right,
+                       key: 'n/a'
+                    })
+                    console.log(x)
+                }
+                
+
+
+
+                break;
+                default:
+                break;
+                
             
         }
-       
+            
+        
+        
     }
-
     
-//This method is to test the handleScoreBar and handleIncreaseLevel methods
+    
+    //This method is to test the handleScoreBar and handleIncreaseLevel methods
     increaseScore = () => {
         
-            this.setState({
-                score: this.state.score + 100,
-                shadowScore: this.state.shadowScore + 100
-            })
-            console.log(this.state.score)
-            console.log(this.state.shadowScore)
-     }
-
-
+        this.setState({
+            score: this.state.score + 100,
+            shadowScore: this.state.shadowScore + 100
+        })
+        // console.log(this.state.score)
+        // console.log(this.state.shadowScore)
+    }
+    
+    
     handleRandomNumber = (arr) => {
         let randomNumber = arr[Math.floor(Math.random() * arr.length)];
         this.setState({
             random: randomNumber
         })
     }
-
+    
     handleScoreBar = (num) => {
         let percentageMet = ((1.00 - (((this.state.pointsToLevel - num) / this.state.pointsToLevel).toFixed(2))).toFixed(2) * 100);
         
-        console.log(percentageMet)
+        // console.log(percentageMet)
         this.setState({
             scorePercentageMet: percentageMet
         })
-
-        console.log(this.state.scorePercentageMet)
+        
+        // console.log(this.state.scorePercentageMet)
     }
-
+    
     handleIncreaseLevel = (num) => {
         if(this.state.shadowScore > num){
             this.setState({
@@ -199,11 +220,11 @@ class Home extends Component {
                 level: this.state.level + 1,
                 scorePercentageMet: '0%'
             })
-            console.log(this.state.pointsToLevel)
+            // console.log(this.state.pointsToLevel)
             
         }
     }
-
+    
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
             let newRes = res.data[0].score
@@ -215,6 +236,7 @@ class Home extends Component {
     
     
     fall = () => {
+        // this.changeColumn()
         this.changeColumn()
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
@@ -230,9 +252,16 @@ class Home extends Component {
                         //before it moves down we want it to check first
                         // basic movement 
                         if (newboard[row + y + 1][col + x] === 0) {
+                            // console.log(newpiece)
                             newboard[row + y][col + x] = 0
+                            console.log('hello', x)
                             newboard[row + y + 1][col + x] = value
                             var movedown = y + 1
+                            this.setState({
+                                board: newboard,
+                                y: movedown,
+                                piece: newpiece
+                            })
                             
                         }
                         // combine movement
@@ -247,13 +276,15 @@ class Home extends Component {
                                 newboard[row + y + 1][col + x] = 0
                             }
                             movedown = y + 1
+                            this.setState({
+                                board: newboard,
+                                y: movedown,
+                                piece: newpiece
+                            })
                         }
                         
-                        this.setState({
-                            board: newboard,
-                            y: movedown,
-                            piece: newpiece
-                        })
+                        
+                        
                         
                     } else {
                         let movedown = y
