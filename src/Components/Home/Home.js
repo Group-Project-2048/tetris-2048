@@ -52,7 +52,6 @@ class Home extends Component {
             pointsToLevel: 600,
             score: 0,
             shadowScore: 0,
-    
             scorePercentageMet: 0,
             nextitem: '',
             swapitem: 32,
@@ -73,6 +72,10 @@ class Home extends Component {
         this.game()
         this.handleRandomNumber(this.state.numbers)
         this.focusDiv()
+
+        //Work in progress
+        this.handleScoreBar(this.state.score)
+        this.handleIncreaseLevel(this.state.pointsToLevel)
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -104,9 +107,13 @@ class Home extends Component {
                 setIntervalID: id
             })
 
+        //This interval is to test the handleScoreBar and handleIncreaseLevel methods
+        setInterval(this.increaseScore, 1000)
+        //***Testing for score bar */
         this.handleGetHighScore()
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
+        
         console.log(this.state.nextItem)
 
     }
@@ -159,7 +166,7 @@ class Home extends Component {
                 score: this.state.score + 100,
                 shadowScore: this.state.shadowScore + 100
             })
-            console.log(this.state.scorePercentageMet)
+            console.log(this.state.score)
             console.log(this.state.shadowScore)
      }
 
@@ -183,7 +190,7 @@ class Home extends Component {
     }
 
     handleIncreaseLevel = (num) => {
-        if(this.state.shadowScore >= num){
+        if(this.state.shadowScore > num){
             this.setState({
                 pointsToLevel: num * 2,
                 shadowScore: 0,
