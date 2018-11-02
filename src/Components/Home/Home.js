@@ -136,7 +136,7 @@ class Home extends Component {
             switch(key){
                 
                 case 37: 
-                if(x>=0){
+                if(x>=0 && newboard[row+y][col+x-1]===0 && y < 8){
                     newboard[row+y][col+x]= 0
                     let left = x-1
                     this.setState({
@@ -154,7 +154,7 @@ class Home extends Component {
                 case 39: 
                 //for some reason it is adding multiple times
                 // x=0
-                if(x<2){
+                if(x<2 && newboard[row+y][col+x+1]===0 && y < 8){
                     newboard[row+y][col+x] = 0
                     console.log(x)
                     let right = x+1
