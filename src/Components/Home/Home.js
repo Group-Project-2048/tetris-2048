@@ -237,7 +237,7 @@ class Home extends Component {
                             if (newboard[row + y + 1][col + x] === 2048) {
                                 newboard[row + y + 1][col + x] = 0
                             }
-                            var movedown = y + 1
+                            movedown = y + 1
                         }
                         
                         this.setState({
@@ -261,7 +261,7 @@ class Home extends Component {
     }
     
     onKeyDown = (e) => {
-        // console.log(e.which)
+        console.log(e.which)
         this.setState({
             key: e.which
         })
@@ -314,6 +314,7 @@ class Home extends Component {
                         <Blocks numbers={this.state.random} />
                     </div>
                     <div className='actual-grid' >
+                        {newboard}
                     <div id='game-over'>
                         <div></div>
                         <div></div>
@@ -321,7 +322,6 @@ class Home extends Component {
                         <div></div>
                         <div></div>
                     </div>
-                        {newboard}
                     </div>
                     <div className='swap-item'>
                         <h4>Swap Item</h4>
