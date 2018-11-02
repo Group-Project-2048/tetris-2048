@@ -290,9 +290,9 @@ class Home extends Component {
         })
 
         return (
-            <div className='container' ref="theDiv" onKeyDown={(e) => this.onKeyDown(e)} tabIndex="1">
-                <div className='top-bar'>
-                    <div className='leaderboard-score'>
+            <section className='container' ref="theDiv" onKeyDown={(e) => this.onKeyDown(e)} tabIndex="1">
+                <header className='top-bar'>
+                    <section className='leaderboard-score'>
                         <div className='leaderboard'>
                             <img id='leader' src={leaderboardimg} alt="" />
                             <h3>{this.state.highestScore}</h3>
@@ -300,37 +300,37 @@ class Home extends Component {
                         <div className='score'>
                             <h2>{this.state.score}</h2>
                         </div>
-                    </div>
-                    <div className='truelevel'>
+                    </section>
+                    <section className='truelevel'>
                         <h3 className='margin-right'>Level {`${this.state.level}`} </h3>
                         <div className='level'>
                             <p className='level2' style={{width: this.state.scorePercentageMet + '%'}}></p>
                         </div>
-                    </div>
-                </div>
-                <div className='middle'>
+                    </section>
+                </header>
+                <section className='middle'>
                     <div className='next-item'>
                         <h4>Next Item</h4>
                         <Blocks numbers={this.state.random} />
                     </div>
-                    <div className='actual-grid' >
+                    <section className='actual-grid' >
                         {newboard}
-                    <div id='game-over'>
+                    <article id='game-over'>
                         <div></div>
                         <div></div>
                         <div></div>
                         <div></div>
                         <div></div>
-                    </div>
-                    </div>
-                    <div className='swap-item'>
+                    </article>
+                    </section>
+                    <section className='swap-item'>
                         <h4>Swap Item</h4>
                         <div>
                             <p>{this.state.swapitem}</p>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </section>
+            </section>
         )
     }
 }
