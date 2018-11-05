@@ -28,8 +28,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Pause togglePause={this.togglePause} pause={this.state.pause} />
-        <Routes pause={this.state.pause}/>
+        <Pause togglePause={this.togglePause} toggleReset={this.toggleReset} reset={this.state.reset} pause={this.state.pause} />
+        <Routes pause={this.state.pause} reset={this.state.reset}/>
       </div>
     );
   }

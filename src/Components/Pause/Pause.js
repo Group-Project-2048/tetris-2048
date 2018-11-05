@@ -19,14 +19,14 @@ class Pause extends Component {
                                 <span></span>
                                 <span></span>
                                 <ul id="menu">
-                                    <li>
-                                        {/* <input className="pause" id="continue-button" type="checkbox" onClick={this.props.togglePause}/> */}
-                                        {/* <img src={continueimg} alt="continue"/> */}
-                                    </li>
+                                    {/* <li>
+                                        <input className="pause" id="continue-button" type="checkbox" onClick={this.props.togglePause}/>
+                                        <img src={continueimg} alt="continue"/>
+                                    </li> */}
                                     <li>
                                         <div>
                                             <Link to='/leader'><img className='rls' src={leaderboardimg} alt="leader boards"/></Link>
-                                            <img className='rls' src={restartimg} alt="restart"/>
+                                                <img onClick={this.props.toggleReset} className='rls' src={restartimg} alt="restart"/>
                                             <img className='rls' src={soundimg} alt="sound: on / off"/>
                                         </div>
                                     </li>
