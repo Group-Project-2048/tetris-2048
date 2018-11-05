@@ -132,7 +132,7 @@ class Home extends Component {
                 this.handleScoreBar(this.state.shadowScore)
                 this.handleIncreaseLevel(this.state.pointsToLevel)
             }
-        }
+        }}}
         if (prevState.stopped !== this.state.stopped) {
             if (this.state.stopped) {
                 this.reDrop(this.state)
@@ -141,16 +141,16 @@ class Home extends Component {
 
                 // this.handleRandomNumber(this.state.numbers)
             }
-        }
+        }}
         //console.log
-        }
-    }}
+        
+    
 
     game = () => {
         let { board, piece } = this.state
 
 
-        let id = setInterval(this.fall, 500)
+        let id = setInterval(this.fall, 1000)
         this.setState({
             setIntervalID: id
         })
