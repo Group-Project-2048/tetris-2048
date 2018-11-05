@@ -12,7 +12,7 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                [0, 'W', 0, 0],
+                [0, 32, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
@@ -53,7 +53,7 @@ class Home extends Component {
             //block class that consists of the pieces like below
             // VALUE WILL BE A FN THAT TAKES A VALUE FROM OU LIST OF VALUES. (2 4 8 16 32 64 WILD)
             // piece: { row: 0, col: 1, value: rando()}
-            piece: { row: 0, col: 1, value: 'W' },
+            piece: { row: 0, col: 1, value: 32 },
             y: 0,
             x: 0,
             z: 0,
@@ -76,7 +76,8 @@ class Home extends Component {
             multiplier: 1,
             key: 'n/a',
             setIntervalID: 0,
-            stopped: false
+            stopped: false,
+            gameover: false
         }
     }
 
@@ -149,7 +150,7 @@ class Home extends Component {
         let { board, piece } = this.state
 
 
-        let id = setInterval(this.fall, 1000)
+        let id = setInterval(this.fall, 500)
         this.setState({
             setIntervalID: id
         })
@@ -195,13 +196,11 @@ class Home extends Component {
                     newboard[row + y][col + x] = 0
                     // console.log(x)
                     let right = x + 1
-
                     this.setState({
                         board: newboard,
                         x: right,
                         key: 'n/a'
                     })
-                    // console.log(x)
                 }
                 break;
             // case 40:
@@ -285,6 +284,24 @@ class Home extends Component {
         }
     }
 
+    gameover=()=>{
+        let { piece, board, x, y } = this.state
+        let newpiece = { ...piece }
+        let { value, row, col } = newpiece
+        let newboard = board.map(element => [...element])
+        if(newpiece.value !== newboard[row+y+1][col+x]){
+            // this works  just need to figure out the proper thing to put in place
+            // this could be an alert, but then we can figure out what we'd like
+            // maybe reactjs-popup? 
+            this.setState({
+                gameover: true
+            })
+            console.log(this.state.gameover)
+        } else {
+
+        }
+    }
+
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
             let newRes = res.data[0].score
@@ -344,7 +361,9 @@ class Home extends Component {
                                 })
 
                             } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
-
+                                if(y <= 3){
+                                    this.gameover()
+                                }
                                 this.setState({
                                     stopped: true
                                 })
@@ -404,6 +423,7 @@ class Home extends Component {
                             })
                         }
                         else {
+                           
                             this.setState({
                                 stopped: true
                             })
