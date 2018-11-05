@@ -112,7 +112,7 @@ class Home extends Component {
                 this.handleRandomNumber(this.state.numbers)
             }
         }
-       
+       //console.log
         
     }
     
