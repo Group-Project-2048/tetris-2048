@@ -14,20 +14,20 @@ class Pause extends Component {
                 return(
                     <nav role="navigation">
                         <div id="menuToggle">
-                            <input type="checkbox" onClick={this.props.togglePause}/>
+                            <input className="pause" type="checkbox" onClick={this.props.togglePause}/>
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 <ul id="menu">
-                                    <li>
-                                        <input className='toggler' type="checkbox" onClick={this.props.togglePause}/>
-                                        <img src={continueimg} alt="constinue"/>
-                                    </li>
+                                    {/* <li>
+                                        <input className="pause" id="continue-button" type="checkbox" onClick={this.props.togglePause}/>
+                                        <img src={continueimg} alt="continue"/>
+                                    </li> */}
                                     <li>
                                         <div>
                                             <Link to='/leader'><img className='rls' src={leaderboardimg} alt="leader boards"/></Link>
-                                            <img className='rls' src={restartimg} alt="restart"/>
-                                            <img className='rls' src={soundimg} alt="sound: on / off"/>
+                                            <img onClick={this.props.toggleReset} className='rls' src={restartimg} alt="restart"/>
+                                            <img onClick={this.props.toggleMusic} className='rls' src={soundimg} alt="sound: on / off"/>
                                         </div>
                                     </li>
                                     <Link to='/'><li>EXIT</li></Link>
