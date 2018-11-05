@@ -26,8 +26,8 @@ class Pause extends Component {
                                     <li>
                                         <div>
                                             <Link to='/leader'><img className='rls' src={leaderboardimg} alt="leader boards"/></Link>
-                                                <img onClick={this.props.toggleReset} className='rls' src={restartimg} alt="restart"/>
-                                            <img className='rls' src={soundimg} alt="sound: on / off"/>
+                                            <img onClick={this.props.toggleReset} className='rls' src={restartimg} alt="restart"/>
+                                            <img onClick={this.props.toggleMusic} className='rls' src={soundimg} alt="sound: on / off"/>
                                         </div>
                                     </li>
                                     <Link to='/'><li>EXIT</li></Link>

@@ -10,14 +10,9 @@ class App extends Component {
 
     this.state = {
       pause: false,
-      reset: false
+      reset: false,
+      music: false
     }
-  }
-
-  toggleReset = () => {
-    this.setState({
-      reset: !this.state.reset
-    })
   }
 
   togglePause = () => {
@@ -25,11 +20,32 @@ class App extends Component {
       pause: !this.state.pause
     })
   }
+  
+  toggleReset = () => {
+    this.setState({
+      reset: !this.state.reset
+    })
+  }
+  
+    toggleMusic = () => {
+      this.setState({
+        music: !this.state.music
+      })
+    }
+
   render() {
     return (
       <div className="App">
-        <Pause togglePause={this.togglePause} toggleReset={this.toggleReset} reset={this.state.reset} pause={this.state.pause} />
-        <Routes pause={this.state.pause} reset={this.state.reset}/>
+        <Pause 
+          togglePause={this.togglePause} 
+          toggleReset={this.toggleReset} 
+          toggleMusic={this.toggleMusic}
+          pause={this.state.pause}
+          reset={this.state.reset} 
+          music={this.state.music} />
+        <Routes 
+          pause={this.state.pause} 
+          reset={this.state.reset}/>
       </div>
     );
   }
