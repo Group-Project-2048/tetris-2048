@@ -9,8 +9,15 @@ class App extends Component {
     super(props)
 
     this.state = {
-      pause: false
+      pause: false,
+      reset: false
     }
+  }
+
+  toggleReset = () => {
+    this.setState({
+      reset: !this.state.reset
+    })
   }
 
   togglePause = () => {
