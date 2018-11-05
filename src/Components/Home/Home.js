@@ -12,24 +12,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
+                [0, 'W', 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
                 [0, 32, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 32, 0],
-                [0, 32, 64, 32],
-                [32, 64, 32, 8]
-            //  [0, 32, 0, 0],
-            // [0, 0, 0, 0],
-            // [0, 0, 0, 0],
-            // [0, 0, 0, 0],
-            // [0, 4, 0, 0],
-            // [0, 64, 0, 0],
-            // [0, 128, 0, 0],
-            // [0, 256, 0, 0],
-            // [0, 512, 0, 0]
+                [0, 64, 0, 0],
+                [0, 128, 0, 0]
+                //  [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 4, 0, 0],
+                // [0, 64, 0, 0],
+                // [0, 128, 0, 0],
+                // [0, 256, 0, 0],
+                // [0, 512, 0, 0]
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 32, 0, 0],
@@ -53,7 +53,7 @@ class Home extends Component {
             //block class that consists of the pieces like below
             // VALUE WILL BE A FN THAT TAKES A VALUE FROM OU LIST OF VALUES. (2 4 8 16 32 64 WILD)
             // piece: { row: 0, col: 1, value: rando()}
-            piece: { row: 0, col: 1, value: 32 },
+            piece: { row: 0, col: 1, value: 'W' },
             y: 0,
             x: 0,
             z: 0,
@@ -65,7 +65,9 @@ class Home extends Component {
             nextitem: '',
             swapitem: 32,
             random: '',
-            numbers: [2, 4, 8, 16, 32, 64, 'W'],
+            numbers: [
+                2, 4, 8, 16, 32, 64,
+                'W'],
             highestScore: [],
             // count: 0
             // initialStart: this.state.board[0][1],
@@ -80,16 +82,19 @@ class Home extends Component {
 
     componentDidMount() {
         this.game()
-        this.handleRandomNumber(this.state.numbers)
+        this.setState({
+            random: this.handleRandomNumber(this.state.numbers)
+        })
+
         this.focusDiv()
         //Work in progress
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
     }
-    
-    componentDidUpdate(prevProps, prevState){
-        if(prevProps.pause !== this.props.pause){
-            if(this.props.pause){
+
+    componentDidUpdate(prevProps, prevState, nextState) {
+        if (prevProps.pause !== this.props.pause) {
+            if (this.props.pause) {
                 clearInterval(this.state.setIntervalID)
                 console.log(this.state.setIntervalID)
             }
@@ -97,99 +102,108 @@ class Home extends Component {
                 this.game()
             }
         }
-        
-        if(prevState.shadowScore !== this.state.shadowScore){
-            if(this.state.shadowScore){
+
+        if (prevState.shadowScore !== this.state.shadowScore) {
+            if (this.state.shadowScore) {
                 this.handleScoreBar(this.state.shadowScore)
                 this.handleIncreaseLevel(this.state.pointsToLevel)
             }
         }
-        if(prevState.stopped !== this.state.stopped){
-            if(this.state.stopped){
+        if (prevState.stopped !== this.state.stopped) {
+            if (this.state.stopped) {
                 this.reDrop(this.state)
                 // this.handleRandomNumber()
             } else {
-                this.handleRandomNumber(this.state.numbers)
+
+                // this.handleRandomNumber(this.state.numbers)
             }
         }
-       //console.log
-        
+        //console.log
+
     }
-    
+
     game = () => {
         let { board, piece } = this.state
-        
-        
+
+
         let id = setInterval(this.fall, 1000)
         this.setState({
             setIntervalID: id
         })
-        
+
         //This interval is to test the handleScoreBar and handleIncreaseLevel methods
         setInterval(this.increaseScore, 1000)
         //***Testing for score bar */
         this.handleGetHighScore()
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
-        
         // console.log(this.state.nextItem)
-        
+
     }
-    
+
     changeColumn = () => {
-        var { piece, key, board,x,y } = this.state
+        var { piece, key, board, x, y } = this.state
         var newboard = board.map(element => [...element])
-        var newpiece = {...piece}
-        var {value, row, col} = newpiece
-       
-            switch(key){
-                
-                case 37: 
-                if(x>=0 && newboard[row+y][col+x-1]===0 && y < 8){
-                    newboard[row+y][col+x]= 0
-                    let left = x-1
+        var newpiece = { ...piece }
+        var { value, row, col } = newpiece
+
+        switch (key) {
+
+            case 37:
+                if (x >= 0 && newboard[row + y][col + x - 1] === 0 && y < 8) {
+                    newboard[row + y][col + x] = 0
+                    let left = x - 1
                     this.setState({
                         board: newboard,
                         x: left,
                         key: 'n/a'
                     })
                 }
-              
+
                 //if the piece was moved to the left or the right the piece before should equal 0
                 // if the piece is moved it should be able to move again to a different place.
                 // x = 0 
-                console.log(x)
+                // console.log(x)
                 break
-                case 39: 
+            case 39:
                 //for some reason it is adding multiple times
                 // x=0
-                if(x<2 && newboard[row+y][col+x+1]===0 && y < 8){
-                    newboard[row+y][col+x] = 0
-                    console.log(x)
-                    let right = x+1
-                    
+                if (x < 2 && newboard[row + y][col + x + 1] === 0 && y < 8) {
+                    newboard[row + y][col + x] = 0
+                    // console.log(x)
+                    let right = x + 1
+
                     this.setState({
                         board: newboard,
-                       x: right,
-                       key: 'n/a'
+                        x: right,
+                        key: 'n/a'
                     })
-                    console.log(x)
+                    // console.log(x)
                 }
                 break;
-                default:
+            // case 40:
+            //  let down = y+1
+            //  newboard[row+y][col+x] = 0
+            //  this.setState({
+            //      board: newboard,
+            //      y: down,
+            //      key: 'n/a'
+            //  })
+
+            default:
                 break;
-                
-            
+
+
         }
-            
-        
-        
+
+
+
     }
-    
-    
+
+ 
     //This method is to test the handleScoreBar and handleIncreaseLevel methods
     increaseScore = () => {
-        
+
         this.setState({
             score: this.state.score + 100,
             shadowScore: this.state.shadowScore + 100
@@ -197,45 +211,46 @@ class Home extends Component {
         // console.log(this.state.score)
         // console.log(this.state.shadowScore)
     }
-    
-    
+
+
     handleRandomNumber = (arr) => {
         let randomNumber = arr[Math.floor(Math.random() * arr.length)];
-        this.setState({
-            random: randomNumber
-        })
+        return randomNumber
     }
-    
+
     handleScoreBar = (num) => {
         let percentageMet = ((1.00 - (((this.state.pointsToLevel - num) / this.state.pointsToLevel).toFixed(2))).toFixed(2) * 100);
-        
+
         // console.log(percentageMet)
         this.setState({
             scorePercentageMet: percentageMet
         })
-        
+
         // console.log(this.state.scorePercentageMet)
     }
-    reDrop = ()=>{
-        console.log('asdofijerpghadf')
+    reDrop = () => {
+        // console.log('asdofijerpghadf')
         let { piece, board, x, y, random } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
         newpiece.value = random
         newboard[0][1] = random
+        let randomnumber = this.handleRandomNumber(this.state.numbers)
         this.setState({
             x: 0,
             y: 0,
             piece: newpiece,
             board: newboard,
-            stopped: false
+            stopped: false,
+            random: randomnumber,
         })
+        // this.handleRandomNumber(this.state.numbers)
         // console.log(this.state)
     }
 
     handleIncreaseLevel = (num) => {
-        if(this.state.shadowScore > num){
+        if (this.state.shadowScore > num) {
             this.setState({
                 pointsToLevel: num * 2,
                 shadowScore: 0,
@@ -243,10 +258,10 @@ class Home extends Component {
                 scorePercentageMet: '0%'
             })
             // console.log(this.state.pointsToLevel)
-            
+
         }
     }
-    
+
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
             let newRes = res.data[0].score
@@ -255,8 +270,8 @@ class Home extends Component {
             })
         })
     }
-    
-    
+
+
     fall = () => {
         // this.changeColumn()
         this.changeColumn()
@@ -273,54 +288,106 @@ class Home extends Component {
                     if (y >= 0 && y <= 7) {
                         //before it moves down we want it to check first
                         // basic movement 
-                        if (newboard[row + y + 1][col + x] === 0) {
-                            // console.log(newpiece)
-                            newboard[row + y][col + x] = 0
-                            // console.log('hello', x)
-                            newboard[row + y + 1][col + x] = value
-                            var movedown = y + 1
-                            this.setState({
-                                board: newboard,
-                                y: movedown,
-                                piece: newpiece
-                            })
-                            
-                        }
-                        // combine movement
-                        else if (newboard[row + y][col + x] === newboard[row + y + 1][col + x]) {
-                            // newboard + newboard(1) = new value
-                            // newvalue = newboard(1)
-                            // newboard = 0
-                            newboard[row + y][col + x] = 0
-                            newboard[row + y + 1][col + x] = value * 2
-                            newpiece.value = value * 2
-                            if (newboard[row + y + 1][col + x] === 2048) {
-                                newboard[row + y + 1][col + x] = 0
+                        // console.log(piece)
+                        if (piece.value !== 'W') {
+                            if (newboard[row + y + 1][col + x] === 0) {
+                                // console.log(newpiece)
+                                newboard[row + y][col + x] = 0
+                                // console.log('hello', x)
+                                newboard[row + y + 1][col + x] = value
+                                var movedown = y + 1
+                                this.setState({
+                                    board: newboard,
+                                    y: movedown,
+                                    piece: newpiece
+                                })
                             }
-                            movedown = y + 1
+                            // combine movement
+                            else if (newboard[row + y][col + x] === newboard[row + y + 1][col + x]) {
+                                // newboard + newboard(1) = new value
+                                // newvalue = newboard(1)
+                                // newboard = 0
+                                newboard[row + y][col + x] = 0
+                                newboard[row + y + 1][col + x] = value * 2
+                                newpiece.value = value * 2
+                                if (newboard[row + y + 1][col + x] === 2048) {
+                                    newboard[row + y + 1][col + x] = 0
+                                }
+                                movedown = y + 1
+                                this.setState({
+                                    board: newboard,
+                                    y: movedown,
+                                    piece: newpiece
+                                })
+
+                            } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
+
+                                this.setState({
+                                    stopped: true
+                                })
+                            }
+                        } else if (piece.value === 'W') {
+                            // console.log(piece)
+                            if (newboard[row + y + 1][col + x] === 0) {
+                                // console.log(newpiece)
+                                newboard[row + y][col + x] = 0
+                                // console.log('hello', x)
+                                newboard[row + y + 1][col + x] = value
+                                var movedown = y + 1
+                                this.setState({
+                                    board: newboard,
+                                    y: movedown,
+                                    piece: newpiece
+                                })
+                            } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
+                                console.log('hello')
+                                // newboard + newboard(1) = new value
+                                // newvalue = newboard(1)
+                                // newboard = 0
+                                newboard[row + y][col + x] = 0
+                                newpiece.value = newboard[row + y + 1][col + x]
+                                let doubled = newpiece.value * 2
+
+                                newboard[row + y + 1][col + x] = doubled
+                                newpiece.value = doubled
+                                if (newboard[row + y + 1][col + x] === 2048) {
+                                    newboard[row + y + 1][col + x] = 0
+                                }
+                                // if (newboard[row + y + 2][col + x] === newboard[row + y + 1][col + x]) {
+                                //     newboard[row + y + 1][col + x] = 0
+                                //     newboard[row + y + 2][col + x] = newpiece.value * 4
+                                // }
+                                movedown = y + 1
+                                this.setState({
+                                    board: newboard,
+                                    y: movedown,
+                                    piece: newpiece
+                                })
+                            } 
+                        }
+
+
+
+
+                    } else {
+                        // console.log('asdfh')
+                        if(piece.value === 'W'){
+                            newpiece.value = 0
+                            newboard[row+y][col+x] = 0
                             this.setState({
                                 board: newboard,
-                                y: movedown,
-                                piece: newpiece
+                                piece: newpiece,
+                                stopped: true
                             })
-                        } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]){
-                            // console.log('hello as well')
-                            //the function would go here as well.
+                        }
+                        else {
                             this.setState({
                                 stopped: true
                             })
-                            
                         }
-                        
-                        
-                        
-                        
-                    } else {
                         // I'm pretty sure I'd put the function in here.
-                        console.log('hello')
-                        this.setState({
-                            stopped: true
-                        })
+                        // console.log('hello')
+                        
                         // let movedown = y
                         // this.setState({
                         //     board: newboard,
@@ -328,24 +395,24 @@ class Home extends Component {
                         // })
                         // alert('hello')
                     }
-                    
+
                 }
-                
+
             })
         })
     }
-    
+
     onKeyDown = (e) => {
         // console.log(e.which)
         this.setState({
             key: e.which
         })
     }
-    
+
     focusDiv() {
         ReactDOM.findDOMNode(this.refs.theDiv).focus()
     }
-    
+
     render() {
         // console.log('key', this.state.key)
         let newboard = this.state.board.map((el, i) => {
@@ -379,7 +446,7 @@ class Home extends Component {
                     <section className='truelevel'>
                         <h3 className='margin-right'>Level {`${this.state.level}`} </h3>
                         <div className='level'>
-                            <p className='level2' style={{width: this.state.scorePercentageMet + '%'}}></p>
+                            <p className='level2' style={{ width: this.state.scorePercentageMet + '%' }}></p>
                         </div>
                     </section>
                 </header>
@@ -390,13 +457,13 @@ class Home extends Component {
                     </div>
                     <section className='actual-grid' >
                         {newboard}
-                    <article id='game-over'>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </article>
+                        <article id='game-over'>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </article>
                     </section>
                     <section className='swap-item'>
                         <h4>Swap Item</h4>
