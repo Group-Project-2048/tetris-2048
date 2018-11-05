@@ -83,12 +83,14 @@ class Home extends Component {
 
     componentDidMount() {
         this.game()
+        this.handleRandomNumber(this.state.numbers)
         this.setState({
             random: this.handleRandomNumber(this.state.numbers)
         })
 
         this.focusDiv()
         //Work in progress
+        this.focusDiv()
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
     }
@@ -100,10 +102,31 @@ class Home extends Component {
                 console.log(this.state.setIntervalID)
             }
             else {
-                this.game()
+                 this.game()
             }
         }
 
+        if(prevProps.reset !== this.props.reset){
+            if(this.props.reset){
+                this.setState({
+                    board: [
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0]],
+                    score: 0,
+                    y:0
+                })
+            } 
+        }
+        
+        if(prevState.shadowScore !== this.state.shadowScore){
+            if(this.state.shadowScore){
         if (prevState.shadowScore !== this.state.shadowScore) {
             if (this.state.shadowScore) {
                 this.handleScoreBar(this.state.shadowScore)
@@ -120,8 +143,8 @@ class Home extends Component {
             }
         }
         //console.log
-
-    }
+        }
+    }}
 
     game = () => {
         let { board, piece } = this.state
@@ -429,7 +452,7 @@ class Home extends Component {
         })
     }
 
-    focusDiv() {
+    focusDiv = () => {
         ReactDOM.findDOMNode(this.refs.theDiv).focus()
     }
 

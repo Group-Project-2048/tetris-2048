@@ -30,6 +30,13 @@ a:hover
 @include links;
 }
 
+#menu #continue-button{
+  position: relative;
+  left: 48%;
+  bottom: 100px;
+  opacity: 10;
+}
+
 .rls {
   width: 100px;
   height: 100px;
@@ -47,7 +54,7 @@ a:hover
   user-select: none;
 }
 
-#menuToggle input
+#menuToggle .pause
 {
   display: block;
   width: 40px;
@@ -96,10 +103,7 @@ a:hover
   transform-origin: 0% 100%;
 }
 
-/* 
- * Transform all the slices of hamburger
- */
-#menuToggle input:checked ~ span
+#menuToggle .pause:checked ~ span
 {
   position: relative;
   top: -26px;
@@ -111,7 +115,7 @@ a:hover
   background: #232323;
 }
 
-#menuToggle input:checked ~ span:nth-last-child(3)
+#menuToggle .pause:checked ~ span:nth-last-child(3)
 {
   position: relative;
   top: -26px;
@@ -121,7 +125,7 @@ a:hover
   transform: rotate(90deg) translate(-12px, 2px);
 }
 
-#menuToggle input:checked ~ span:nth-last-child(2)
+#menuToggle .pause:checked ~ span:nth-last-child(2)
 {
   position: relative;
   top: -26px;
@@ -158,7 +162,7 @@ a:hover
   font-size: 22px;
 }
 
-#menuToggle input:checked ~ ul
+#menuToggle .pause:checked ~ ul
 {
   transform: none;
 }
