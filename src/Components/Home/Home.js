@@ -254,7 +254,7 @@ class Home extends Component {
                         if (newboard[row + y + 1][col + x] === 0) {
                             // console.log(newpiece)
                             newboard[row + y][col + x] = 0
-                            console.log('hello', x)
+                            // console.log('hello', x)
                             newboard[row + y + 1][col + x] = value
                             var movedown = y + 1
                             this.setState({
@@ -281,17 +281,23 @@ class Home extends Component {
                                 y: movedown,
                                 piece: newpiece
                             })
+                        } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]){
+                            console.log('hello as well')
+                            //the function would go here as well.
                         }
                         
                         
                         
                         
                     } else {
-                        let movedown = y
-                        this.setState({
-                            board: newboard,
-                            y: movedown
-                        })
+                        // I'm pretty sure I'd put the function in here.
+                        console.log('hello')
+                        // let movedown = y
+                        // this.setState({
+                        //     board: newboard,
+                        //     y: movedown
+                        // })
+                        alert('hello')
                     }
                     
                 }
@@ -301,7 +307,7 @@ class Home extends Component {
     }
     
     onKeyDown = (e) => {
-        console.log(e.which)
+        // console.log(e.which)
         this.setState({
             key: e.which
         })
