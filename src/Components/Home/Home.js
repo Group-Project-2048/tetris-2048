@@ -12,24 +12,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                // [0, 32, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 32, 0],
-                // [0, 32, 64, 32],
-                // [32, 64, 32, 8]
-             [0, 32, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 32, 0, 0],
-            [0, 64, 0, 0],
-            [0, 128, 0, 0],
-            [0, 256, 0, 0],
-            [0, 512, 0, 0]
+                [0, 32, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 32, 0],
+                [0, 32, 64, 32],
+                [32, 64, 32, 8]
+            //  [0, 32, 0, 0],
+            // [0, 0, 0, 0],
+            // [0, 0, 0, 0],
+            // [0, 0, 0, 0],
+            // [0, 4, 0, 0],
+            // [0, 64, 0, 0],
+            // [0, 128, 0, 0],
+            // [0, 256, 0, 0],
+            // [0, 512, 0, 0]
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 32, 0, 0],
@@ -73,7 +73,8 @@ class Home extends Component {
             swapItem: 32,
             multiplier: 1,
             key: 'n/a',
-            setIntervalID: 0
+            setIntervalID: 0,
+            stopped: false
         }
     }
 
@@ -103,7 +104,15 @@ class Home extends Component {
                 this.handleIncreaseLevel(this.state.pointsToLevel)
             }
         }
-        
+        if(prevState.stopped !== this.state.stopped){
+            if(this.state.stopped){
+                this.reDrop(this.state)
+                // this.handleRandomNumber()
+            } else {
+                this.handleRandomNumber(this.state.numbers)
+            }
+        }
+       //console.log
         
     }
     
@@ -123,7 +132,7 @@ class Home extends Component {
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
         
-        console.log(this.state.nextItem)
+        // console.log(this.state.nextItem)
         
     }
     
@@ -166,10 +175,6 @@ class Home extends Component {
                     })
                     console.log(x)
                 }
-                
-
-
-
                 break;
                 default:
                 break;
@@ -211,7 +216,24 @@ class Home extends Component {
         
         // console.log(this.state.scorePercentageMet)
     }
-    
+    reDrop = ()=>{
+        console.log('asdofijerpghadf')
+        let { piece, board, x, y, random } = this.state
+        let newpiece = { ...piece }
+        let { value, row, col } = newpiece
+        let newboard = board.map(element => [...element])
+        newpiece.value = random
+        newboard[0][1] = random
+        this.setState({
+            x: 0,
+            y: 0,
+            piece: newpiece,
+            board: newboard,
+            stopped: false
+        })
+        // console.log(this.state)
+    }
+
     handleIncreaseLevel = (num) => {
         if(this.state.shadowScore > num){
             this.setState({
@@ -282,8 +304,12 @@ class Home extends Component {
                                 piece: newpiece
                             })
                         } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]){
-                            console.log('hello as well')
+                            // console.log('hello as well')
                             //the function would go here as well.
+                            this.setState({
+                                stopped: true
+                            })
+                            
                         }
                         
                         
@@ -292,12 +318,15 @@ class Home extends Component {
                     } else {
                         // I'm pretty sure I'd put the function in here.
                         console.log('hello')
+                        this.setState({
+                            stopped: true
+                        })
                         // let movedown = y
                         // this.setState({
                         //     board: newboard,
                         //     y: movedown
                         // })
-                        alert('hello')
+                        // alert('hello')
                     }
                     
                 }
