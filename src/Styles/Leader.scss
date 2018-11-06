@@ -1,3 +1,20 @@
+$main-color: #434448;
+$game-color: #18242D;
+$level-color: #5D666C;
+$level2-color: #98FD82;
+
+$two: #C0B4A5;
+$four: #F2CB35;
+$eight: #FF891F;
+$sixteen: #FF0A15;
+$thirty:  #7DCB3E;
+$sixty:  #C47BFB;
+$onehund: #FF019D;
+$twohund:  #12B559;
+$fivehund: #8500F5;
+$thous: #018EE6;
+$twothous: #000000;
+
 .backBtn{
     border-radius: 5px;
     border: none;
@@ -62,32 +79,35 @@
     border-radius: 5px;
     border: none;
     height: 25px;
-    width: auto;
-    background-color: red;
+    width: 75px;
+    background-color: $sixteen;
 }
 
 .weekScoreBtns{
     border-radius: 5px;
     border: none;
     height: 25px;
-    width: auto;
+    width: 75px;
     margin: 5px;
+    background-color: $thirty;
 }
 
 .monthScoreBtns{
     border-radius: 5px;
     border: none;
     height: 25px;
-    width: auto;
+    width: 75px;
     margin: 5px;
+    background-color: $eight;
 }
 
 .overallScoreBtns{
     border-radius: 5px;
     border: none;
     height: 25px;
-    width: auto;
+    width: 75px;
     margin: 5px;
+    background-color: $sixty;
 }
 
 /************************************/
