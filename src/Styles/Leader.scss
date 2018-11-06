@@ -16,14 +16,15 @@ $thous: #018EE6;
 $twothous: #000000;
 
 #backBtn{
-    border-radius: 5px;
+    border-radius: 100px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 40px;
     background-color: black;
-    text-decoration: none;
     color: white;
-    transition: none;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-left: 350px;
 }
 
 .backgroundBox{
@@ -53,29 +54,107 @@ $twothous: #000000;
     overflow: scroll;
 
     border: 1px solid $onehund; 
-    // background-color: black;
     width: 400px;
     height: 500px;
     margin: auto;
     margin-top: 20px;
     /* border-radius: 10px; */
 
-    -webkit-animation: glow 1.5s infinite alternate;
+  
+
+  
+
+}
+
+.mainBox-day{
+    @extend .mainBox;
+
+    border: 1px solid $sixteen; 
+
+    -webkit-animation: glow2 1.5s infinite alternate;
   -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
   -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
   transition: border 1.5s linear, box-shadow 1.5s linear;
   
   transition: all 200ms ease-in-out;
+
+
+    @-webkit-keyframes glow2 {
+        to {
+          border-color: $sixteen; 
+          -webkit-box-shadow: 0 0 15px $sixteen; 
+          -moz-box-shadow: 0 0 15px $sixteen; 
+          box-shadow: 0 0 30px $sixteen; 
+        }
+      }
 }
 
-@-webkit-keyframes glow {
-    to {
-      border-color: $onehund; 
-      -webkit-box-shadow: 0 0 15px $onehund; 
-      -moz-box-shadow: 0 0 15px $onehund; 
-      box-shadow: 0 0 30px $onehund; 
-    }
-  }
+.mainBox-week{
+    @extend .mainBox;
+
+    border: 1px solid $thirty; 
+
+    -webkit-animation: glow3 1.5s infinite alternate;
+  -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
+  -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
+  transition: border 1.5s linear, box-shadow 1.5s linear;
+  
+  transition: all 200ms ease-in-out;
+
+    @-webkit-keyframes glow3 {
+        to {
+          border-color: $thirty; 
+          -webkit-box-shadow: 0 0 15px $thirty; 
+          -moz-box-shadow: 0 0 15px $thirty; 
+          box-shadow: 0 0 30px $thirty; 
+        }
+      }
+}
+
+.mainBox-month{
+    @extend .mainBox;
+
+    border: 1px solid $eight; 
+
+    -webkit-animation: glow4 1.5s infinite alternate;
+  -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
+  -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
+  transition: border 1.5s linear, box-shadow 1.5s linear;
+  
+  transition: all 200ms ease-in-out;
+
+    @-webkit-keyframes glow4 {
+        to {
+          border-color: $eight; 
+          -webkit-box-shadow: 0 0 15px $eight; 
+          -moz-box-shadow: 0 0 15px $eight; 
+          box-shadow: 0 0 30px $eight; 
+        }
+      }
+}
+
+.mainBox-overall{
+    @extend .mainBox;
+
+    border: 1px solid $sixty; 
+
+    -webkit-animation: glow5 1.5s infinite alternate;
+  -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
+  -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
+  transition: border 1.5s linear, box-shadow 1.5s linear;
+  
+  transition: all 200ms ease-in-out;
+
+    @-webkit-keyframes glow5 {
+        to {
+          border-color: $sixty; 
+          -webkit-box-shadow: 0 0 15px $sixty; 
+          -moz-box-shadow: 0 0 15px $sixty; 
+          box-shadow: 0 0 30px $sixty; 
+        }
+      }
+}
+
 
 .pageTitles{
     display: flex;
@@ -127,20 +206,25 @@ $twothous: #000000;
 
 .falsedayScoreBtns:hover{
     transform: scale(1.1);
+    background-color: $sixteen;
 }
 .falseweekScoreBtns:hover{
     transform: scale(1.1);
+    background-color: $thirty;
 }
 .falsemonthScoreBtns:hover{
     transform: scale(1.1);
+    background-color: $eight;
 }
 .falseoverallScoreBtns:hover{
     transform: scale(1.1);
+    background-color: $sixty;
 }
 
 .truedayScoreBtns:hover{
     transform: scale(1.1);
 }
+
 .trueweekScoreBtns:hover{
     transform: scale(1.1);
 }
