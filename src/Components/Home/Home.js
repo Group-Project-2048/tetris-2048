@@ -13,24 +13,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
+                // [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0]
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
-                //  [0, 32, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 4, 0, 0],
-                // [0, 64, 0, 0],
-                // [0, 128, 0, 0],
-                // [0, 256, 0, 0],
-                // [0, 512, 0, 0]
+                [0, 4, 0, 0],
+                [0, 64, 0, 0],
+                [0, 128, 0, 0],
+                [0, 256, 0, 0],
+                [0, 512, 0, 0]
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 32, 0, 0],
@@ -41,19 +41,6 @@ class Home extends Component {
                 // [64, 1024, 4, 0],
                 // [8, 2, 64, 32]
             ],
-
-            // [0, 0, 0, 0],
-            // [0, 0, 0, 0],
-            // [0, 0, 0, 0],
-            // [0, 16, 0, 0],
-            // [0, 32, 0, 0],
-            // [0, 64, 0, 0],
-            // [0, 128, 0, 0],
-            // [0, 256, 0, 0],
-            // [0, 512, 0, 0]
-            //block class that consists of the pieces like below
-            // VALUE WILL BE A FN THAT TAKES A VALUE FROM OU LIST OF VALUES. (2 4 8 16 32 64 WILD)
-            // piece: { row: 0, col: 1, value: rando()}
             piece: { row: 0, col: 1, value: 32 },
             y: 0,
             x: 0,
@@ -75,7 +62,7 @@ class Home extends Component {
             multiplier: 1,
             key: 'n/a',
             setIntervalID: 0,
-            stopped: false,
+            // stopped: false,
             gameover: false,
             rereset: false,
             revolved: false
@@ -104,10 +91,10 @@ class Home extends Component {
         if (prevProps.reset !== this.props.reset) {
             if (this.props.reset) {
                 let newpiece = { ...this.state.piece }
-                newpiece.value = this.state.random
+                newpiece.value = this.state.revolver[1]
                 this.setState({
                     board: [
-                        [0, this.state.random, 0, 0],
+                        [0, newpiece.value, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
@@ -133,16 +120,7 @@ class Home extends Component {
                 }
             }
         }
-        if (prevState.stopped !== this.state.stopped) {
-            if (this.state.stopped) {
-                console.log('fired!!!!!!!')
-                // this.reDrop() 
-                // this.handleRandomNumber(this.state.numbers)
-            } else {
 
-                // this.handleRandomNumber(this.state.numbers)
-            }
-        }
         if (prevState.gameover !== this.state.gameover) {
             if (this.state.gameover) {
                 clearInterval(this.state.setIntervalID)
@@ -154,10 +132,10 @@ class Home extends Component {
         if (prevState.rereset !== this.state.rereset) {
             if (this.state.rereset) {
                 let newpiece = { ...this.state.piece }
-                newpiece.value = this.state.random
+                newpiece.value = this.state.revolver[1]
                 this.setState({
                     board: [
-                        [0, this.state.random, 0, 0],
+                        [0, newpiece.value, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
@@ -376,13 +354,18 @@ class Home extends Component {
             swal({
                 title: 'Game Over',
                 text: "Play Again?",
-                type: 'warning',
-                showCancelButton: false,
+                showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey:false,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes'
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Exit'
             }).then((result) => {
                 console.log(result)
+                if(result.dismiss){
+                    this.props.history.push('/')
+                }
                 this.setState({
                     rereset: true,
                     gameover: false
