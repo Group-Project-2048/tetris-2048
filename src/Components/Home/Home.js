@@ -268,7 +268,7 @@ class Home extends Component {
             random: randomnumber,
         })
         // this.handleRandomNumber(this.state.numbers)
-        // console.log(this.state)
+        console.log(this.state)
     }
 
     handleIncreaseLevel = (num) => {
@@ -297,6 +297,7 @@ class Home extends Component {
                 gameover: true
             })
             console.log(this.state.gameover)
+            alert('asdhf')
         } else {
 
         }
@@ -361,7 +362,7 @@ class Home extends Component {
                                 })
 
                             } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
-                                if(y <= 3){
+                                if(y <= 2){
                                     this.gameover()
                                 }
                                 this.setState({
