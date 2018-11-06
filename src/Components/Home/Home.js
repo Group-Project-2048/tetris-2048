@@ -158,14 +158,15 @@ class Home extends Component {
     game = () => {
         let { board, piece } = this.state
 
-
-        let id = setInterval(this.fall, 1000)
+        let time = 900-(this.state.level*10 > 600 ? 600 : this.state.level*10)
+        let id = setInterval(this.fall, time)
+        console.log(time)
         this.setState({
             setIntervalID: id
         })
 
         //This interval is to test the handleScoreBar and handleIncreaseLevel methods
-        setInterval(this.increaseScore, 1000)
+        // setInterval(this.increaseScore, 1000)
         //***Testing for score bar */
         this.handleGetHighScore()
         this.handleScoreBar(this.state.score)
@@ -176,7 +177,7 @@ class Home extends Component {
 
     fall = () => {
         this.changeColumn()
-        let { piece, board, x, y } = this.state
+        let { piece, board, x, y, score, shadowScore} = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
@@ -202,6 +203,9 @@ class Home extends Component {
                                 newboard[row + y][col + x] = 0
                                 newboard[row + y + 1][col + x] = value * 2
                                 newpiece.value = value * 2
+                                // console.log(newpiece.value)
+                                let newscore = score + newpiece.value
+                                let newshadow = shadowScore + newpiece.value
                                 if (newboard[row + y + 1][col + x] === 2048) {
                                     newboard[row + y + 1][col + x] = 0
                                 }
@@ -209,9 +213,12 @@ class Home extends Component {
                                 this.setState({
                                     board: newboard,
                                     y: movedown,
-                                    piece: newpiece
+                                    piece: newpiece,
+                                    score: newscore,
+                                    shadowScore: newshadow
                                 })
-
+                                // console.log(score, shadowScore)
+                                
                             } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
                                 if (y <= 2) {
                                     this.gameover()
@@ -236,17 +243,21 @@ class Home extends Component {
                                 newboard[row + y][col + x] = 0
                                 newpiece.value = newboard[row + y + 1][col + x]
                                 let doubled = newpiece.value * 2
-
+                                let newscore = score + doubled
+                               let newshadow = shadowScore + doubled
                                 newboard[row + y + 1][col + x] = doubled
                                 newpiece.value = doubled
                                 if (newboard[row + y + 1][col + x] === 2048) {
                                     newboard[row + y + 1][col + x] = 0
                                 }
                                 movedown = y + 1
+                                // console.log(score, shadowScore)
                                 this.setState({
                                     board: newboard,
                                     y: movedown,
-                                    piece: newpiece
+                                    piece: newpiece,
+                                    score: newscore,
+                                    shadowScore: newshadow
                                 })
                             }
                         } else if (piece.value ==='BOMB'){
@@ -500,6 +511,8 @@ class Home extends Component {
 
         return (
             <section className='container' ref="theDiv" onKeyDown={(e) => this.onKeyDown(e)} tabIndex="1">
+                <div className='blurryBack'>   
+
                 <header className='top-bar'>
                     <section className='leaderboard-score'>
                         <div className='leaderboard'>
@@ -522,16 +535,20 @@ class Home extends Component {
                         <h4>Next Item</h4>
                         <Blocks numbers={this.state.revolver[0]} />
                     </div> */}
-                    <section className='actual-grid' >
-                        {newboard}
-                        <article id='game-over'>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </article>
-                    </section>
+                    <div className='gameFrame'>
+
+                        <section className='actual-grid' >
+                            {newboard}
+                            <article id='game-over'>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </article>
+                        </section>
+
+                    </div>
                     {/* <section className='swap-item'>
                         <h4>Swap Item</h4>
                         <div>
@@ -539,6 +556,8 @@ class Home extends Component {
                         </div>
                     </section> */}
                 </section>
+                    
+                </div>
             </section>
         )
     }
