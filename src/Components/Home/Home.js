@@ -94,7 +94,7 @@ class Home extends Component {
                 newpiece.value = this.state.revolver[1]
                 this.setState({
                     board: [
-                        [0, this.state.newpiece.value, 0, 0],
+                        [0, newpiece.value, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
@@ -135,7 +135,7 @@ class Home extends Component {
                 newpiece.value = this.state.revolver[1]
                 this.setState({
                     board: [
-                        [0, this.state.newpiece.value, 0, 0],
+                        [0, newpiece.value, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
