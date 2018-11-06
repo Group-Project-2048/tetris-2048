@@ -2,7 +2,7 @@ $main-color: #434448;
 $game-color: #18242D;
 $level-color: #5D666C;
 $level2-color: #98FD82;
-$game-over: #467fff;
+$game-over: white;
 
 $two: #C0B4A5;
 $four: #F2CB35;
@@ -15,12 +15,23 @@ $twohund:  #12B559;
 $fivehund: #8500F5;
 $thous: #018EE6;
 $twothous: #000000;
-$wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+
 
 .container{
-    background: $main-color;
-    width: 100vw;
+    background-image: url('../Images/space.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100vh;
+    
+}
+
+.blurryBack{
+    width: 700px;
+    height: 100vh;
+    margin: auto;
+    // border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.315);
+    position: center;
 }
 
 .actual-grid {
@@ -30,7 +41,7 @@ $wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
     grid-template-columns: repeat(4, 1fr);
     width: 300px;
     height: 480px;
-    // margin: auto;
+    margin: auto;
     // margin-top: 50px;
 }
 .top-bar{
@@ -86,6 +97,31 @@ $wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
 .middle{
     display:flex;
     justify-content: center;
+}
+
+.gameFrame{
+    border: 1px solid white;
+    width: 300px;
+    height: 480px;
+    margin: auto;
+    padding: 10px;
+
+    -webkit-animation: glow6 1.5s infinite alternate;
+  -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
+  -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
+  transition: border 1.5s linear, box-shadow 1.5s linear;
+  
+  transition: all 200ms ease-in-out;
+
+
+    @-webkit-keyframes glow6 {
+        to {
+          border-color: white; 
+          -webkit-box-shadow: 0 0 15px white; 
+          -moz-box-shadow: 0 0 15px white; 
+          box-shadow: 0 0 30px white; 
+        }
+      }
 }
 
 #game-over{
