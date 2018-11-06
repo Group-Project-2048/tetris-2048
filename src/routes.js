@@ -7,7 +7,6 @@ import StartScreen from './Components/StartScreen/StartScreen';
 
 
 export default function Routes( props ){
-    console.log('props in router: ', props.pause, props.reset)
     return <Switch>
         <Route render={routerProps => <Home {...routerProps} reset={props.reset} pause={props.pause}/>} path='/home' exact/>
         <Route component={Leader} path='/leader' exact/>

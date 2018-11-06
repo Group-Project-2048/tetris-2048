@@ -13,24 +13,26 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                [0, 32, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 0, 0, 0],
-                // [0, 4, 0, 0],
-                // [0, 64, 0, 0],
-                // [0, 128, 0, 0],
-                // [0, 256, 0, 0],
-                // [0, 512, 0, 0]
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0]
+
+                [0, 32, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 2, 0, 0],
+                [0, 4, 0, 0],
+                [0, 64, 0, 0],
+                [0, 128, 0, 0],
+                [0, 256, 0, 0],
+                [0, 512, 0, 0]
+
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 32, 0, 0],
@@ -53,7 +55,7 @@ class Home extends Component {
             swapitem: 32,
             random: '',
             revolver: [2, 32],
-            numbers: [2, 4, 8, 16, 32, 64, 'W', 'BOMB'],
+            numbers: [2, 4, 4, 8, 8, 16, 16, 32, 32, 64, 64, 'W', 'BOMB'],
             highestScore: [],
             // count: 0
             // initialStart: this.state.board[0][1],
@@ -399,14 +401,30 @@ class Home extends Component {
                 showCancelButton: true,
                 allowOutsideClick: false,
                 allowEscapeKey:false,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#FF0A15',
+                cancelButtonColor: '#467fff',
                 confirmButtonText: 'Yes',
-                cancelButtonText: 'Exit'
+                cancelButtonText: 'No'
             }).then((result) => {
-                console.log(result)
                 if(result.dismiss){
-                    this.props.history.push('/')
+                    swal({ 
+                    title: 'Exit',
+                    text: 'Where to?',
+                    showCancelButton: true,
+                    allowOutsideClick: false,
+                    allowEscapeKey:false,
+                    confirmButtonColor: '#FF0A15',
+                    cancelButtonColor: '#467fff',
+                    confirmButtonText: 'Exit',
+                    cancelButtonText: 'Boards'
+                }).then((result) => {
+                    if(result.value){
+                        this.props.history.push('/') 
+                    }
+                    else if(result.dismiss){
+                        this.props.history.push('/leader')
+                    }
+                })
                 }
                 this.setState({
                     rereset: true,
