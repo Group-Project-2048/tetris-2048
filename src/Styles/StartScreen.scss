@@ -1,3 +1,20 @@
+$main-color: #434448;
+$game-color: #18242D;
+$level-color: #5D666C;
+$level2-color: #98FD82;
+
+$two: #C0B4A5;
+$four: #F2CB35;
+$eight: #FF891F;
+$sixteen: #FF0A15;
+$thirty:  #7DCB3E;
+$sixty:  #C47BFB;
+$onehund: #FF019D;
+$twohund:  #12B559;
+$fivehund: #8500F5;
+$thous: #018EE6;
+$twothous: #000000;
+
 .BtnBox{
     // border: 1px solid white;
     width: 100px;
@@ -55,7 +72,7 @@
   }
 
 .startMenuBox{
-    border: 1px solid #467fff; 
+    border: 1px solid $onehund; 
     background-color: black;
     width: 400px;
     height: 500px;
@@ -76,10 +93,10 @@
 
 @-webkit-keyframes glow {
     to {
-      border-color: #467fff; 
-      -webkit-box-shadow: 0 0 15px #467fff; 
-      -moz-box-shadow: 0 0 15px #467fff; 
-      box-shadow: 0 0 30px #467fff; 
+      border-color: $onehund; 
+      -webkit-box-shadow: 0 0 15px $onehund; 
+      -moz-box-shadow: 0 0 15px $onehund; 
+      box-shadow: 0 0 30px $onehund; 
     }
   }
 

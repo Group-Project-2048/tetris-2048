@@ -15,11 +15,15 @@ $fivehund: #8500F5;
 $thous: #018EE6;
 $twothous: #000000;
 
-.backBtn{
-    border-radius: 5px;
+#backBtn{
+    // border-radius: 5px;
     border: none;
     height: 25px;
-    width: auto;
+    width: 75px;
+    background-color: black;
+    text-decoration: none;
+    color: white;
+    transition: none;
 }
 
 .backgroundBox{
@@ -46,8 +50,28 @@ $twothous: #000000;
     flex-direction: column;
     margin-top: 10px;
     background-color: black;
-    overflow: scroll
+    overflow: scroll;
+
+    border: 1px solid $onehund; 
+    // background-color: black;
+    width: 400px;
+    height: 500px;
+    margin: auto;
+    margin-top: 20px;
+    /* border-radius: 10px; */
+
+    -webkit-animation: glow 1.5s infinite alternate;
+  -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
+  -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
+  transition: border 1.5s linear, box-shadow 1.5s linear;
+  
+
+
+  /* border-radius: 10px; */
+  transition: all 200ms ease-in-out;
 }
+
+
 
 .pageTitles{
     display: flex;
@@ -74,17 +98,27 @@ $twothous: #000000;
 
 /* Score Bttns */
 
-.dayScoreBtns{
+.truedayScoreBtns{
     margin: 5px;
-    border-radius: 5px;
+    // border-radius: 5px;
     border: none;
     height: 25px;
     width: 75px;
     background-color: $sixteen;
 }
 
-.weekScoreBtns{
-    border-radius: 5px;
+.falsedayScoreBtns{
+    margin: 5px;
+    // border-radius: 5px;
+    border: none;
+    height: 25px;
+    width: 75px;
+    background-color: black;
+    color: white;
+}
+
+.trueweekScoreBtns{
+    // border-radius: 5px;
     border: none;
     height: 25px;
     width: 75px;
@@ -92,8 +126,18 @@ $twothous: #000000;
     background-color: $thirty;
 }
 
-.monthScoreBtns{
-    border-radius: 5px;
+.falseweekScoreBtns{
+    // border-radius: 5px;
+    border: none;
+    height: 25px;
+    width: 75px;
+    margin: 5px;
+    background-color: black;
+    color: white;
+}
+
+.truemonthScoreBtns{
+    // border-radius: 5px;
     border: none;
     height: 25px;
     width: 75px;
@@ -101,13 +145,33 @@ $twothous: #000000;
     background-color: $eight;
 }
 
-.overallScoreBtns{
-    border-radius: 5px;
+.falsemonthScoreBtns{
+    // border-radius: 5px;
+    border: none;
+    height: 25px;
+    width: 75px;
+    margin: 5px;
+    background-color: black;
+    color: white;
+}
+
+.trueoverallScoreBtns{
+    // border-radius: 5px;
     border: none;
     height: 25px;
     width: 75px;
     margin: 5px;
     background-color: $sixty;
+}
+
+.falseoverallScoreBtns{
+    // border-radius: 5px;
+    border: none;
+    height: 25px;
+    width: 75px;
+    margin: 5px;
+    background-color: black;
+    color: white;
 }
 
 /************************************/

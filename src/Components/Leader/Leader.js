@@ -13,6 +13,10 @@ class Leader extends Component {
             scoresOfMonth: [],
             scoresOfWeek: [],
             score: 'overall',
+            overallColor: false,
+            dayColor: false,
+            weekColor: false,
+            monthColor: false
 
         }
 
@@ -30,7 +34,11 @@ class Leader extends Component {
         axios.get('/api/getPlayers').then(res => {
             console.log(res.data)
             this.setState({
-                players: res.data
+                players: res.data,
+                overallColor: true,
+                dayColor: false,
+                weekColor: false,
+                monthColor: false
             })
         })
     }
@@ -69,7 +77,11 @@ class Leader extends Component {
 
         this.setState({
             scoresOfDay: dayScores2,
-            score: 'day'
+            score: 'day',
+            dayColor: true,
+            overallColor: false,
+            weekColor: false,
+            monthColor: false
         })
         
     }
@@ -130,7 +142,11 @@ class Leader extends Component {
 
         this.setState({
             scoresOfWeek: weekScore2,
-            score: 'week'
+            score: 'week',
+            overallColor: false,
+            dayColor: false,
+            weekColor: true,
+            monthColor: false
         })
 
     }
@@ -159,7 +175,11 @@ class Leader extends Component {
 
         this.setState({
             scoresOfMonth: monthScores2,
-            score: 'month'
+            score: 'month',
+            overallColor: false,
+            dayColor: false,
+            weekColor: false,
+            monthColor: true
         })
         
     }
@@ -169,7 +189,11 @@ class Leader extends Component {
             console.log(res.data)
             this.setState({
                 players: res.data.splice(0, 10),
-                score: 'overall'
+                score: 'overall',
+                overallColor: true,
+                dayColor: false,
+                weekColor: false,
+                monthColor: false
             })
         })
     }
@@ -250,14 +274,14 @@ class Leader extends Component {
 
         return (
             <div className='backgroundBox'>
-                <button className='backBtn'><Link to='/home'>Back</Link></button>
-                <h1 style={{ color: 'white' }}>Top Players</h1>
+                <button id='backBtn'><Link to='/home'>Back</Link></button>
+                <h1 style={{ color: 'white' }}>Leaderboard</h1>
 
                 <div className='scoreBtns'>
-                    <button onClick={() => this.handleDayBtn(this.state.players)} className='dayScoreBtns'>Day</button>
-                    <button onClick={() => this.handleWeekBtn(this.state.players)} className='weekScoreBtns'>Week</button>
-                    <button onClick={() => this.handleMonthBtn(this.state.players)} className='monthScoreBtns'>Month</button>
-                    <button onClick={() => this.handleOverallBtn()} className='overallScoreBtns'>Overall</button>
+                    <button onClick={() => this.handleDayBtn(this.state.players)} className={`${this.state.dayColor}dayScoreBtns`}>Day</button>
+                    <button onClick={() => this.handleWeekBtn(this.state.players)} className={`${this.state.weekColor}weekScoreBtns`}>Week</button>
+                    <button onClick={() => this.handleMonthBtn(this.state.players)} className={`${this.state.monthColor}monthScoreBtns`}>Month</button>
+                    <button onClick={() => this.handleOverallBtn()} className={`${this.state.overallColor}overallScoreBtns`}>Overall</button>
                 </div>
 
                 <div className='mainBox'>
