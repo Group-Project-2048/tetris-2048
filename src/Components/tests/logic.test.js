@@ -72,3 +72,10 @@ describe('Leadership btns work', ()=> {
         expect(handleOverall())
     })
 })
+
+
+describe("The toggle function toggle the boolean", ()=>{
+    test('type of should return a boolean', ()=>{
+        
+    })
+})
