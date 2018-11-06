@@ -5,6 +5,7 @@ import leaderboardimg from '../../Images/Group-03.png'
 import Axios from 'axios';
 import keydown, { Keys } from 'react-keydown'
 import ReactDOM from 'react-dom';
+import swal from 'sweetalert2'
 
 
 class Home extends Component {
@@ -15,9 +16,9 @@ class Home extends Component {
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
+                [0, 64, 0, 0],
+                [0, 64, 0, 0],
+                [0, 64, 0, 0],
                 [0, 32, 0, 0],
                 [0, 64, 0, 0],
                 [0, 128, 0, 0]
@@ -77,7 +78,8 @@ class Home extends Component {
             key: 'n/a',
             setIntervalID: 0,
             stopped: false,
-            gameover: false
+            gameover: false,
+            rereset: false
         }
     }
 
@@ -108,9 +110,11 @@ class Home extends Component {
 
         if(prevProps.reset !== this.props.reset){
             if(this.props.reset){
+                let newpiece = {...this.state.piece}
+                newpiece.value = this.state.random
                 this.setState({
                     board: [
-                    [0, 0, 0, 0],
+                    [0, this.state.random, 0, 0],
                     [0, 0, 0, 0],
                     [0, 0, 0, 0],
                     [0, 0, 0, 0],
@@ -120,7 +124,8 @@ class Home extends Component {
                     [0, 0, 0, 0],
                     [0, 0, 0, 0]],
                     score: 0,
-                    y:0
+                    y:0,
+                    piece: newpiece
                 })
             } 
         }
@@ -141,7 +146,38 @@ class Home extends Component {
 
                 // this.handleRandomNumber(this.state.numbers)
             }
-        }}
+        }
+        if(prevState.gameover !== this.state.gameover){
+            if(this.state.gameover){
+                clearInterval(this.state.setIntervalID)
+            } else{
+               this.game()
+            }
+        }
+
+        if(prevState.rereset !== this.state.rereset){
+                if(this.state.rereset){
+                    let newpiece = {...this.state.piece}
+                    newpiece.value = this.state.random
+                    this.setState({
+                        board: [
+                        [0, this.state.random, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0]],
+                        score: 0,
+                        y:0,
+                        piece: newpiece
+                    })
+                    // this.game()
+            } 
+        }
+    }
         //console.log
         
     
@@ -268,7 +304,7 @@ class Home extends Component {
             random: randomnumber,
         })
         // this.handleRandomNumber(this.state.numbers)
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     handleIncreaseLevel = (num) => {
@@ -297,7 +333,21 @@ class Home extends Component {
                 gameover: true
             })
             console.log(this.state.gameover)
-            alert('asdhf')
+            swal({
+                title: 'Game Over',
+                text: "Play Again?",
+                type: 'warning',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                  console.log(result)
+                  this.setState({
+                      rereset: true,
+                      gameover: false
+                })
+              })
         } else {
 
         }
@@ -458,6 +508,7 @@ class Home extends Component {
     }
 
     render() {
+        // console.log(this.state.rereset)
         // console.log('key', this.state.key)
         let newboard = this.state.board.map((el, i) => {
             let item = el.map(number => {
