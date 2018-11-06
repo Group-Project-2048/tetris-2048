@@ -79,7 +79,8 @@ class Home extends Component {
             setIntervalID: 0,
             stopped: false,
             gameover: false,
-            rereset: false
+            rereset: false, 
+            slow: true
         }
     }
 
@@ -178,6 +179,19 @@ class Home extends Component {
                     // this.game()
             } 
         }
+        if(prevState.slow !== this.state.slow){
+            if(this.state.slow){
+                console.log(this.state.slow)
+                // this.game()
+            } else {
+                
+                console.log(this.state.slow)
+                setInterval(this.fall, 10)
+                this.setState({
+                    slow: true,
+                })
+            }
+        }
     }
         //console.log
         
@@ -240,14 +254,18 @@ class Home extends Component {
                     })
                 }
                 break;
-            // case 40:
+            case 32:
+                
+                    
+                    this.setState({
+                        // board: newboard,
+                       //  y: down,
+                        key: 'n/a',
+                        slow: false
+                    })
+                
             //  let down = y+1
             //  newboard[row+y][col+x] = 0
-            //  this.setState({
-            //      board: newboard,
-            //      y: down,
-            //      key: 'n/a'
-            //  })
 
             default:
                 break;
@@ -333,7 +351,7 @@ class Home extends Component {
             this.setState({
                 gameover: true
             })
-            console.log(this.state.gameover)
+            // console.log(this.state.gameover)
             swal({
                 title: 'Game Over',
                 text: "Play Again?",
