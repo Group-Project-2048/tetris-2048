@@ -12,7 +12,6 @@
     "express-session": "^1.15.6",
     "font": "0.0.4",
     "font-awesome": "^4.7.0",
-    "frosted-glass": "^0.3.1",
     "jest": "^23.6.0",
     "massive": "^5.5.1",
     "node-sass": "^4.9.4",
