@@ -66,7 +66,7 @@ class Home extends Component {
             swapitem: 32,
             random: '',
             revolver: [2, 32],
-            numbers: [2, 4, 8, 16, 32, 64, 'W', 'B'],
+            numbers: [2, 4, 8, 16, 32, 64, 'W', 'BOMB'],
             highestScore: [],
             // count: 0
             // initialStart: this.state.board[0][1],
@@ -486,10 +486,10 @@ class Home extends Component {
                     </section>
                 </header>
                 <section className='middle'>
-                    <div className='next-item'>
+                    {/* <div className='next-item'>
                         <h4>Next Item</h4>
                         <Blocks numbers={this.state.revolver[0]} />
-                    </div>
+                    </div> */}
                     <section className='actual-grid' >
                         {newboard}
                         <article id='game-over'>
@@ -500,12 +500,12 @@ class Home extends Component {
                             <div></div>
                         </article>
                     </section>
-                    <section className='swap-item'>
+                    {/* <section className='swap-item'>
                         <h4>Swap Item</h4>
                         <div>
                             <p>{this.state.swapitem}</p>
                         </div>
-                    </section>
+                    </section> */}
                 </section>
             </section>
         )
