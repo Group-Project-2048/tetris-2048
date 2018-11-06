@@ -469,10 +469,6 @@ class Home extends Component {
                     </section>
                 </header>
                 <section className='middle'>
-                    <div className='next-item'>
-                        <h4>Next Item</h4>
-                        <Blocks numbers={this.state.revolver[0]} />
-                    </div>
                     <section className='actual-grid' >
                         {newboard}
                         <article id='game-over'>
@@ -482,12 +478,6 @@ class Home extends Component {
                             <div></div>
                             <div></div>
                         </article>
-                    </section>
-                    <section className='swap-item'>
-                        <h4>Swap Item</h4>
-                        <div>
-                            <p>{this.state.swapitem}</p>
-                        </div>
                     </section>
                 </section>
             </section>
