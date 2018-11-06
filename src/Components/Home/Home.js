@@ -13,24 +13,26 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                [0, 32, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 0, 0, 0],
-                // [0, 4, 0, 0],
-                // [0, 64, 0, 0],
-                // [0, 128, 0, 0],
-                // [0, 256, 0, 0],
-                // [0, 512, 0, 0]
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0]
+
+                [0, 32, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 2, 0, 0],
+                [0, 4, 0, 0],
+                [0, 64, 0, 0],
+                [0, 128, 0, 0],
+                [0, 256, 0, 0],
+                [0, 512, 0, 0]
+
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 32, 0, 0],
@@ -388,14 +390,30 @@ class Home extends Component {
                 showCancelButton: true,
                 allowOutsideClick: false,
                 allowEscapeKey:false,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#FF0A15',
+                cancelButtonColor: '#467fff',
                 confirmButtonText: 'Yes',
-                cancelButtonText: 'Exit'
+                cancelButtonText: 'No'
             }).then((result) => {
-                console.log(result)
                 if(result.dismiss){
-                    this.props.history.push('/')
+                    swal({ 
+                    title: 'Exit',
+                    text: 'Where to?',
+                    showCancelButton: true,
+                    allowOutsideClick: false,
+                    allowEscapeKey:false,
+                    confirmButtonColor: '#FF0A15',
+                    cancelButtonColor: '#467fff',
+                    confirmButtonText: 'Exit',
+                    cancelButtonText: 'Boards'
+                }).then((result) => {
+                    if(result.value){
+                        this.props.history.push('/') 
+                    }
+                    else if(result.dismiss){
+                        this.props.history.push('/leader')
+                    }
+                })
                 }
                 this.setState({
                     rereset: true,
