@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../Styles/Leader.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Logo2 from '../../Images/Leaderboard.png'
 
 class Leader extends Component {
     constructor(props) {
@@ -274,8 +275,11 @@ class Leader extends Component {
 
         return (
             <div className='backgroundBox'>
-                <button id='backBtn'><Link to='/home'>Back</Link></button>
-                <h1 style={{ color: 'white' }}>Leaderboard</h1>
+                <div style={{display: 'flex', flexDirection: 'column', width: '400px', margin: 'auto'}}>
+                    <button id='backBtn' style={{margin: 'auto', marginBottom: '20px'}}><Link to='/home'>Back</Link></button>
+                    <img src={Logo2} alt="" style={{width: '400px', margin: 'auto', marginBottom: '15px'}}/>
+
+                </div>
 
                 <div className='scoreBtns'>
                     <button onClick={() => this.handleDayBtn(this.state.players)} className={`${this.state.dayColor}dayScoreBtns`}>Day</button>
