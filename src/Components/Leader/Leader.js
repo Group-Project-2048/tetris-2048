@@ -17,8 +17,8 @@ class Leader extends Component {
             overallColor: false,
             dayColor: false,
             weekColor: false,
-            monthColor: false
-
+            monthColor: false,
+            halo: 'overall'
         }
 
 
@@ -82,7 +82,8 @@ class Leader extends Component {
             dayColor: true,
             overallColor: false,
             weekColor: false,
-            monthColor: false
+            monthColor: false,
+            halo: 'day'
         })
         
     }
@@ -147,7 +148,8 @@ class Leader extends Component {
             overallColor: false,
             dayColor: false,
             weekColor: true,
-            monthColor: false
+            monthColor: false,
+            halo: 'week'
         })
 
     }
@@ -180,7 +182,8 @@ class Leader extends Component {
             overallColor: false,
             dayColor: false,
             weekColor: false,
-            monthColor: true
+            monthColor: true,
+            halo: 'month'
         })
         
     }
@@ -194,9 +197,14 @@ class Leader extends Component {
                 overallColor: true,
                 dayColor: false,
                 weekColor: false,
-                monthColor: false
+                monthColor: false,
+                halo: 'overall'
             })
         })
+    }
+
+    handleGoHome = () => {
+        this.props.history.push('/home')
     }
 
     render() {
@@ -276,7 +284,7 @@ class Leader extends Component {
         return (
             <div className='backgroundBox'>
                 <div style={{display: 'flex', flexDirection: 'column', width: '400px', margin: 'auto'}}>
-                    <button id='backBtn' style={{margin: 'auto', marginBottom: '20px'}}><Link to='/home'>Back</Link></button>
+                    <button id='backBtn' onClick={this.handleGoHome}><i class="fas fa-arrow-left"></i></button>
                     <img src={Logo2} alt="" style={{width: '400px', margin: 'auto', marginBottom: '15px'}}/>
 
                 </div>
@@ -288,7 +296,7 @@ class Leader extends Component {
                     <button onClick={() => this.handleOverallBtn()} className={`${this.state.overallColor}overallScoreBtns`}>Overall</button>
                 </div>
 
-                <div className='mainBox'>
+                <div className={`mainBox-${this.state.halo}`}>
                     <div className='pageTitles'>
                         <h3>Players
                             <hr />
