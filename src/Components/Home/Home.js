@@ -13,24 +13,24 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                // [0, 32, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0]
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
-                [0, 4, 0, 0],
-                [0, 64, 0, 0],
-                [0, 128, 0, 0],
-                [0, 256, 0, 0],
-                [0, 512, 0, 0]
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+                // [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 4, 0, 0],
+                // [0, 64, 0, 0],
+                // [0, 128, 0, 0],
+                // [0, 256, 0, 0],
+                // [0, 512, 0, 0]
                 // [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 32, 0, 0],
@@ -185,7 +185,7 @@ class Home extends Component {
                 let newboard = board.map(element => [...element])
                 if (y >= 0 && y <= 8) {
                     if (y >= 0 && y <= 7) {
-                        if (piece.value !== 'W') {
+                        if (piece.value !== 'W' && piece.value !== 'BOMB') {
                             if (newboard[row + y + 1][col + x] === 0) {
                                 newboard[row + y][col + x] = 0
                                 newboard[row + y + 1][col + x] = value
@@ -230,7 +230,7 @@ class Home extends Component {
                                     piece: newpiece
                                 })
                             } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
-                                console.log('hello')
+                                // console.log('hello')
                                 newboard[row + y][col + x] = 0
                                 newpiece.value = newboard[row + y + 1][col + x]
                                 let doubled = newpiece.value * 2
@@ -247,6 +247,28 @@ class Home extends Component {
                                     piece: newpiece
                                 })
                             }
+                        } else if (piece.value ==='BOMB'){
+                            console.log('hello')
+                            if (newboard[row + y + 1][col + x] === 0) {
+                                newboard[row + y][col + x] = 0
+                                newboard[row + y + 1][col + x] = value
+                                var movedown = y + 1
+                                this.setState({
+                                    board: newboard,
+                                    y: movedown,
+                                    piece: newpiece
+                                })
+                            }
+                            else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
+                                // console.log('hello')
+                                newboard[row + y][col + x] = 0
+                                newboard[row + y + 1][col + x] = 0
+                                this.setState({
+                                    board: newboard,
+                                    piece: newpiece
+                                })
+                                this.reDrop()
+                            }
                         }
 
                     } else {
@@ -259,6 +281,15 @@ class Home extends Component {
                                 board: newboard,
                                 piece: newpiece,
                                 stopped: true
+                            })
+                            this.reDrop()
+                        }
+                        else if(piece.value ==='BOMB'){
+                            newpiece.value = 0
+                            newboard[row+y][col+x] = 0
+                            this.setState({
+                                board:newboard,
+                                piece: newpiece
                             })
                             this.reDrop()
                         }
