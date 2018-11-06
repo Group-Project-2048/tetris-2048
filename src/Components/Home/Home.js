@@ -172,7 +172,8 @@ class Home extends Component {
                         [0, 0, 0, 0]],
                         score: 0,
                         y:0,
-                        piece: newpiece
+                        piece: newpiece,
+                        rereset: false
                     })
                     // this.game()
             } 
