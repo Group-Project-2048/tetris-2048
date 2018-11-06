@@ -55,7 +55,7 @@ class Home extends Component {
             swapitem: 32,
             random: '',
             revolver: [2, 32],
-            numbers: [2, 4, 8, 16, 32, 64, 'W', 'BOMB'],
+            numbers: [2, 4, 4, 8, 8, 16, 16, 32, 32, 64, 64, 'W', 'BOMB'],
             highestScore: [],
             // count: 0
             // initialStart: this.state.board[0][1],
