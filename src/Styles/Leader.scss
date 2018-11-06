@@ -16,7 +16,7 @@ $thous: #018EE6;
 $twothous: #000000;
 
 #backBtn{
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
     height: 25px;
     width: 75px;
@@ -65,13 +65,17 @@ $twothous: #000000;
   -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
   transition: border 1.5s linear, box-shadow 1.5s linear;
   
-
-
-  /* border-radius: 10px; */
   transition: all 200ms ease-in-out;
 }
 
-
+@-webkit-keyframes glow {
+    to {
+      border-color: $onehund; 
+      -webkit-box-shadow: 0 0 15px $onehund; 
+      -moz-box-shadow: 0 0 15px $onehund; 
+      box-shadow: 0 0 30px $onehund; 
+    }
+  }
 
 .pageTitles{
     display: flex;
@@ -100,79 +104,125 @@ $twothous: #000000;
 
 .truedayScoreBtns{
     margin: 5px;
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 93px;
     background-color: $sixteen;
+    font-size: 17px;
+    transition: all .2s ease-in-out;
 }
 
 .falsedayScoreBtns{
     margin: 5px;
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 93px;
     background-color: black;
     color: white;
+    font-size: 17px;
+    transition: all .2s ease-in-out;
 }
 
+.falsedayScoreBtns:hover{
+    transform: scale(1.1);
+}
+.falseweekScoreBtns:hover{
+    transform: scale(1.1);
+}
+.falsemonthScoreBtns:hover{
+    transform: scale(1.1);
+}
+.falseoverallScoreBtns:hover{
+    transform: scale(1.1);
+}
+
+.truedayScoreBtns:hover{
+    transform: scale(1.1);
+}
+.trueweekScoreBtns:hover{
+    transform: scale(1.1);
+}
+.truemonthScoreBtns:hover{
+    transform: scale(1.1);
+}
+.trueoverallScoreBtns:hover{
+    transform: scale(1.1);
+}
+
+
+
 .trueweekScoreBtns{
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 93px;
     margin: 5px;
     background-color: $thirty;
+    font-size: 17px;
+    transition: all .2s ease-in-out;
 }
 
 .falseweekScoreBtns{
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 93px;
     margin: 5px;
     background-color: black;
     color: white;
+    font-size: 17px;
+    transition: all .2s ease-in-out;
 }
 
 .truemonthScoreBtns{
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 93px;
     margin: 5px;
     background-color: $eight;
+    font-size: 17px;
+    transition: all .2s ease-in-out;
 }
 
 .falsemonthScoreBtns{
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 93px;
     margin: 5px;
     background-color: black;
     color: white;
+    font-size: 17px;
+    transition: all .2s ease-in-out;
 }
 
 .trueoverallScoreBtns{
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 93px;
     margin: 5px;
     background-color: $sixty;
+    font-size: 17px;
+    transition: all .2s ease-in-out;
 }
 
 .falseoverallScoreBtns{
-    // border-radius: 5px;
+    border-radius: 5px;
     border: none;
-    height: 25px;
-    width: 75px;
+    height: 40px;
+    width: 93px;
     margin: 5px;
     background-color: black;
     color: white;
+    font-size: 17px;
+    transition: all .2s ease-in-out;
 }
+
+
 
 /************************************/
 

@@ -16,12 +16,12 @@ class Home extends Component {
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
-                [0, 64, 0, 0],
-                [0, 64, 0, 0],
-                [0, 64, 0, 0],
-                [0, 32, 0, 0],
-                [0, 64, 0, 0],
-                [0, 128, 0, 0]
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
                 //  [0, 32, 0, 0],
                 // [0, 0, 0, 0],
                 // [0, 0, 0, 0],
@@ -63,12 +63,10 @@ class Home extends Component {
             score: 0,
             shadowScore: 0,
             scorePercentageMet: 0,
-            nextitem: '',
             swapitem: 32,
             random: '',
-            numbers: [
-                2, 4, 8, 16, 32, 64,
-                'W'],
+            revolver: [2, 32],
+            numbers: [2, 4, 8, 16, 32, 64, 'W', 'B'],
             highestScore: [],
             // count: 0
             // initialStart: this.state.board[0][1],
@@ -79,19 +77,13 @@ class Home extends Component {
             setIntervalID: 0,
             stopped: false,
             gameover: false,
-            rereset: false, 
-            slow: true
+            rereset: false,
+            revolved: false
         }
     }
 
     componentDidMount() {
         this.game()
-        this.handleRandomNumber(this.state.numbers)
-        this.setState({
-            random: this.handleRandomNumber(this.state.numbers)
-        })
-
-        this.focusDiv()
         //Work in progress
         this.focusDiv()
         this.handleScoreBar(this.state.score)
@@ -105,63 +97,66 @@ class Home extends Component {
                 console.log(this.state.setIntervalID)
             }
             else {
-                 this.game()
+                this.game()
             }
         }
 
-        if(prevProps.reset !== this.props.reset){
-            if(this.props.reset){
-                let newpiece = {...this.state.piece}
+        if (prevProps.reset !== this.props.reset) {
+            if (this.props.reset) {
+                let newpiece = { ...this.state.piece }
                 newpiece.value = this.state.random
                 this.setState({
                     board: [
-                    [0, this.state.random, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0]],
+                        [0, this.state.random, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0]],
                     score: 0,
-                    y:0,
+                    y: 0,
                     piece: newpiece
                 })
-            } 
+            }
         }
-        
-        if(prevState.shadowScore !== this.state.shadowScore){
-            if(this.state.shadowScore){
+
         if (prevState.shadowScore !== this.state.shadowScore) {
             if (this.state.shadowScore) {
-                this.handleScoreBar(this.state.shadowScore)
-                this.handleIncreaseLevel(this.state.pointsToLevel)
+                if (prevState.shadowScore !== this.state.shadowScore) {
+                    if (this.state.shadowScore) {
+                        this.handleScoreBar(this.state.shadowScore)
+                        this.handleIncreaseLevel(this.state.pointsToLevel)
+                    }
+                }
             }
-        }}}
+        }
         if (prevState.stopped !== this.state.stopped) {
             if (this.state.stopped) {
-                this.reDrop(this.state)
-                // this.handleRandomNumber()
+                console.log('fired!!!!!!!')
+                // this.reDrop() 
+                // this.handleRandomNumber(this.state.numbers)
             } else {
 
                 // this.handleRandomNumber(this.state.numbers)
             }
         }
-        if(prevState.gameover !== this.state.gameover){
-            if(this.state.gameover){
+        if (prevState.gameover !== this.state.gameover) {
+            if (this.state.gameover) {
                 clearInterval(this.state.setIntervalID)
-            } else{
-               this.game()
+            } else {
+                this.game()
             }
         }
 
-        if(prevState.rereset !== this.state.rereset){
-                if(this.state.rereset){
-                    let newpiece = {...this.state.piece}
-                    newpiece.value = this.state.random
-                    this.setState({
-                        board: [
+        if (prevState.rereset !== this.state.rereset) {
+            if (this.state.rereset) {
+                let newpiece = { ...this.state.piece }
+                newpiece.value = this.state.random
+                this.setState({
+                    board: [
                         [0, this.state.random, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
@@ -176,25 +171,9 @@ class Home extends Component {
                         piece: newpiece,
                         rereset: false
                     })
-                    // this.game()
+                }
             } 
         }
-        if(prevState.slow !== this.state.slow){
-            if(this.state.slow){
-                console.log(this.state.slow)
-                // this.game()
-            } else {
-                
-                console.log(this.state.slow)
-                setInterval(this.fall, 10)
-                this.setState({
-                    slow: true,
-                })
-            }
-        }
-    }
-        
-    
 
     game = () => {
         let { board, piece } = this.state
@@ -254,12 +233,13 @@ class Home extends Component {
                                 })
 
                             } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
-                                if(y <= 2){
+                                if (y <= 2) {
                                     this.gameover()
                                 }
                                 this.setState({
                                     stopped: true
                                 })
+                                this.reDrop()
                             }
                         } else if (piece.value === 'W') {
                             if (newboard[row + y + 1][col + x] === 0) {
@@ -288,21 +268,24 @@ class Home extends Component {
                                     y: movedown,
                                     piece: newpiece
                                 })
-                            } 
+                            }
                         }
 
                     } else {
-                        if(piece.value === 'W'){
+                        // console.log('asdfh')
+                        if (piece.value === 'W') {
+                        
                             newpiece.value = 0
-                            newboard[row+y][col+x] = 0
+                            newboard[row + y][col + x] = 0
                             this.setState({
                                 board: newboard,
                                 piece: newpiece,
                                 stopped: true
                             })
+                            this.reDrop()
                         }
                         else {
-                           
+                            this.reDrop()
                             this.setState({
                                 stopped: true
                             })
@@ -320,7 +303,6 @@ class Home extends Component {
         var { value, row, col } = newpiece
 
         switch (key) {
-
             case 37:
                 if (x >= 0 && newboard[row + y][col + x - 1] === 0 && y < 8) {
                     newboard[row + y][col + x] = 0
@@ -335,7 +317,6 @@ class Home extends Component {
             case 39:
                 if (x < 2 && newboard[row + y][col + x + 1] === 0 && y < 8) {
                     newboard[row + y][col + x] = 0
-                    // console.log(x)
                     let right = x + 1
                     this.setState({
                         board: newboard,
@@ -355,61 +336,59 @@ class Home extends Component {
 
             default:
                 break;
-
-
         }
-
-
-
     }
 
     reDrop = () => {
-        let { piece, board, x, y, random } = this.state
+        let random = this.handleRandomNumber(this.state.numbers)
+        let { piece, board, x, y, revolver } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
-        newpiece.value = random
-        newboard[0][1] = random
-        let randomnumber = this.handleRandomNumber(this.state.numbers)
+        let newRevolver = [...revolver]
+        newRevolver.splice(1, 1, newRevolver[0])
+        newRevolver[0] = random;
+        newpiece.value = newRevolver[1]
+        newboard[0][1] = newRevolver[1]
+
         this.setState({
             x: 0,
             y: 0,
             piece: newpiece,
             board: newboard,
             stopped: false,
-            random: randomnumber,
+            revolved: true,
+            revolver: newRevolver
+            // random: randomNumber,
+
         })
     }
 
-    gameover=()=>{
+    gameover = () => {
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
-        if(newpiece.value !== newboard[row+y+1][col+x]){
+        if (newpiece.value !== newboard[row + y + 1][col + x]) {
             this.setState({
                 gameover: true
             })
-            // console.log(this.state.gameover)
             swal({
                 title: 'Game Over',
                 text: "Play Again?",
                 type: 'warning',
                 showCancelButton: false,
-                allowOutsideClick: false,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes'
-              }).then((result) => {
-                  console.log(result)
-                  this.setState({
-                      rereset: true,
-                      gameover: false
+            }).then((result) => {
+                console.log(result)
+                this.setState({
+                    rereset: true,
+                    gameover: false
                 })
-              })
-        } else {
-
-        }
+            })
+        } 
     }
 
     onKeyDown = (e) => {
@@ -470,6 +449,7 @@ class Home extends Component {
     //////////////////score and level methods ///////////////////////
 
     render() {
+        
         let newboard = this.state.board.map((el, i) => {
             let item = el.map(number => {
                 return (
@@ -508,7 +488,7 @@ class Home extends Component {
                 <section className='middle'>
                     <div className='next-item'>
                         <h4>Next Item</h4>
-                        <Blocks numbers={this.state.random} />
+                        <Blocks numbers={this.state.revolver[0]} />
                     </div>
                     <section className='actual-grid' >
                         {newboard}

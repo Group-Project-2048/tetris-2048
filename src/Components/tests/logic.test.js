@@ -1,4 +1,6 @@
-const {reDrop} = require('../Logic/logic')
+const {reDrop} = require('../Logic/logic');
+const {handleDayBtn, handleMonthBtn, handleWeekBtn, handleOverall} = require('../Leader/Leader');
+
 const fake = {x: 2, y: 'whatup', piece: {row: 0, col: 1, value: 32}, board: [ [0, 32, 0, 0],
 [0, 0, 0, 0],
 [0, 0, 0, 0],
@@ -43,10 +45,34 @@ describe("it drops again somehow", ()=>{
         expect(reDrop(fake).piece).toHaveProperty('value')
     })
 
-
-
-
+    
+    
+    
 })
+
+//Jose Unit Tests
+
+const fakeArray = [{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-05"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-05"}, {id: 31, name: "Evered", score: 817762, time_stamp: "2018-10-13"}, {id: 10, name: "Brigham", score: 794934, time_stamp: "2018-10-22"}]
+
+describe('Leadership btns work', ()=> {
+
+    test('dayBtn display highest score of the day', ()=>{
+        expect(handleDayBtn(fakeArray)).toBe({id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-05"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-05"})
+    })
+    
+    test('weekBtn displays highest score of the week', ()=>{
+        expect(handleWeekBtn())
+    })
+    
+    test('monthBtn displays highest score of the month', ()=>{
+        expect(handleMonthBtn())
+    })
+    
+    test('overallBtn displays highest overall score', ()=>{
+        expect(handleOverall())
+    })
+})
+
 
 describe("The toggle function toggle the boolean", ()=>{
     test('type of should return a boolean', ()=>{
