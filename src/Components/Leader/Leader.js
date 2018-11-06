@@ -85,7 +85,7 @@ class Leader extends Component {
             monthColor: false,
             halo: 'day'
         })
-        
+
     }
 
     handleLast30Days() {
@@ -137,7 +137,7 @@ class Leader extends Component {
             }
 
         }
-        
+
         let weekScore2 = weekScores.splice(0, 10)
         console.log(weekScore2)
 
@@ -185,7 +185,7 @@ class Leader extends Component {
             monthColor: true,
             halo: 'month'
         })
-        
+
     }
 
     handleOverallBtn() {
@@ -283,37 +283,39 @@ class Leader extends Component {
 
         return (
             <div className='backgroundBox'>
-                <div style={{display: 'flex', flexDirection: 'column', width: '400px', margin: 'auto'}}>
-                    <button id='backBtn' onClick={this.handleGoHome}><i class="fas fa-arrow-left"></i></button>
-                    <img src={Logo2} alt="" style={{width: '400px', margin: 'auto', marginBottom: '15px'}}/>
+                <div className='container'>
+                    <div style={{ display: 'flex', flexDirection: 'column', width: '400px', margin: 'auto' }}>
+                        <button id='backBtn' onClick={this.handleGoHome}><i class="fas fa-arrow-left" style={{ marginTop: '4px' }}></i></button>
+                        <img src={Logo2} alt="" style={{ width: '400px', margin: 'auto', marginBottom: '15px', marginTop: '20px'}} />
 
-                </div>
-
-                <div className='scoreBtns'>
-                    <button onClick={() => this.handleDayBtn(this.state.players)} className={`${this.state.dayColor}dayScoreBtns`}>Day</button>
-                    <button onClick={() => this.handleWeekBtn(this.state.players)} className={`${this.state.weekColor}weekScoreBtns`}>Week</button>
-                    <button onClick={() => this.handleMonthBtn(this.state.players)} className={`${this.state.monthColor}monthScoreBtns`}>Month</button>
-                    <button onClick={() => this.handleOverallBtn()} className={`${this.state.overallColor}overallScoreBtns`}>Overall</button>
-                </div>
-
-                <div className={`mainBox-${this.state.halo}`}>
-                    <div className='pageTitles'>
-                        <h3>Players
-                            <hr />
-                        </h3>
-                        <h3 style={{ marginRight: '20px' }}>Score
-                            <hr />
-                        </h3>
                     </div>
-                    <div className='scorePlayers'>
-                        <div className='playerBox'>
 
-                            <div className='userNames'>
-                                {this.state.score === 'overall' ? newPlayers.splice(0, 10) : this.state.score === 'day' ? showDay : this.state.score === 'month' ? showMonth : this.state.score === 'week' ? showWeek : 'overall'}
-                            </div>
+                    <div className='scoreBtns'>
+                        <button onClick={() => this.handleDayBtn(this.state.players)} className={`${this.state.dayColor}dayScoreBtns`}>Day</button>
+                        <button onClick={() => this.handleWeekBtn(this.state.players)} className={`${this.state.weekColor}weekScoreBtns`}>Week</button>
+                        <button onClick={() => this.handleMonthBtn(this.state.players)} className={`${this.state.monthColor}monthScoreBtns`}>Month</button>
+                        <button onClick={() => this.handleOverallBtn()} className={`${this.state.overallColor}overallScoreBtns`}>Overall</button>
+                    </div>
+
+                    <div className={`mainBox-${this.state.halo}`}>
+                        <div className='pageTitles'>
+                            <h3>Players
+                            <hr />
+                            </h3>
+                            <h3 style={{ marginRight: '20px' }}>Score
+                            <hr />
+                            </h3>
                         </div>
-                        <div className="scoreBox">
-                            {this.state.score === 'overall' ? scores.splice(0, 10) : this.state.score === 'day' ? showDayScores : this.state.score === 'month' ? showMonthScores : this.state.score === 'week' ? showWeekScores : 'overall'}
+                        <div className='scorePlayers'>
+                            <div className='playerBox'>
+
+                                <div className='userNames'>
+                                    {this.state.score === 'overall' ? newPlayers.splice(0, 10) : this.state.score === 'day' ? showDay : this.state.score === 'month' ? showMonth : this.state.score === 'week' ? showWeek : 'overall'}
+                                </div>
+                            </div>
+                            <div className="scoreBox">
+                                {this.state.score === 'overall' ? scores.splice(0, 10) : this.state.score === 'day' ? showDayScores : this.state.score === 'month' ? showMonthScores : this.state.score === 'week' ? showWeekScores : 'overall'}
+                            </div>
                         </div>
                     </div>
                 </div>
