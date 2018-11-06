@@ -398,9 +398,26 @@ class Home extends Component {
         }
     }
 
+    onKeyDown = (e) => {
+        this.setState({
+            key: e.which
+        })
+    }
+
+    focusDiv = () => {
+        ReactDOM.findDOMNode(this.refs.theDiv).focus()
+    }
+    
+    handleRandomNumber = (arr) => {
+        let randomNumber = arr[Math.floor(Math.random() * arr.length)];
+        return randomNumber
+    }
+
+    //////////////////score and level methods ///////////////////////
+    
     //This method is to test the handleScoreBar and handleIncreaseLevel methods
     increaseScore = () => {
-
+        
         this.setState({
             score: this.state.score + 100,
             shadowScore: this.state.shadowScore + 100
@@ -408,21 +425,15 @@ class Home extends Component {
         // console.log(this.state.score)
         // console.log(this.state.shadowScore)
     }
-
-
-    handleRandomNumber = (arr) => {
-        let randomNumber = arr[Math.floor(Math.random() * arr.length)];
-        return randomNumber
-    }
-
+    
     handleScoreBar = (num) => {
         let percentageMet = ((1.00 - (((this.state.pointsToLevel - num) / this.state.pointsToLevel).toFixed(2))).toFixed(2) * 100);
-
+        
         this.setState({
             scorePercentageMet: percentageMet
         })
     }
-
+    
     handleIncreaseLevel = (num) => {
         if (this.state.shadowScore > num) {
             this.setState({
@@ -433,9 +444,7 @@ class Home extends Component {
             })
         }
     }
-
-
-
+    
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
             let newRes = res.data[0].score
@@ -444,19 +453,7 @@ class Home extends Component {
             })
         })
     }
-
-
-   
-
-    onKeyDown = (e) => {
-        this.setState({
-            key: e.which
-        })
-    }
-
-    focusDiv = () => {
-        ReactDOM.findDOMNode(this.refs.theDiv).focus()
-    }
+    //////////////////score and level methods ///////////////////////
 
     render() {
         let newboard = this.state.board.map((el, i) => {
