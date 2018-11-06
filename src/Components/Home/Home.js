@@ -482,6 +482,8 @@ class Home extends Component {
 
         return (
             <section className='container' ref="theDiv" onKeyDown={(e) => this.onKeyDown(e)} tabIndex="1">
+                <div className='blurryBack'>   
+
                 <header className='top-bar'>
                     <section className='leaderboard-score'>
                         <div className='leaderboard'>
@@ -504,16 +506,20 @@ class Home extends Component {
                         <h4>Next Item</h4>
                         <Blocks numbers={this.state.revolver[0]} />
                     </div> */}
-                    <section className='actual-grid' >
-                        {newboard}
-                        <article id='game-over'>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </article>
-                    </section>
+                    <div className='gameFrame'>
+
+                        <section className='actual-grid' >
+                            {newboard}
+                            <article id='game-over'>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </article>
+                        </section>
+
+                    </div>
                     {/* <section className='swap-item'>
                         <h4>Swap Item</h4>
                         <div>
@@ -521,6 +527,8 @@ class Home extends Component {
                         </div>
                     </section> */}
                 </section>
+                    
+                </div>
             </section>
         )
     }
