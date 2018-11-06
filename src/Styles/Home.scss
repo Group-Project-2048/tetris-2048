@@ -202,4 +202,13 @@ $wild: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
     display:none
 }
 
+.num-BOMB{
+    @extend .num;
+    background-image: url('../Images/Bomb2.png');
+    // background-size: cover;
+    background-repeat: no-repeat;
+    background-color: $two;
+    color: transparent;
+}
+
 
