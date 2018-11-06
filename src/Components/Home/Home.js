@@ -84,9 +84,6 @@ class Home extends Component {
 
     componentDidMount() {
         this.game()
-        // this.handleRandomNumber(this.state.numbers)
-
-        this.focusDiv()
         //Work in progress
         this.focusDiv()
         this.handleScoreBar(this.state.score)
@@ -175,17 +172,8 @@ class Home extends Component {
                         rereset: false
                     })
                 }
-                // this.game()
-            
-                        
-                    // this.game()
             } 
         }
-
-
-    
-        
-    
 
     game = () => {
         let { board, piece } = this.state
@@ -205,182 +193,6 @@ class Home extends Component {
         // console.log(this.state.nextItem)
 
     }
-
-    changeColumn = () => {
-        var { piece, key, board, x, y } = this.state
-        var newboard = board.map(element => [...element])
-        var newpiece = { ...piece }
-        var { value, row, col } = newpiece
-
-        switch (key) {
-
-            case 37:
-                if (x >= 0 && newboard[row + y][col + x - 1] === 0 && y < 8) {
-                    newboard[row + y][col + x] = 0
-                    let left = x - 1
-                    this.setState({
-                        board: newboard,
-                        x: left,
-                        key: 'n/a'
-                    })
-                }
-
-                //if the piece was moved to the left or the right the piece before should equal 0
-                // if the piece is moved it should be able to move again to a different place.
-                // x = 0 
-                // console.log(x)
-                break
-            case 39:
-                //for some reason it is adding multiple times
-                // x=0
-                if (x < 2 && newboard[row + y][col + x + 1] === 0 && y < 8) {
-                    newboard[row + y][col + x] = 0
-                    // console.log(x)
-                    let right = x + 1
-                    this.setState({
-                        board: newboard,
-                        x: right,
-                        key: 'n/a'
-                    })
-                }
-                break;
-            // case 40:
-            //  let down = y+1
-            //  newboard[row+y][col+x] = 0
-            //  this.setState({
-            //      board: newboard,
-            //      y: down,
-            //      key: 'n/a'
-            //  })
-
-            default:
-                break;
-
-
-        }
-    }
-
-
-    //This method is to test the handleScoreBar and handleIncreaseLevel methods
-    increaseScore = () => {
-
-        this.setState({
-            score: this.state.score + 100,
-            shadowScore: this.state.shadowScore + 100
-        })
-        // console.log(this.state.score)
-        // console.log(this.state.shadowScore)
-    }
-
-
-    handleRandomNumber = (arr) => {
-        console.log(arr)
-        let randomNumber = arr[Math.floor(Math.random() * arr.length)];
-        
-
-        return randomNumber
-
-    }
-
-    handleScoreBar = (num) => {
-        let percentageMet = ((1.00 - (((this.state.pointsToLevel - num) / this.state.pointsToLevel).toFixed(2))).toFixed(2) * 100);
-
-        // console.log(percentageMet)
-        this.setState({
-            scorePercentageMet: percentageMet
-        })
-
-        // console.log(this.state.scorePercentageMet)
-    }
-    reDrop = () => {
-        // console.log('asdofijerpghadf')
-        let random = this.handleRandomNumber(this.state.numbers)
-        let { piece, board, x, y, revolver } = this.state
-        let newpiece = { ...piece }
-        let { value, row, col } = newpiece
-        let newboard = board.map(element => [...element])
-        let newRevolver = [...revolver]
-        newRevolver.splice(1, 1, newRevolver[0])
-        newRevolver[0] = random;
-        newpiece.value = newRevolver[1]
-        console.log(newpiece)
-        console.log(newRevolver)
-        newboard[0][1] = newRevolver[1]
-
-
-
-        this.setState({
-            x: 0,
-            y: 0,
-            piece: newpiece,
-            board: newboard,
-            stopped: false,
-            revolved: true,
-            revolver: newRevolver
-            // random: randomNumber,
-
-        })
-
-
-
-        // console.log(this.state)
-    }
-
-    handleIncreaseLevel = (num) => {
-        if (this.state.shadowScore > num) {
-            this.setState({
-                pointsToLevel: num * 2,
-                shadowScore: 0,
-                level: this.state.level + 1,
-                scorePercentageMet: '0%'
-            })
-            // console.log(this.state.pointsToLevel)
-
-        }
-    }
-
-    gameover = () => {
-        let { piece, board, x, y } = this.state
-        let newpiece = { ...piece }
-        let { value, row, col } = newpiece
-        let newboard = board.map(element => [...element])
-        if (newpiece.value !== newboard[row + y + 1][col + x]) {
-            // this works  just need to figure out the proper thing to put in place
-            // this could be an alert, but then we can figure out what we'd like
-            // maybe reactjs-popup? 
-            this.setState({
-                gameover: true
-            })
-            console.log(this.state.gameover)
-            swal({
-                title: 'Game Over',
-                text: "Play Again?",
-                type: 'warning',
-                showCancelButton: false,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes'
-            }).then((result) => {
-                console.log(result)
-                this.setState({
-                    rereset: true,
-                    gameover: false
-                })
-            })
-        } else {
-
-        }
-    }
-
-    handleGetHighScore = () => {
-        Axios.get('/api/getHighScore').then(res => {
-            let newRes = res.data[0].score
-            this.setState({
-                highestScore: newRes
-            })
-        })
-    }
-
 
     fall = () => {
         this.changeColumn()
@@ -491,7 +303,6 @@ class Home extends Component {
         var { value, row, col } = newpiece
 
         switch (key) {
-
             case 37:
                 if (x >= 0 && newboard[row + y][col + x - 1] === 0 && y < 8) {
                     newboard[row + y][col + x] = 0
@@ -506,7 +317,6 @@ class Home extends Component {
             case 39:
                 if (x < 2 && newboard[row + y][col + x + 1] === 0 && y < 8) {
                     newboard[row + y][col + x] = 0
-                    // console.log(x)
                     let right = x + 1
                     this.setState({
                         board: newboard,
@@ -526,61 +336,59 @@ class Home extends Component {
 
             default:
                 break;
-
-
         }
-
-
-
     }
 
     reDrop = () => {
-        let { piece, board, x, y, random } = this.state
+        let random = this.handleRandomNumber(this.state.numbers)
+        let { piece, board, x, y, revolver } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
-        newpiece.value = random
-        newboard[0][1] = random
-        let randomnumber = this.handleRandomNumber(this.state.numbers)
+        let newRevolver = [...revolver]
+        newRevolver.splice(1, 1, newRevolver[0])
+        newRevolver[0] = random;
+        newpiece.value = newRevolver[1]
+        newboard[0][1] = newRevolver[1]
+
         this.setState({
             x: 0,
             y: 0,
             piece: newpiece,
             board: newboard,
             stopped: false,
-            random: randomnumber,
+            revolved: true,
+            revolver: newRevolver
+            // random: randomNumber,
+
         })
     }
 
-    gameover=()=>{
+    gameover = () => {
         let { piece, board, x, y } = this.state
         let newpiece = { ...piece }
         let { value, row, col } = newpiece
         let newboard = board.map(element => [...element])
-        if(newpiece.value !== newboard[row+y+1][col+x]){
+        if (newpiece.value !== newboard[row + y + 1][col + x]) {
             this.setState({
                 gameover: true
             })
-            // console.log(this.state.gameover)
             swal({
                 title: 'Game Over',
                 text: "Play Again?",
                 type: 'warning',
                 showCancelButton: false,
-                allowOutsideClick: false,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes'
-              }).then((result) => {
-                  console.log(result)
-                  this.setState({
-                      rereset: true,
-                      gameover: false
+            }).then((result) => {
+                console.log(result)
+                this.setState({
+                    rereset: true,
+                    gameover: false
                 })
-              })
-        } else {
-
-        }
+            })
+        } 
     }
 
     onKeyDown = (e) => {
