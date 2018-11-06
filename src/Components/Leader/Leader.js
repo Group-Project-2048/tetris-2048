@@ -12,7 +12,7 @@ class Leader extends Component {
             scoresOfDay: [],
             scoresOfMonth: [],
             scoresOfWeek: [],
-            score: 'Overall',
+            score: 'overall',
 
         }
 
@@ -169,7 +169,7 @@ class Leader extends Component {
             console.log(res.data)
             this.setState({
                 players: res.data.splice(0, 10),
-                score: 'Overall'
+                score: 'overall'
             })
         })
     }
@@ -273,11 +273,11 @@ class Leader extends Component {
                         <div className='playerBox'>
 
                             <div className='userNames'>
-                                {this.state.score === 'Overall' ? newPlayers.splice(0, 10) : this.state.score === 'day' ? showDay : this.state.score === 'month' ? showMonth : this.state.score === 'week' ? showWeek : 'Overall'}
+                                {this.state.score === 'overall' ? newPlayers.splice(0, 10) : this.state.score === 'day' ? showDay : this.state.score === 'month' ? showMonth : this.state.score === 'week' ? showWeek : 'overall'}
                             </div>
                         </div>
                         <div className="scoreBox">
-                            {this.state.score === 'Overall' ? scores.splice(0, 10) : this.state.score === 'day' ? showDayScores : this.state.score === 'month' ? showMonthScores : this.state.score === 'week' ? showWeekScores : 'Overall'}
+                            {this.state.score === 'overall' ? scores.splice(0, 10) : this.state.score === 'day' ? showDayScores : this.state.score === 'month' ? showMonthScores : this.state.score === 'week' ? showWeekScores : 'overall'}
                         </div>
                     </div>
                 </div>
