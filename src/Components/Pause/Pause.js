@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import '../../Styles/Pause.scss';
-import continueimg from '../../Images/Group-01.png'
+// import continueimg from '../../Images/Group-01.png'
 import restartimg from '../../Images/Group-02.png'
 import leaderboardimg from '../../Images/Group-03.png'
 import soundimg from '../../Images/Group-05.png'

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../Styles/Leader.scss';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import Logo2 from '../../Images/Leaderboard.png'
 
 class Leader extends Component {

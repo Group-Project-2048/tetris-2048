@@ -1,5 +1,4 @@
-const {reDrop} = require('../Logic/logic');
-const {handleDayBtn, handleMonthBtn, handleWeekBtn, handleOverall} = require('../Logic/logic');
+const {reDrop, toggle, random, handleDayBtn, handleMonthBtn, handleWeekBtn, handleOverall} = require('../Logic/logic');
 
 const fake = {x: 2, y: 'whatup', piece: {row: 0, col: 1, value: 32}, board: [ [0, 32, 0, 0],
 [0, 0, 0, 0],
@@ -19,6 +18,10 @@ const fake2 = {x: 2, y: 4, piece: {row: 0, col: 1, value: 32}, board: [ [0, 32, 
 [0, 128, 0, 0],
 [0, 256, 0, 0],
 [0, 512, 0, 0]], random: 64}
+
+const mixUp = [2,4,8,16,32,64]
+
+//Mike Unit Tests
 
 describe("it drops again somehow", ()=>{
     test('type of should return object', ()=>{
@@ -45,9 +48,6 @@ describe("it drops again somehow", ()=>{
         expect(reDrop(fake).piece).toHaveProperty('value')
     })
 
-    
-    
-    
 })
 
 //Jose Unit Tests
@@ -82,5 +82,31 @@ describe('Leadership btns work', ()=> {
 describe("The toggle function toggle the boolean", ()=>{
     test('type of should return a boolean', ()=>{
         
+    })
+})
+
+//Digory Unit Tests
+
+describe("The toggle function toggle the boolean", ()=>{
+    test('type of should return boolean', ()=>{
+        expect(typeof(toggle(true))).toBe('boolean')
+    })
+    
+    test('true should return false', ()=>{
+        expect(toggle(true)).toBe(false)
+    })
+
+    test('false should return true', ()=>{
+        expect(toggle(false)).toBe(true)
+    })
+
+    test('non-boolean should return undefined', ()=>{
+        expect(toggle(fake)).toBe(undefined)
+    })
+})
+
+describe("the random function returns a randon number", ()=>{
+    test('type of random should return a number', ()=>{
+        expect(typeof(random(mixUp))).toBe('number')
     })
 })

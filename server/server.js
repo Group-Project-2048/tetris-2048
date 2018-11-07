@@ -8,11 +8,8 @@ const express = require('express');
 // const mid = require('./middleware/checkForDevelopment');
 const app = express();
 
-const path = require('path'); // Usually moved to the start of file
 
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+app.use( express.static( `${__dirname}/../build` ) );
 //Middleware
 
 const checkForSession = require('./middleware/checkForSessions');
@@ -60,6 +57,9 @@ app.get('/api/getSession', c.checkSession);
 
 //Get the highest score for the player
 
-app.get('/api/getHighScore', c.getHighestScore)
+app.get('/api/getHighScore', c.getHighestScore);
+
+//recording score on lose
+// app.put('/api/sendScore/:id', c.sendScoreOnlose);
 
 app.listen(SERVER_PORT, () => {console.log(`Server ${SERVER_PORT} is running`); })
