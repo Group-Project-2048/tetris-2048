@@ -61,7 +61,6 @@ class Home extends Component {
         if (prevProps.pause !== this.props.pause) {
             if (this.props.pause) {
                 clearInterval(this.state.setIntervalID)
-                console.log(this.state.setIntervalID)
             }
             else {
                 this.game()
@@ -138,18 +137,13 @@ class Home extends Component {
 
         let time = 850-(this.state.level*10 > 600 ? 600 : this.state.level*10)
         let id = setInterval(this.fall, time)
-        console.log(time)
         this.setState({
             setIntervalID: id
         })
 
-        //This interval is to test the handleScoreBar and handleIncreaseLevel methods
-        // setInterval(this.increaseScore, 1000)
-        //***Testing for score bar */
         this.handleGetHighScore()
         this.handleScoreBar(this.state.score)
         this.handleIncreaseLevel(this.state.pointsToLevel)
-        // console.log(this.state.nextItem)
 
     }
 
@@ -181,7 +175,6 @@ class Home extends Component {
                                 newboard[row + y][col + x] = 0
                                 newboard[row + y + 1][col + x] = value * 2
                                 newpiece.value = value * 2
-                                // console.log(newpiece.value)
                                 let newscore = score + newpiece.value
                                 let newshadow = shadowScore + newpiece.value
                                 if (newboard[row + y + 1][col + x] === 2048) {
@@ -195,7 +188,6 @@ class Home extends Component {
                                     score: newscore,
                                     shadowScore: newshadow
                                 })
-                                // console.log(score, shadowScore)
                                 
                             } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
                                 if (y <= 2) {
@@ -217,7 +209,6 @@ class Home extends Component {
                                     piece: newpiece
                                 })
                             } else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
-                                // console.log('hello')
                                 newboard[row + y][col + x] = 0
                                 newpiece.value = newboard[row + y + 1][col + x]
                                 let doubled = newpiece.value * 2
@@ -229,7 +220,6 @@ class Home extends Component {
                                     newboard[row + y + 1][col + x] = 0
                                 }
                                 movedown = y + 1
-                                // console.log(score, shadowScore)
                                 this.setState({
                                     board: newboard,
                                     y: movedown,
@@ -239,7 +229,6 @@ class Home extends Component {
                                 })
                             }
                         } else if (piece.value ==='BOMB'){
-                            console.log('hello')
                             if (newboard[row + y + 1][col + x] === 0) {
                                 newboard[row + y][col + x] = 0
                                 newboard[row + y + 1][col + x] = value
@@ -251,7 +240,6 @@ class Home extends Component {
                                 })
                             }
                             else if (newboard[row + y][col + x] !== newboard[row + y + 1][col + x]) {
-                                // console.log('hello')
                                 newboard[row + y][col + x] = 0
                                 newboard[row + y + 1][col + x] = 0
                                 this.setState({
@@ -263,7 +251,6 @@ class Home extends Component {
                         }
 
                     } else {
-                        // console.log('asdfh')
                         if (piece.value === 'W') {
                         
                             newpiece.value = 0
@@ -373,7 +360,9 @@ class Home extends Component {
             this.setState({
                 gameover: true
             })
-            this.sendScoreOnLose()
+            if(this.state.score > 1){
+                this.sendScoreOnLose()
+            }
             swal({
                 title: 'Game Over',
                 text: "Play Again?",
@@ -430,27 +419,22 @@ class Home extends Component {
 
     //////////////////score and level methods ///////////////////////
 
-        //This will need to function eventually
     sendScoreOnLose = () => {
         let { user_id } = this.state;
         let body = this.state.score
-        console.log( 'body', body )
-        Axios.put(`/api/sendScore/${user_id}`, {body})
-        .then(result => {
-            // console.log(result)
-        })
-        .catch(err => {console.log(err)})
+            Axios.put(`/api/sendScore/${user_id}`, {body})
+            .then(result => {
+                // console.log(result)
+            })
+            .catch(err => {console.log(err)})
     }
     
-    //This method is to test the handleScoreBar and handleIncreaseLevel methods
     increaseScore = () => {
         
         this.setState({
             score: this.state.score + 100,
             shadowScore: this.state.shadowScore + 100
         })
-        // console.log(this.state.score)
-        // console.log(this.state.shadowScore)
     }
     
     handleScoreBar = (num) => {
