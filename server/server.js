@@ -8,7 +8,6 @@ const express = require('express');
 // const mid = require('./middleware/checkForDevelopment');
 const app = express();
 
-const path = require('path'); // Usually moved to the start of file
 
 app.use( express.static( `${__dirname}/../build` ) );
 //Middleware
