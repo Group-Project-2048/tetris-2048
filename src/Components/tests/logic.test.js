@@ -52,7 +52,7 @@ describe("it drops again somehow", ()=>{
 
 //Jose Unit Tests
 
-const fakeArray = [{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-6"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-5"}, {id: 31, name: "Evered", score: 817762, time_stamp: "2018-10-13"}, {id: 10, name: "Brigham", score: 794934, time_stamp: "2018-10-22"}]
+const fakeArray = [{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-7"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-5"}, {id: 31, name: "Evered", score: 817762, time_stamp: "2018-10-13"}, {id: 10, name: "Brigham", score: 794934, time_stamp: "2018-10-22"}]
 
 describe('Leadership btns work', ()=> {
 
@@ -62,15 +62,15 @@ describe('Leadership btns work', ()=> {
 
     test('dayBtn display highest score of the day', ()=>{
         // console.log(fakeArray)
-        expect(handleDayBtn(fakeArray)).toEqual([{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-6"}])
+        expect(handleDayBtn(fakeArray)).toEqual([{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-7"}])
     })
     
     test('weekBtn displays highest score of the week', ()=>{
-        expect(handleWeekBtn(fakeArray)).toEqual([{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-6"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-5"}])
+        expect(handleWeekBtn(fakeArray)).toEqual([{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-7"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-5"}])
     })
     
     test('monthBtn displays highest score of the month', ()=>{
-        expect(handleMonthBtn(fakeArray)).toEqual([{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-6"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-5"}, {id: 31, name: "Evered", score: 817762, time_stamp: "2018-10-13"}, {id: 10, name: "Brigham", score: 794934, time_stamp: "2018-10-22"}])
+        expect(handleMonthBtn(fakeArray)).toEqual([{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-7"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-5"}, {id: 31, name: "Evered", score: 817762, time_stamp: "2018-10-13"}, {id: 10, name: "Brigham", score: 794934, time_stamp: "2018-10-22"}])
     })
     
     test('monthBtn returns an array', ()=>{
@@ -78,12 +78,6 @@ describe('Leadership btns work', ()=> {
     })
 })
 
-
-describe("The toggle function toggle the boolean", ()=>{
-    test('type of should return a boolean', ()=>{
-        
-    })
-})
 
 //Digory Unit Tests
 
