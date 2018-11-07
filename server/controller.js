@@ -22,12 +22,10 @@ module.exports = {
         } = req.body
 
         db.register_User([username, score]).then(dbResult => {
-
-                console.log(dbResult)
-                req.session.user.id = dbResult[0].id;
-                req.session.user.username = dbResult[0].name;
-                res.status(200).send(dbResult)
-
+            console.log(dbResult)
+            req.session.user.id = dbResult[0].id;
+            req.session.user.username = dbResult[0].name;
+            res.status(200).send(dbResult)
         })
     },
 
