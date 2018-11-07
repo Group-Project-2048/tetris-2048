@@ -79,6 +79,14 @@ module.exports = {
             res.status(200).send(result);
         })
         .catch(err => (console.log(err)))
+    },
+
+    deleteUser: (req, res) => {
+        const db = req.app.get('db')
+        let {id} = req.session.user;
+        console.log(id)
+
+        db.delete_user([id]).then(user => res.status(200).send(user)).catch(err => console.log(err))
     }
     
 }

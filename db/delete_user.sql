@@ -1,0 +1,1 @@
+delete from overflow where id = $1
