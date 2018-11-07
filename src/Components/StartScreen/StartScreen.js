@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../Styles/StartScreen.scss';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import logo from'../../Images/Stacky.png';
 import swal from 'sweetalert2';
@@ -84,6 +85,7 @@ class StartScreen extends Component {
         return(
             <div>
                 <div className='startBack'>
+                <Link to='/about'><button>About</button></Link>
                     <div className='startMenuBox'>
                         <div className='stackyTitle'>
                             <img src={logo} alt="" className='stackyTitle'/>
