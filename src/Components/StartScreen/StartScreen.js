@@ -37,7 +37,7 @@ class StartScreen extends Component {
         this.setState({
             [prop]: val
         })
-        console.log(this.state.username)
+        // console.log(this.state.username)
     }
 
     handleRegister(){
@@ -64,8 +64,7 @@ class StartScreen extends Component {
 
         let body = {
             username: username,
-            score: 0,
-            time_stamp: null
+            score: 0
         }
 
         axios.post('/api/register', body).then(res =>{

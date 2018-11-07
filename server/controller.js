@@ -12,29 +12,21 @@ module.exports = {
     },
 
     register: (req, res, next) => {
-        // const {id} = req.params;
-        
         const db = req.app.get('db');
-        let {session} = req;
+        // let {id} = req.session.user;
         const {
 
             username,
-            score,
-            time_stamp
+            score
 
         } = req.body
 
-        // if(session.user.username === username)
-
-        db.register_User([username, score, time_stamp]).then(dbResult => {
-
-            db.get_1user([username]).then(dbResult => {
+        db.register_User([username, score]).then(dbResult => {
 
                 console.log(dbResult)
-                session.user.id = dbResult[0].id;
-                session.user.username = dbResult[0].name;
+                req.session.user.id = dbResult[0].id;
+                req.session.user.username = dbResult[0].name;
                 res.status(200).send(dbResult)
-            })
 
         })
     },
@@ -72,7 +64,7 @@ module.exports = {
         let {body} = req.body;
         const db = req.app.get('db');
         console.log('req.session.user.id', id)
-        console.log('req.body', body)
+        console.log('req.body', req.body)
 
         db.send_score([id, body])
         .then(result => {
