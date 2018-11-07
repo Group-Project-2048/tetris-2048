@@ -13,35 +13,16 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
-                // [0, 32, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 0, 0, 0]
-
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
-                [0, 2, 0, 0],
-                [0, 4, 0, 0],
-                [0, 64, 0, 0],
-                [0, 128, 0, 0],
-                [0, 256, 0, 0],
-                [0, 512, 0, 0]
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
 
-                // [0, 32, 0, 0],
-                // [0, 0, 0, 0],
-                // [0, 32, 0, 0],
-                // [0, 64, 0, 0],
-                // [0, 128, 0, 0],
-                // [0, 256, 0, 0],
-                // [32, 512, 0, 0],
-                // [64, 1024, 4, 0],
-                // [8, 2, 64, 32]
             ],
             piece: { row: 0, col: 1, value: 32 },
             y: 0,
@@ -57,14 +38,11 @@ class Home extends Component {
             revolver: [2, 32],
             numbers: [2, 4, 4, 8, 8, 16, 16, 32, 32, 64, 64, 'W', 'BOMB'],
             highestScore: [],
-            // count: 0
-            // initialStart: this.state.board[0][1],
             nextItem: 64,
             swapItem: 32,
             multiplier: 1,
             key: 'n/a',
             setIntervalID: 0,
-            // stopped: false,
             gameover: false,
             rereset: false,
             revolved: false,

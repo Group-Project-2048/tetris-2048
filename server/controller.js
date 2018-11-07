@@ -46,7 +46,7 @@ module.exports = {
         
         //The session id and username have been hardcoded to make sure that there is always something in session for development purposes.
         
-        db.get_user([(session.user.id = 69), (session.user.username = 'Josefa')]).then(dbResult => {
+        db.get_user([session.user.id, session.user.username ]).then(dbResult => {
 
             session.user.id = dbResult[0].id;
             session.user.username = dbResult[0].name;

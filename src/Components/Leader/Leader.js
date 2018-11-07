@@ -86,6 +86,8 @@ class Leader extends Component {
             halo: 'day'
         })
 
+        return dayScores2
+
     }
 
     handleLast30Days() {
