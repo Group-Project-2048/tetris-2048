@@ -21,7 +21,6 @@ class Leader extends Component {
         }
 
 
-        this.handleDisplayPlayers = this.handleDisplayPlayers.bind(this);
         this.handleDayBtn = this.handleDayBtn.bind(this);
         this.handleWeekBtn = this.handleWeekBtn.bind(this);
         this.handleOverallBtn = this.handleOverallBtn.bind(this);
@@ -32,7 +31,7 @@ class Leader extends Component {
     componentDidMount() {
         console.log('attempting to get')
         axios.get('/api/getPlayers').then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({
                 players: res.data,
                 overallColor: true,
@@ -43,14 +42,7 @@ class Leader extends Component {
         })
     }
 
-    handleDisplayPlayers() {
-        // return this.players.map(){
-
-        // }
-    }
-
     handleDayBtn(array) {
-        //This btn will display the highest scores of the day
         let dayScores = [];
 
         let today = new Date();
@@ -64,7 +56,7 @@ class Leader extends Component {
             let oldScore = array[i].score;
 
             if (timeStamp !== null && oldScore !== 0) {
-                console.log(array[i].score)
+                // console.log(array[i].score)
                 let arrayDate = timeStamp.substring(0, 10)
 
                 if (arrayDate === yyyy + '-' + (mm + 1) + '-' + dd) {
@@ -73,7 +65,7 @@ class Leader extends Component {
             }
         }
         let dayScores2 = dayScores.splice(0, 10)
-        console.log(dayScores2)
+        // console.log(dayScores2)
 
         this.setState({
             scoresOfDay: dayScores2,
@@ -115,21 +107,14 @@ class Leader extends Component {
     handleWeekBtn(array) {
         let weekScores = [];
         let thisWeek = this.handleLast7Days()
-        console.log(thisWeek)
-        console.log(array)
 
         for (let i = 0; i < array.length; i++) {
             let timeStamp = array[i].time_stamp;
-            console.log(array[i])
-            console.log(array[i].time_stamp)
             let oldScore = array[i].score;
 
             if (timeStamp !== null && oldScore !== 0) {
                 let arrayDate = timeStamp.substring(0, 10)
-                console.log(timeStamp.substring(0, 10))
                 for (let j = 0; j < thisWeek.length; j++) {
-                    console.log(arrayDate)
-                    console.log(thisWeek[j])
                     if (thisWeek[j] === arrayDate) {
                         weekScores.push(array[i])
                     }
@@ -140,7 +125,6 @@ class Leader extends Component {
         }
 
         let weekScore2 = weekScores.splice(0, 10)
-        console.log(weekScore2)
 
 
         this.setState({
@@ -175,7 +159,6 @@ class Leader extends Component {
 
         }
         let monthScores2 = monthScores.splice(0, 10);
-        console.log(monthScores2)
 
         this.setState({
             scoresOfMonth: monthScores2,
@@ -191,7 +174,6 @@ class Leader extends Component {
 
     handleOverallBtn() {
         axios.get('/api/getPlayers').then(res => {
-            console.log(res.data)
             this.setState({
                 players: res.data.splice(0, 10),
                 score: 'overall',
