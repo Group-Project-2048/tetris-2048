@@ -137,7 +137,7 @@ class Home extends Component {
     game = () => {
         let { board, piece } = this.state
 
-        let time = 900-(this.state.level*10 > 600 ? 600 : this.state.level*10)
+        let time = 850-(this.state.level*10 > 600 ? 600 : this.state.level*10)
         let id = setInterval(this.fall, time)
         console.log(time)
         this.setState({
@@ -305,7 +305,7 @@ class Home extends Component {
 
         switch (key) {
             case 37:
-                if (x >= 0 && newboard[row + y][col + x - 1] === 0 && y < 8) {
+                if (x >= 0 && newboard[row + y][col + x - 1] === 0 && newboard[row+y+1][col+x-1] === 0 && y < 8) {
                     newboard[row + y][col + x] = 0
                     let left = x - 1
                     this.setState({
@@ -316,7 +316,7 @@ class Home extends Component {
                 }
                 break
             case 39:
-                if (x < 2 && newboard[row + y][col + x + 1] === 0 && y < 8) {
+                if (x < 2 && newboard[row + y][col + x + 1] === 0 && newboard[row+y+1][col+x+1] === 0 && y < 8) {
                     newboard[row + y][col + x] = 0
                     let right = x + 1
                     this.setState({
