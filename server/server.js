@@ -62,4 +62,8 @@ app.get('/api/getHighScore', c.getHighestScore);
 //recording score on lose
 app.put('/api/sendScore/:id', c.sendScoreOnLose);
 
+//Delete user from database and session.
+
+app.delete('/api/deleteUser', c.deleteUser)
+
 app.listen(SERVER_PORT, () => {console.log(`Server ${SERVER_PORT} is running`); })

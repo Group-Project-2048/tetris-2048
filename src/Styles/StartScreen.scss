@@ -21,7 +21,7 @@ $twothous: #000000;
     height: 100px;
     margin: auto;
     margin-top: 50px;
-    background-color: black;
+    background-color: transparent;
 }
 
 .fas fa-play{
@@ -32,7 +32,7 @@ $twothous: #000000;
 
 .loginBtn{
     font-size: 80px;
-    background-color: black;
+    background-color: transparent;
     color: white;
     border: none;
 }
@@ -51,7 +51,7 @@ $twothous: #000000;
 }
 
 .startBack{
-    background-color: black;
+    background-color: #252525;
     min-height: 100%;
     min-width: 1024px;
 
@@ -73,7 +73,8 @@ $twothous: #000000;
 
 .startMenuBox{
     border: 1px solid $onehund; 
-    background-color: black;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5) ),url(../Components/StartScreen/03ac06db28fb05f20fd17b4c05c8512c.jpg);
+    background-size: cover;
     width: 400px;
     height: 500px;
     margin: auto;
@@ -101,7 +102,7 @@ $twothous: #000000;
   }
 
 .usernameInput{
-    background-color: black;
+    background-color: transparent;
     border: none;
     font-size: 20px;
     text-align: center;
