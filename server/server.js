@@ -1,3 +1,4 @@
+const path = require('path'); // Usually moved to the start of file
 require('dotenv').config()
 const session = require('express-session');
 const massive = require('massive');
@@ -8,6 +9,10 @@ const express = require('express');
 // const mid = require('./middleware/checkForDevelopment');
 const app = express();
 
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 //Middleware
 
 const checkForSession = require('./middleware/checkForSessions');
