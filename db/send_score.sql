@@ -1,4 +1,5 @@
-update overflow
-set 
-    score = $2
-where id =$1;
+UPDATE overflow
+SET
+    score = $2,
+    time_stamp = CURRENT_DATE
+WHERE id = $1;

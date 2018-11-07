@@ -60,7 +60,7 @@ app.get('/api/getSession', c.checkSession);
 app.get('/api/getHighScore', c.getHighestScore);
 
 //recording score on lose
-// app.put('/api/sendScore/:id', c.sendScoreOnlose);
+app.put('/api/sendScore/:id', c.sendScoreOnLose);
 
 //Delete user from database and session.
 
