@@ -13,15 +13,25 @@ class Home extends Component {
         super(props)
         this.state = {
             board: [
+                // [0, 32, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0],
+                // [0, 0, 0, 0]
+
                 [0, 32, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
+                [0, 16, 0, 0],
+                [0, 8, 0, 0],
+                [0, 2, 0, 0],
+                [0, 128, 0, 0],
+                [0, 256, 0, 0],
+                [0, 1024, 32, 0]
 
             ],
             piece: { row: 0, col: 1, value: 32 },
@@ -374,7 +384,7 @@ class Home extends Component {
             this.setState({
                 gameover: true
             })
-            // this.sendScoreOnLose()
+            this.sendScoreOnLose()
             swal({
                 title: 'Game Over',
                 text: "Play Again?",
@@ -432,14 +442,16 @@ class Home extends Component {
     //////////////////score and level methods ///////////////////////
 
         //This will need to function eventually
-    // sendScoreOnLose = () => {
-    //     let { user_id, score } = this.state;
-    //     Axios.put(`/api/sendScore/${user_id}`, score)
-    //     .then(result => {
-    //         console.log(result)
-    //     })
-    //     .catch(err => {console.log(err)})
-    // }
+    sendScoreOnLose = () => {
+        let { user_id } = this.state;
+        let body = this.state.score
+        console.log( 'body', body )
+        Axios.put(`/api/sendScore/${user_id}`, {body})
+        .then(result => {
+            // console.log(result)
+        })
+        .catch(err => {console.log(err)})
+    }
     
     //This method is to test the handleScoreBar and handleIncreaseLevel methods
     increaseScore = () => {

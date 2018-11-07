@@ -37,12 +37,9 @@ class StartScreen extends Component {
         this.setState({
             [prop]: val
         })
-        console.log(this.state.username)
     }
 
     handleRegister(){
-
-        //I am currently trying to make the session object to have a user property with an object that stores the id from the database. 
 
         const toast = swal.mixin({
             toast: true,
@@ -64,8 +61,7 @@ class StartScreen extends Component {
 
         let body = {
             username: username,
-            score: 0,
-            time_stamp: null
+            score: 0
         }
 
         axios.post('/api/register', body).then(res =>{
