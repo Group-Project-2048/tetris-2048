@@ -114,3 +114,21 @@ export function handleMonthBtn(array) {
 
 }
 
+
+export function toggle(value){
+    if(value === true){
+        value = !value
+    }
+    else if(value === false){
+      value = !value
+    }
+    else {
+        value = undefined
+    }
+    return value
+}
+
+export function random(arr){
+    let mixed = arr[Math.floor(Math.random() * arr.length)];
+    return mixed
+}
