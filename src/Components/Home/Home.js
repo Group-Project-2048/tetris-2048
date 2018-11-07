@@ -67,7 +67,8 @@ class Home extends Component {
             // stopped: false,
             gameover: false,
             rereset: false,
-            revolved: false
+            revolved: false,
+            user_id: 0
         }
     }
 
@@ -395,6 +396,7 @@ class Home extends Component {
             this.setState({
                 gameover: true
             })
+            // this.sendScoreOnLose()
             swal({
                 title: 'Game Over',
                 text: "Play Again?",
@@ -450,6 +452,16 @@ class Home extends Component {
     }
 
     //////////////////score and level methods ///////////////////////
+
+        //This will need to function eventually
+    // sendScoreOnLose = () => {
+    //     let { user_id, score } = this.state;
+    //     Axios.put(`/api/sendScore/${user_id}`, score)
+    //     .then(result => {
+    //         console.log(result)
+    //     })
+    //     .catch(err => {console.log(err)})
+    // }
     
     //This method is to test the handleScoreBar and handleIncreaseLevel methods
     increaseScore = () => {
@@ -483,9 +495,9 @@ class Home extends Component {
     
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
-            let newRes = res.data[0].score
             this.setState({
-                highestScore: newRes
+                highestScore: res.data[0].score,
+                user_id: res.data[0].id
             })
         })
     }

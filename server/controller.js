@@ -65,6 +65,20 @@ module.exports = {
 
             res.status(200).send(dbResult);
         }).catch(err => (console.log(err)))
+    },
+
+    sendScoreOnLose: (req, res) => {
+        let {id} = req.session.user;
+        let {body} = req.body;
+        const db = req.app.get('db');
+        console.log('req.session.user.id', id)
+        console.log('req.body', body)
+
+        db.send_score([id, body])
+        .then(result => {
+            res.status(200).send(result);
+        })
+        .catch(err => (console.log(err)))
     }
     
 }

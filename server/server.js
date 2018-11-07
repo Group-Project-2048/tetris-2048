@@ -55,6 +55,9 @@ app.get('/api/getSession', c.checkSession);
 
 //Get the highest score for the player
 
-app.get('/api/getHighScore', c.getHighestScore)
+app.get('/api/getHighScore', c.getHighestScore);
+
+//recording score on lose
+// app.put('/api/sendScore/:id', c.sendScoreOnlose);
 
 app.listen(SERVER_PORT, () => {console.log(`Server ${SERVER_PORT} is running`); })

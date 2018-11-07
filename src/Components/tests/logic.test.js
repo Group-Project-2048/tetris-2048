@@ -1,4 +1,4 @@
-const {reDrop} = require('../Logic/logic');
+const {reDrop, toggle, random} = require('../Logic/logic');
 const {handleDayBtn, handleMonthBtn, handleWeekBtn, handleOverall} = require('../Leader/Leader');
 
 const fake = {x: 2, y: 'whatup', piece: {row: 0, col: 1, value: 32}, board: [ [0, 32, 0, 0],
@@ -19,6 +19,10 @@ const fake2 = {x: 2, y: 4, piece: {row: 0, col: 1, value: 32}, board: [ [0, 32, 
 [0, 128, 0, 0],
 [0, 256, 0, 0],
 [0, 512, 0, 0]], random: 64}
+
+const mixUp = [2,4,8,16,32,64]
+
+//Mike Unit Tests
 
 describe("it drops again somehow", ()=>{
     test('type of should return object', ()=>{
@@ -45,37 +49,53 @@ describe("it drops again somehow", ()=>{
         expect(reDrop(fake).piece).toHaveProperty('value')
     })
 
-    
-    
-    
 })
 
 //Jose Unit Tests
 
-const fakeArray = [{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-05"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-05"}, {id: 31, name: "Evered", score: 817762, time_stamp: "2018-10-13"}, {id: 10, name: "Brigham", score: 794934, time_stamp: "2018-10-22"}]
+// const fakeArray = [{id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-05"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-05"}, {id: 31, name: "Evered", score: 817762, time_stamp: "2018-10-13"}, {id: 10, name: "Brigham", score: 794934, time_stamp: "2018-10-22"}]
 
-describe('Leadership btns work', ()=> {
+// describe('Leadership btns work', ()=> {
 
-    test('dayBtn display highest score of the day', ()=>{
-        expect(handleDayBtn(fakeArray)).toBe({id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-05"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-05"})
+//     test('dayBtn display highest score of the day', ()=>{
+//         expect(handleDayBtn(fakeArray)).toBe({id: 41, name: "Digory", score: 1392925, time_stamp: "2018-11-05"}, {id: 1, name: "Rab", score: 867659, time_stamp: "2018-11-05"})
+//     })
+    
+//     test('weekBtn displays highest score of the week', ()=>{
+//         expect(handleWeekBtn())
+//     })
+    
+//     test('monthBtn displays highest score of the month', ()=>{
+//         expect(handleMonthBtn())
+//     })
+    
+//     test('overallBtn displays highest overall score', ()=>{
+//         expect(handleOverall())
+//     })
+// })
+
+//Digory Unit Tests
+
+describe("The toggle function toggle the boolean", ()=>{
+    test('type of should return boolean', ()=>{
+        expect(typeof(toggle(true))).toBe('boolean')
     })
     
-    test('weekBtn displays highest score of the week', ()=>{
-        expect(handleWeekBtn())
+    test('true should return false', ()=>{
+        expect(toggle(true)).toBe(false)
     })
-    
-    test('monthBtn displays highest score of the month', ()=>{
-        expect(handleMonthBtn())
+
+    test('false should return true', ()=>{
+        expect(toggle(false)).toBe(true)
     })
-    
-    test('overallBtn displays highest overall score', ()=>{
-        expect(handleOverall())
+
+    test('non-boolean should return undefined', ()=>{
+        expect(toggle(fake)).toBe(undefined)
     })
 })
 
-
-describe("The toggle function toggle the boolean", ()=>{
-    test('type of should return a boolean', ()=>{
-        
+describe("the random function returns a randon number", ()=>{
+    test('type of random should return a number', ()=>{
+        expect(typeof(random(mixUp))).toBe('number')
     })
 })
