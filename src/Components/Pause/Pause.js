@@ -81,9 +81,9 @@ class Pause extends Component {
                                             <Link to='/leader'><img className='rls' src={leaderboardimg} alt="leader boards"/></Link>
                                             <img onClick={this.props.toggleReset} className='rls' src={restartimg} alt="restart"/>
                                             <img onClick={this.toggleMusic} className='rls' src={soundimg} alt="sound: on / off"/>
-                                            <audio controls>
+                                            {/* <audio controls>
                                                 <source src='../../Music/La_Calahorra.mp3' type="audio/mpeg"/>
-                                            </audio>
+                                            </audio> */}
                                         </div>
                                     </li>
                                     <button className='deleteUserBtn' onClick={this.handleDeleteUser}>DELETE USER</button>
