@@ -135,7 +135,7 @@ class Home extends Component {
     game = () => {
         let { board, piece } = this.state
 
-        let time = 850-(this.state.level*10 > 600 ? 600 : this.state.level*10)
+        let time = 800-(this.state.level*20 > 600 ? 600 : this.state.level*20)
         let id = setInterval(this.fall, time)
         this.setState({
             setIntervalID: id
