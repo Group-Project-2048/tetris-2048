@@ -9,6 +9,7 @@ import postgresimg from '../../Images/postgres.png'
 import nodeimg from '../../Images/node-js.png'
 import michael from '../../Images/Michael.png'
 import digs from '../../Images/digs.png'
+import jose from '../../Images/Jose.JPG'
 
 
 class About extends Component {
@@ -56,6 +57,7 @@ class About extends Component {
                         <div className='partner'>
                         <div className='center'>
                             <h4>José A. Ortiz</h4>
+                            <img className='personal-pic' src={jose} alt=""/>
                             <button className='cool_button'><a href="https://www.linkedin.com/in/jose-angel-ortiz-webdeveloper/" target='_blank'>LinkedIn</a></button>
                             <button className='cool_button'><a href="https://github.com/Joseangel15" target='_blank'>GitHub</a></button>
                             </div>
