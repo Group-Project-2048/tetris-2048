@@ -275,7 +275,7 @@ class Leader extends Component {
             <div className='backgroundBox'>
                 <div className='container'>
                     <div style={{ display: 'flex', flexDirection: 'column', width: '400px', margin: 'auto' }}>
-                        <button id='backBtn' onClick={this.handleGoHome}><i class="fas fa-arrow-left" style={{ marginTop: '4px' }}></i></button>
+                        <button id='backBtn' onClick={this.handleGoHome}><i class="fas fa-arrow-left fa-2x" style={{ marginTop: '5px'}}></i></button>
                         <img src={Logo2} alt="" style={{ width: '400px', margin: 'auto', marginBottom: '15px', marginTop: '20px'}} />
 
                     </div>
