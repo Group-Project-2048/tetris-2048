@@ -81,7 +81,6 @@ class StartScreen extends Component {
         return(
             <div>
                 <div className='startBack'>
-                <Link to='/about'><button>About</button></Link>
                     <div className='startMenuBox'>
                         <div className='stackyTitle'>
                             <img src={logo} alt="" className='stackyTitle'/>
@@ -101,6 +100,7 @@ class StartScreen extends Component {
                             </button>
                         </div>
                     </div>
+                <Link to='/about'><button className='cool_button'>About</button></Link>
                 </div>
             </div>
         )
