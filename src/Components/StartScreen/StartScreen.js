@@ -88,7 +88,8 @@ class StartScreen extends Component {
                         <div style={{width: '200px', margin: 'auto'}}>
                             <input 
                                 type="text" 
-                                placeholder='Username' 
+                                placeholder='Username'
+                                maxLength= "10" 
                                 value={this.state.user[0]? this.state.user[0].name: undefined}
                                 className='usernameInput'
                                 onChange={(e) => this.handleChange('username', e.target.value)}/>
