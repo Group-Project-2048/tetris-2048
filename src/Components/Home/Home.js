@@ -36,7 +36,7 @@ class Home extends Component {
             random: '',
             revolver: [2, 32],
             numbers: [2, 4, 4, 8, 8, 16, 16, 32, 32, 64, 64, 'W', 'BOMB'],
-            highestScore: [],
+            highestScore: 0,
             nextItem: 64,
             swapItem: 32,
             multiplier: 1,
@@ -360,7 +360,7 @@ class Home extends Component {
             this.setState({
                 gameover: true
             })
-            if(this.state.score > 1){
+            if(this.state.score > this.state.highestScore){
                 this.sendScoreOnLose()
             }
             swal({
@@ -458,8 +458,9 @@ class Home extends Component {
     
     handleGetHighScore = () => {
         Axios.get('/api/getHighScore').then(res => {
+            let hi = res.data[0].score
             this.setState({
-                highestScore: res.data[0].score,
+                highestScore: hi,
                 user_id: res.data[0].id
             })
         })

@@ -8,8 +8,27 @@ import soundimg from '../../Images/Group-05.png'
 import swal from 'sweetalert2';
 import Axios from 'axios';
 
+import music from '../../Music/La_Calahorra.mp3';
+
 
 class Pause extends Component {
+    constructor(){
+        super()
+
+        this.state={
+            playMusic: true
+        }
+        this.audio = new Audio(music)
+    }
+
+    toggleMusic = () => {
+        console.log('Music is:', this.state.playMusic)
+        this.setState({
+            playMusic: !this.state.playMusic
+        })
+        this.state.play ? this.audio.play() : this.audio.pause();
+    }
+
 
 
     handleDeleteUser = () => {
@@ -61,7 +80,10 @@ class Pause extends Component {
                                         <div>
                                             <Link to='/leader'><img className='rls' src={leaderboardimg} alt="leader boards"/></Link>
                                             <img onClick={this.props.toggleReset} className='rls' src={restartimg} alt="restart"/>
-                                            <img onClick={this.props.toggleMusic} className='rls' src={soundimg} alt="sound: on / off"/>
+                                            <img onClick={this.toggleMusic} className='rls' src={soundimg} alt="sound: on / off"/>
+                                            {/* <audio controls>
+                                                <source src='../../Music/La_Calahorra.mp3' type="audio/mpeg"/>
+                                            </audio> */}
                                         </div>
                                     </li>
                                     <button className='deleteUserBtn' onClick={this.handleDeleteUser}>DELETE USER</button>
