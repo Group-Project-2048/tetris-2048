@@ -8,9 +8,41 @@ class About extends Component{
 
     render(){
         return(
-            <div>
-                About
-                <Link to='/'><button>back</button></Link>
+            <div className='aboutBack'>
+
+                <div>
+                    <Link to='/'><button id='aboutBtn'>BACK</button></Link>
+
+                    <header>
+                        <section>
+                            <div id='infoBoxes'>
+                                <img src="" alt=""/>
+                                <h1>Digory Ellsworth</h1>
+                                <h5>Co-Developer</h5>
+                                <p>Short Bio</p>
+                                <a href=""></a>
+                                <a href=""></a>
+                            </div>
+                            <div id='infoBoxes'>
+                            <img src="" alt=""/>
+                                <h1>Michael C. Han</h1>
+                                <h5>Co-Developer</h5>
+                                <p>Short Bio</p>
+                                <a href=""></a>
+                                <a href=""></a>
+                            </div>
+                            <div id='infoBoxes'>
+                            <img src="" alt=""/>
+                                <h1>Jose A. Ortiz</h1>
+                                <h5>Co-Developer</h5>
+                                <p>Short Bio</p>
+                                <a href=""></a>
+                                <a href=""></a>
+                            </div>
+                        </section>
+                    </header>
+                </div>
+
             </div>
         )
     }

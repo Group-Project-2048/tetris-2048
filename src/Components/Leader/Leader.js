@@ -29,9 +29,7 @@ class Leader extends Component {
     }
 
     componentDidMount() {
-        console.log('attempting to get')
         axios.get('/api/getPlayers').then(res => {
-            // console.log(res.data)
             this.setState({
                 players: res.data,
                 overallColor: true,
@@ -46,7 +44,17 @@ class Leader extends Component {
         let dayScores = [];
 
         let today = new Date();
-        let dd = today.getDate();
+        
+        function newDay(){
+
+            let today = new Date();
+            let dd = '' + today.getDate();
+    
+            if (dd.length < 2)  dd = '0' + dd;
+    
+            return dd
+            }
+
         let mm = today.getMonth(); //January is 0!
         let yyyy = today.getFullYear();
 
@@ -56,16 +64,14 @@ class Leader extends Component {
             let oldScore = array[i].score;
 
             if (timeStamp !== null && oldScore !== 0) {
-                // console.log(array[i].score)
                 let arrayDate = timeStamp.substring(0, 10)
 
-                if (arrayDate === yyyy + '-' + (mm + 1) + '-' + dd) {
+                if (arrayDate === yyyy + '-' + (mm + 1) + '-' + newDay()) {
                     dayScores.push(array[i])
                 }
             }
         }
         let dayScores2 = dayScores.splice(0, 10)
-        // console.log(dayScores2)
 
         this.setState({
             scoresOfDay: dayScores2,
@@ -86,9 +92,9 @@ class Leader extends Component {
             var d = new Date();
             d.setDate(d.getDate() - n);
 
-            return (function (day, month, year) {
-                return [day < 10 ? '0' + day : day, month < 10 ? '0' + month : month, year].join('-');
-            })(d.getFullYear(), (d.getMonth() + 1), d.getDate());
+            return (function (year, month, day) {
+                  return [year < 10 ? '0' + year : year, month < 10 ? '0' + month : month, day < 10 ? '0' + day: day].join('-');
+              })(d.getFullYear(), (d.getMonth() + 1), d.getDate());
         });
     }
 
@@ -98,11 +104,12 @@ class Leader extends Component {
             var d = new Date();
             d.setDate(d.getDate() - n);
 
-            return (function (day, month, year) {
-                return [day < 10 ? '0' + day : day, month < 10 ? '0' + month : month, year].join('-');
-            })(d.getFullYear(), (d.getMonth() + 1), d.getDate());
+            return (function (year, month, day) {
+                  return [year < 10 ? '0' + year : year, month < 10 ? '0' + month : month, day < 10 ? '0' + day: day].join('-');
+              })(d.getFullYear(), (d.getMonth() + 1), d.getDate());
         });
     }
+    
 
     handleWeekBtn(array) {
         let weekScores = [];
@@ -175,7 +182,7 @@ class Leader extends Component {
     handleOverallBtn() {
         axios.get('/api/getPlayers').then(res => {
             this.setState({
-                players: res.data.splice(0, 10),
+                players: res.data,
                 score: 'overall',
                 overallColor: true,
                 dayColor: false,
