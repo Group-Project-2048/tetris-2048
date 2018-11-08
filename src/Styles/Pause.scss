@@ -173,3 +173,25 @@ a:hover
   color: White;
   font-size: 18px;
 }
+
+@media (max-width: 1250px) {
+  #menuToggle .pause{
+    left: 62vw;
+  }
+  #menuToggle span{
+    left: 62vw;
+  }
+  #menuToggle span:nth-last-child(2)
+  {
+    left: 63vw;
+  }
+  #menuToggle .pause:checked ~ span{
+    left: 62vw;
+  }
+  #menuToggle .pause:checked ~ span:nth-last-child(3){
+    left: 62vw;
+  }
+  #menuToggle .pause:checked ~ span:nth-last-child(2){
+    left: 62vw;
+  }
+}
