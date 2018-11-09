@@ -1,4 +1,4 @@
-const {reDrop, toggle, random, handleDayBtn, handleMonthBtn, handleWeekBtn, handleOverall} = require('../Logic/logic');
+const {reDrop, toggle, random, handleDayBtn, handleMonthBtn, handleWeekBtn} = require('../Logic/logic');
 
 const fake = {x: 2, y: 'whatup', piece: {row: 0, col: 1, value: 32}, board: [ [0, 32, 0, 0],
 [0, 0, 0, 0],

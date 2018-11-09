@@ -80,7 +80,7 @@ class Pause extends Component {
                                         <div>
                                             <Link to='/leader'><img className='rls' src={leaderboardimg} alt="leader boards"/></Link>
                                             <img onClick={this.props.toggleReset} className='rls' src={restartimg} alt="restart"/>
-                                            <img onClick={this.toggleMusic} className='rls' src={soundimg} alt="sound: on / off"/>
+                                            {/* <img onClick={this.toggleMusic} className='rls' src={soundimg} alt="sound: on / off"/> */}
                                             {/* <audio controls>
                                                 <source src='../../Music/La_Calahorra.mp3' type="audio/mpeg"/>
                                             </audio> */}
